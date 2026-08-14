@@ -1,1 +1,15 @@
-<p>surveys works!</p>
+
+@if (list().length > 0) {
+    @for(survey of list(); track survey.id; let index = $index) {
+        <tr>
+            <td>{{survey.title}}</td>
+            <td>{{survey.description}}</td>
+            <td>{{survey.category}}</td>
+            <td>{{survey.created_at}}</td>
+            <td>{{survey.ends_at}}</td>
+        </tr>
+    }
+} @else {
+    <p>Keine items in der Liste</p>
+}
+
