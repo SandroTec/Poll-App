@@ -1,7 +1,7 @@
 
 @if (list().length > 0) {
     @for(survey of list(); track survey.id; let index = $index) {
-        <tr>
+        <tr [routerLink]="['detail', survey.id]" role="link">
             <td>{{survey.title}}</td>
             <td>{{survey.description}}</td>
             <td>{{survey.category}}</td>
