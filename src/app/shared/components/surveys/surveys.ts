@@ -12,4 +12,8 @@ import { RouterLink } from '@angular/router';
 export class Surveys {
   surveyService = inject(SurveyService);
   list = this.surveyService.surveyList;
+
+  
+  
 }
+

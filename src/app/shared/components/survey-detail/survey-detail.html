@@ -1,1 +1,14 @@
-<p>survey-detail works!</p>
+    @if (questionList().length > 0) {
+        @for(question of questionList(); track question.id; let index = $index) {
+            <tr>
+                <td>{{question.title}}</td>
+                <td>
+                    @for (answer of getAnswersForQuestion(question.id); track answer.id) {
+                        <div> {{ answer.title }} </div>
+                    }
+                </td>
+            </tr>
+        }
+    } @else {
+        <p>Keine items in der Liste</p>
+    }
