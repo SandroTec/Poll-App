@@ -14,7 +14,7 @@ export class Surveys {
   surveyService = inject(SurveyService);
   list = this.surveyService.surveyList;
 
-  // calculates day remaining before survey is ending
+  // calculates and returns day remaining before survey is ending
   getEndingTime(surveyEndsAt: Date) {
     const now = new Date();
     const endTime = new Date(surveyEndsAt);
