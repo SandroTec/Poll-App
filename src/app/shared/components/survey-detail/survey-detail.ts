@@ -18,7 +18,6 @@ export class SurveyDetail {
 
   async ngOnInit() {
     const surveyId = Number(this.route.snapshot.paramMap.get('id'));
-    console.log('Survey ID:', surveyId);
     // Fetch questions by using the surveyId
     await this.surveyService.getQuestions(surveyId);
     // map a new array with the question ids
