@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { SurveyService } from '../../services/survey.service';
 import { RouterLink } from '@angular/router';
+import { Survey } from '../../interfaces/survey';
 
 
 @Component({
@@ -13,7 +14,20 @@ export class Surveys {
   surveyService = inject(SurveyService);
   list = this.surveyService.surveyList;
 
+  getEndingTime(surveyEndsAt: Date) {
+    const now = new Date();
+    const endTime = new Date(surveyEndsAt);
+    const timeDifference = endTime.getTime() - now.getTime();
+    const daysRemaining = Math.ceil(timeDifference / (1000 * 3600 * 24));
+    return daysRemaining;
+  }
   
-  
+  getEndingSoonSurveys() {
+    return this.list().filter((survey: Survey) => 
+      this.getEndingTime(survey.ends_at) <= 2 && 
+      this.getEndingTime(survey.ends_at) >= 0
+    );
+  }
+
 }
 

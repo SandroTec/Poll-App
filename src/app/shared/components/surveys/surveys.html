@@ -1,13 +1,34 @@
 
+<h2>Your surveys</h2>
+<h3>Ending soon surveys</h3>
+
+@if (list().length > 0) {
+    @for(survey of getEndingSoonSurveys(); track survey.id; let index = $index) {
+        <div class="soon-ending-card" [routerLink]="['detail', survey.id]" role="link">
+            <span>{{survey.category}}</span>
+
+            <p>{{survey.title}}</p>
+            <p>{{survey.description}}</p>
+            
+            <div class="days-left-bg">
+                <span>Ends in {{ getEndingTime( survey.ends_at ) }} day('s)</span>
+            </div>
+        </div>
+    }
+}
+
+
 @if (list().length > 0) {
     @for(survey of list(); track survey.id; let index = $index) {
-        <tr [routerLink]="['detail', survey.id]" role="link">
-            <td>{{survey.title}}</td>
-            <td>{{survey.description}}</td>
-            <td>{{survey.category}}</td>
-            <td>{{survey.created_at}}</td>
-            <td>{{survey.ends_at}}</td>
-        </tr>
+        <div [routerLink]="['detail', survey.id]" role="link">
+            <span>{{survey.category}}</span>
+
+            <p>{{survey.title}}</p>
+            <p>{{survey.description}}</p>
+            
+            <span>Ends in:</span>
+            <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
+        </div>
     }
 } @else {
     <p>Keine items in der Liste</p>
