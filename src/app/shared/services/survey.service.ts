@@ -21,20 +21,24 @@ export class SurveyService {
 
   }
 
+  // method to fetch surveys from the Supabase database and update the surveyList signal
   async getSurveys() {
     let response = await this.supabase.from('surveys').select('*');
     this.surveyList.set((response.data ?? []) as Survey[]);
-
   }
 
+  // method to fetch questions for a specific survey from the Supabase database and update the questionList signal
   async getQuestions(surveyId: number) {
     let response = await this.supabase.from('survey_questions').select('*').eq('survey_id', surveyId);
     this.questionList.set((response.data ?? []) as Question[]);
 
   }
 
-  async getAnswers(questionId: number) {
-    let response = await this.supabase.from('question_answers').select('*').eq('question_id', questionId);
+  // method to fetch answers for specific questions from the Supabase database 
+  // and update the answerList signal
+  // using .in() to filter by an array of question ids
+  async getAnswers(questionIds: number[]) {
+    let response = await this.supabase.from('question_answers').select('*').in('question_id', questionIds);
     this.answerList.set((response.data ?? []) as Answer[]);
 
   }
