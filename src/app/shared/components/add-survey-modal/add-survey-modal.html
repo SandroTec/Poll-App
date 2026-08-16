@@ -1,0 +1,53 @@
+<dialog #dialog>
+    <div>
+        <h2>Add a new survey</h2>
+        <button>cancel</button>
+    </div>
+
+    <div>
+        <form action="">
+            <div>
+                <label for="title">Survey name</label>
+                <input name="title" type="text">
+
+                <label for="endDate">Set end date (optional)</label>
+                <input name="endDate" type="date">
+                
+                <label for="description">Describing text (optional)</label>
+                <input name="description" type="text">
+                
+                <label for="categories">Choose category</label>
+                <input name="categories" type="text">
+            </div>
+            <div>
+                <div>
+                    <label for="question">1. Question</label>
+                    <input type="text" name="question" id="">
+
+                    <button>Add next question</button>
+
+                </div>
+                <div>
+                    <label for="multiple-answers">allow multiple answers</label>
+                    <input name="multiple-answers" type="checkbox">
+                    <label for="answers">Answers</label>
+                    
+                    <ul>
+                        <li>
+                            <input name="answers" type="text">
+                        </li>
+                        <li>
+                            <input name="answers" type="text">
+                        </li>
+                    </ul>
+                    <button>Add answer</button>
+                </div>
+            </div>
+
+            <button type="submit">Publish</button>
+
+        </form>
+    </div>
+
+</dialog>
+
