@@ -4,7 +4,11 @@
                 <td>{{question.title}}</td>
                 <td>
                     @for (answer of getAnswersForQuestion(question.id); track answer.id) {
-                        <div> {{ answer.title }} </div>
+                        <div> 
+                            <li>
+                                {{ answer.title }}
+                            </li> 
+                        </div>
                     }
                 </td>
             </tr>
