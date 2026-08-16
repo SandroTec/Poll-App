@@ -1,4 +1,4 @@
-import { Component, ElementRef, viewChild, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-add-survey-modal',
@@ -8,8 +8,11 @@ import { Component, ElementRef, viewChild, ViewChild } from '@angular/core';
 })
 
 export class AddSurveyModal {
+  //safes dialog html element as dialog via ViewChild
   @ViewChild('dialog') dialog!: ElementRef<HTMLDialogElement>;
 
+
+  // classic showModal to display dialog when button in main is clicked
   openModal() {
     this.dialog.nativeElement.showModal()
   }
