@@ -1,3 +1,4 @@
+
 <dialog #dialog>
     <div>
         <h2>Add a new survey</h2>
@@ -5,49 +6,47 @@
     </div>
 
     <div>
-        <form action="">
+        <form [formGroup]="surveyForm">
             <div>
                 <label for="title">Survey name</label>
-                <input name="title" type="text">
+                <input id="title" type="text" formControlName="title">
 
                 <label for="endDate">Set end date (optional)</label>
-                <input name="endDate" type="date">
+                <input id="endDate" type="date" formControlName="ends_at">
                 
                 <label for="description">Describing text (optional)</label>
-                <input name="description" type="text">
+                <input id="description" type="text" formControlName="description">
                 
                 <label for="categories">Choose category</label>
-                <input name="categories" type="text">
+                <input id="categories" type="text" formControlName="category">
             </div>
-            <div>
-                <div>
-                    <label for="question">1. Question</label>
-                    <input type="text" name="question" id="">
 
-                    <button>Add next question</button>
+            <div formArrayName="questions">
+                @for (question of surveyForm.controls.questions.controls; track $index; let questionIndex = $index) {
+                    <div [formGroupName]="questionIndex">
+                        <label [for]="'question-' + questionIndex">{{ questionIndex + 1 }}. Question</label>
+                        <input [id]="'question-' + questionIndex" type="text" formControlName="question">
 
-                </div>
-                <div>
-                    <label for="multiple-answers">allow multiple answers</label>
-                    <input name="multiple-answers" type="checkbox">
-                    <label for="answers">Answers</label>
-                    
-                    <ul>
-                        <li>
-                            <input name="answers" type="text">
-                        </li>
-                        <li>
-                            <input name="answers" type="text">
-                        </li>
-                    </ul>
-                    <button>Add answer</button>
-                </div>
+                        <button type="button" (click)="addQuestion()">Add next question</button>
+
+                        <label [for]="'multiple-answers-' + questionIndex">allow multiple answers</label>
+                        <input [id]="'multiple-answers-' + questionIndex" type="checkbox" formControlName="multiple_answers">   
+
+                        <div formArrayName="answers">
+                            @for (answer of question.controls.answers.controls; track $index; let answerIndex = $index) {
+                                <div [formGroupName]="answerIndex">
+                                    <label [for]="'answers-' + questionIndex + '-' + answerIndex">{{ answerIndex + 1 }}. Answer</label>
+                                    <input [id]="'answers-' + questionIndex + '-' + answerIndex" type="text" formControlName="answer">
+                                </div>
+                            }
+
+                            <button type="button" (click)="addAnswers(questionIndex)">Add answer</button>
+                        </div>
+                    </div>
+                }
             </div>
 
             <button type="submit">Publish</button>
-
         </form>
     </div>
-
 </dialog>
-
