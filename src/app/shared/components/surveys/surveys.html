@@ -19,22 +19,48 @@
     }
 }
 
+<button (click)="state = 'active'">
+    active
+</button>
+    
+<button (click)="state = 'past'">
+    past
+</button>
 
-@if (list().length > 0) {
-    @for(survey of list(); track survey.id; let index = $index) {
-        <div [routerLink]="['detail', survey.id]" role="link">
-            <span>{{survey.category}}</span>
+@if (state == "active" || state == "") {
+    @if (list().length > 0) {
+        @for(survey of getActiveSurveys(); track survey.id; let index = $index) {
+            <div [routerLink]="['detail', survey.id]" role="link">
+                <span>{{survey.category}}</span>
 
-            <p>{{survey.title}}</p>
-            <p>{{survey.description}}</p>
-            
-            <span>Ends in:</span>
-            @if (survey.ends_at) {
-                <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
-            }
-        </div>
+                <p>{{survey.title}}</p>
+                <p>{{survey.description}}</p>
+                
+                <span>Ends in:</span>
+                @if (survey.ends_at) {
+                    <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
+                }
+            </div>
+        }
+    } @else {
+        <p>Keine items in der Liste</p>
     }
-} @else {
-    <p>Keine items in der Liste</p>
-}
+}@else if (state == "past") {
+    @if (list().length > 0) {
+        @for(survey of getPastSurveys(); track survey.id; let index = $index) {
+            <div [routerLink]="['detail', survey.id]" role="link">
+                <span>{{survey.category}}</span>
 
+                <p>{{survey.title}}</p>
+                <p>{{survey.description}}</p>
+                
+                <span>Ends in:</span>
+                @if (survey.ends_at) {
+                    <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
+                }
+            </div>
+        }
+    } @else {
+        <p>Keine items in der Liste</p>
+    }
+}

@@ -13,6 +13,7 @@ import { Survey } from '../../interfaces/survey';
 export class Surveys {
   surveyService = inject(SurveyService);
   list = this.surveyService.surveyList;
+  state:string = "";
 
   // calculates and returns day remaining before survey is ending
   getEndingTime(surveyEndsAt: Date) {
@@ -29,6 +30,20 @@ export class Surveys {
       survey.ends_at !== undefined &&
       this.getEndingTime(survey.ends_at) <= 2 && 
       this.getEndingTime(survey.ends_at) >= 0
+    );
+  }
+
+  getPastSurveys() {
+    return this.list().filter((survey: Survey) => 
+      survey.ends_at !== undefined &&
+      this.getEndingTime(survey.ends_at) <= 0 
+    );
+  }
+
+  getActiveSurveys() {
+    return this.list().filter((survey: Survey) => 
+      survey.ends_at !== undefined &&
+      this.getEndingTime(survey.ends_at) >= 0 
     );
   }
 
