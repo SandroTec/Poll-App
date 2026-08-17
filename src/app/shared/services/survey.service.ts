@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import { Survey } from '../interfaces/survey';
 import { Question } from '../interfaces/question';
 import { Answer } from '../interfaces/answer';
+import { SurveyModel } from '../models/surveyModel';
 
 
 @Injectable({
@@ -41,6 +42,18 @@ export class SurveyService {
     let response = await this.supabase.from('question_answers').select('*').in('question_id', questionIds);
     this.answerList.set((response.data ?? []) as Answer[]);
 
+  }
+
+  async addSurvey(survey: SurveyModel) {
+    const survey_data = survey.getCleanAddJson()
+
+    const { data, error } = await this.supabase
+      .from('surveys')
+      .insert([survey_data])
+      .select();
+
+      console.log('INSERT DATA:', data);
+      console.log('INSERT ERROR:', error);
   }
   
 }

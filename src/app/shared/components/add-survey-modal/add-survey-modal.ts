@@ -1,5 +1,10 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators, FormArray } from '@angular/forms';
+import { Router } from '@angular/router';
+import { SurveyForm } from '../survey-form/survey-form';
+import { SurveyService } from '../../services/survey.service';
+import { SurveyModel } from '../../models/surveyModel';
+
 
 @Component({
   selector: 'app-add-survey-modal',
@@ -9,6 +14,9 @@ import { FormGroup, FormControl, ReactiveFormsModule, Validators, FormArray } fr
 })
 
 export class AddSurveyModal {
+  router = inject(Router);
+  surveySevice = inject(SurveyService);
+
   //safes dialog html element as dialog via ViewChild
   @ViewChild('dialog') dialog!: ElementRef<HTMLDialogElement>;
 
@@ -49,5 +57,13 @@ export class AddSurveyModal {
     const question = questions.at(questionIndex) as FormGroup;
     const answers = question.get('answers') as FormArray;
     answers.push(this.createAnswersForm());
+  }
+
+  onSubmit() {
+    if(this.surveyForm.valid) {
+    let survey = new SurveyModel(this.surveyForm.value);
+
+      this.surveySevice.addSurvey(survey)
+    }
   }
 }

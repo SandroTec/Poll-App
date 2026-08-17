@@ -6,7 +6,7 @@
     </div>
 
     <div>
-        <form [formGroup]="surveyForm">
+        <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
             <div>
                 <label for="title">Survey name</label>
                 <input id="title" type="text" formControlName="title">
