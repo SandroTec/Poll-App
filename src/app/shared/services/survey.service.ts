@@ -12,14 +12,12 @@ import { SurveyModel } from '../models/surveyModel';
 export class SurveyService {
 
   supabase = createClient('https://zlbbjaxdutacpsrcqhrz.supabase.co/','sb_publishable_3yQFBsKbiKiTv7vtWH2hZQ_CJkhtaid');
-
   surveyList = signal<Survey[]>([]);
   questionList = signal<Question[]>([]);
   answerList = signal<Answer[]>([]);
 
   constructor() {
     this.getSurveys();
-
   }
 
   // method to fetch surveys from the Supabase database and update the surveyList signal
@@ -46,14 +44,10 @@ export class SurveyService {
 
   async addSurvey(survey: SurveyModel) {
     const survey_data = survey.getCleanAddJson()
-
     const { data, error } = await this.supabase
       .from('surveys')
       .insert([survey_data])
       .select();
-
-      console.log('INSERT DATA:', data);
-      console.log('INSERT ERROR:', error);
   }
   
 }
