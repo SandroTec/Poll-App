@@ -11,7 +11,9 @@
             <p>{{survey.description}}</p>
             
             <div class="days-left-bg">
-                <span>Ends in {{ getEndingTime( survey.ends_at ) }} day('s)</span>
+                @if (survey.ends_at) {
+                    <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
+                }
             </div>
         </div>
     }
@@ -27,7 +29,9 @@
             <p>{{survey.description}}</p>
             
             <span>Ends in:</span>
-            <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
+            @if (survey.ends_at) {
+                <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
+            }
         </div>
     }
 } @else {

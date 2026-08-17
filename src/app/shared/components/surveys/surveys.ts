@@ -26,6 +26,7 @@ export class Surveys {
   // returns a list of all surveys ending in the next 2 days
   getEndingSoonSurveys() {
     return this.list().filter((survey: Survey) => 
+      survey.ends_at !== undefined &&
       this.getEndingTime(survey.ends_at) <= 2 && 
       this.getEndingTime(survey.ends_at) >= 0
     );
