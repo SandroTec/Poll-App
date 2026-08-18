@@ -9,6 +9,11 @@
 
 }
 
+.soon-ending-survey-rows {
+    width: 100%;
+    display: flex;
+}
+
 .soon-ending-card {
     width: 321px;
     height: 310px;
@@ -22,3 +27,6 @@
     color: black;
 }
 
+.survey-list {
+    display: flex;
+}

@@ -2,22 +2,24 @@
 <h2>Your surveys</h2>
 <h3>Ending soon surveys</h3>
 
-@if (list().length > 0) {
-    @for(survey of getEndingSoonSurveys(); track survey.id; let index = $index) {
-        <div class="soon-ending-card" [routerLink]="['detail', survey.id]" role="link">
-            <span>{{survey.category}}</span>
+<div class="soon-ending-survey-rows">
+    @if (list().length > 0) {
+        @for(survey of getEndingSoonSurveys(); track survey.id; let index = $index) {
+            <div class="soon-ending-card" [routerLink]="['detail', survey.id]" role="link">
+                <span>{{survey.category}}</span>
 
-            <p>{{survey.title}}</p>
-            <p>{{survey.description}}</p>
-            
-            <div class="days-left-bg">
-                @if (survey.ends_at) {
-                    <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
-                }
+                <p>{{survey.title}}</p>
+                <p>{{survey.description}}</p>
+                
+                <div class="days-left-bg">
+                    @if (survey.ends_at) {
+                        <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
+                    }
+                </div>
             </div>
-        </div>
+        }
     }
-}
+</div>
 
 <button (click)="state = 'active'">
     active
@@ -27,40 +29,42 @@
     past
 </button>
 
-@if (state == "active" || state == "") {
-    @if (list().length > 0) {
-        @for(survey of getActiveSurveys(); track survey.id; let index = $index) {
-            <div [routerLink]="['detail', survey.id]" role="link">
-                <span>{{survey.category}}</span>
+<div class="survey-list">
+    @if (state == "active" || state == "") {
+        @if (list().length > 0) {
+            @for(survey of getActiveSurveys(); track survey.id; let index = $index) {
+                <div [routerLink]="['detail', survey.id]" role="link">
+                    <span>{{survey.category}}</span>
 
-                <p>{{survey.title}}</p>
-                <p>{{survey.description}}</p>
-                
-                <span>Ends in:</span>
-                @if (survey.ends_at) {
-                    <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
-                }
-            </div>
+                    <p>{{survey.title}}</p>
+                    <p>{{survey.description}}</p>
+                    
+                    <span>Ends in:</span>
+                    @if (survey.ends_at) {
+                        <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
+                    }
+                </div>
+            }
+        } @else {
+            <p>Keine items in der Liste</p>
         }
-    } @else {
-        <p>Keine items in der Liste</p>
-    }
-}@else if (state == "past") {
-    @if (list().length > 0) {
-        @for(survey of getPastSurveys(); track survey.id; let index = $index) {
-            <div [routerLink]="['detail', survey.id]" role="link">
-                <span>{{survey.category}}</span>
+    }@else if (state == "past") {
+        @if (list().length > 0) {
+            @for(survey of getPastSurveys(); track survey.id; let index = $index) {
+                <div [routerLink]="['detail', survey.id]" role="link">
+                    <span>{{survey.category}}</span>
 
-                <p>{{survey.title}}</p>
-                <p>{{survey.description}}</p>
-                
-                <span>Ends in:</span>
-                @if (survey.ends_at) {
-                    <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
-                }
-            </div>
+                    <p>{{survey.title}}</p>
+                    <p>{{survey.description}}</p>
+                    
+                    <span>Ends in:</span>
+                    @if (survey.ends_at) {
+                        <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
+                    }
+                </div>
+            }
+        } @else {
+            <p>Keine items in der Liste</p>
         }
-    } @else {
-        <p>Keine items in der Liste</p>
     }
-}
+</div>
