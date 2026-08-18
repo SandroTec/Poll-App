@@ -26,6 +26,9 @@ export class AddSurveyModal {
   openModal() {
     this.dialog.nativeElement.showModal()
   }
+  closeModal() {
+    this.dialog.nativeElement.close()
+  }
 
   surveyForm = new FormGroup({
     title: new FormControl('n/a', {nonNullable: true, validators: [Validators.required]}),
@@ -84,6 +87,8 @@ export class AddSurveyModal {
         await this.surveySevice.addAnswer(answer);
       }
     }
+    
   }
+  this.closeModal()
 }
 }
