@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { SurveyForm } from '../survey-form/survey-form';
 import { SurveyService } from '../../services/survey.service';
 import { SurveyModel } from '../../models/surveyModel';
+import { QuestionModel } from '../../models/questionModel';
+import { AnswerModel } from '../../models/answerModel';
 
 
 @Component({
@@ -35,15 +37,18 @@ export class AddSurveyModal {
 
   createQuestionForm() {
     return new FormGroup({
-      question: new FormControl('n/a', {nonNullable: true, validators: [Validators.required]}),
-      multiple_answers: new FormControl(true, {nonNullable: true}),
-      answers: new FormArray([this.createAnswersForm()]),
+      title: new FormControl('n/a', {nonNullable: true, validators: [Validators.required]}),
+      allow_multiple_answers: new FormControl(false, {nonNullable: true}),
+      answers: new FormArray([
+        this.createAnswersForm(),
+        this.createAnswersForm()
+      ]),
     });
   }
 
   createAnswersForm() {
     return new FormGroup({
-      answer: new FormControl('n/a', {nonNullable: true, validators: [Validators.required]}),
+      title: new FormControl('n/a', {nonNullable: true, validators: [Validators.required]}),
     });
   }
 
@@ -59,11 +64,26 @@ export class AddSurveyModal {
     answers.push(this.createAnswersForm());
   }
 
-  onSubmit() {
-    if(this.surveyForm.valid) {
-    let survey = new SurveyModel(this.surveyForm.value);
-
-      this.surveySevice.addSurvey(survey)
+  async onSubmit() {
+  if (this.surveyForm.valid) {
+    const formValue = this.surveyForm.value;
+    const survey = new SurveyModel(formValue);
+    const createdSurvey = await this.surveySevice.addSurvey(survey);
+    for (const questionValue of formValue.questions ?? []) {
+      const question = new QuestionModel({
+        ...questionValue,
+        survey_id: createdSurvey.id
+      });
+      const createdQuestion =
+        await this.surveySevice.addQuestion(question);
+      for (const answerValue of questionValue.answers ?? []) {
+        const answer = new AnswerModel({
+          ...answerValue,
+          question_id: createdQuestion.id
+        });
+        await this.surveySevice.addAnswer(answer);
+      }
     }
   }
+}
 }

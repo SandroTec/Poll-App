@@ -4,6 +4,8 @@ import { Survey } from '../interfaces/survey';
 import { Question } from '../interfaces/question';
 import { Answer } from '../interfaces/answer';
 import { SurveyModel } from '../models/surveyModel';
+import { QuestionModel } from '../models/questionModel';
+import { AnswerModel } from '../models/answerModel';
 
 
 @Injectable({
@@ -39,7 +41,6 @@ export class SurveyService {
   async getAnswers(questionIds: number[]) {
     let response = await this.supabase.from('question_answers').select('*').in('question_id', questionIds);
     this.answerList.set((response.data ?? []) as Answer[]);
-
   }
 
   async addSurvey(survey: SurveyModel) {
@@ -48,6 +49,25 @@ export class SurveyService {
       .from('surveys')
       .insert([survey_data])
       .select();
+      return data?.[0]
+  }
+
+  async addQuestion(question: QuestionModel) {
+    const question_data = question.getCleanAddJson()
+    const { data, error } = await this.supabase
+      .from('survey_questions')
+      .insert([question_data])
+      .select();
+      return data?.[0]
+
   }
   
+  async addAnswer(answer: AnswerModel) {
+    const answer_data = answer.getCleanAddJson()
+    const { data, error } = await this.supabase
+      .from('question_answers')
+      .insert([answer_data])
+      .select();
+
+  }
 }

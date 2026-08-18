@@ -25,18 +25,18 @@
                 @for (question of surveyForm.controls.questions.controls; track $index; let questionIndex = $index) {
                     <div [formGroupName]="questionIndex">
                         <label [for]="'question-' + questionIndex">{{ questionIndex + 1 }}. Question</label>
-                        <input [id]="'question-' + questionIndex" type="text" formControlName="question">
+                        <input [id]="'question-' + questionIndex" type="text" formControlName="title">
 
                         <button type="button" (click)="addQuestion()">Add next question</button>
 
                         <label [for]="'multiple-answers-' + questionIndex">allow multiple answers</label>
-                        <input [id]="'multiple-answers-' + questionIndex" type="checkbox" formControlName="multiple_answers">   
+                        <input [id]="'multiple-answers-' + questionIndex" type="checkbox" formControlName="allow_multiple_answers">   
 
                         <div formArrayName="answers">
                             @for (answer of question.controls.answers.controls; track $index; let answerIndex = $index) {
                                 <div [formGroupName]="answerIndex">
                                     <label [for]="'answers-' + questionIndex + '-' + answerIndex">{{ answerIndex + 1 }}. Answer</label>
-                                    <input [id]="'answers-' + questionIndex + '-' + answerIndex" type="text" formControlName="answer">
+                                    <input [id]="'answers-' + questionIndex + '-' + answerIndex" type="text" formControlName="title">
                                 </div>
                             }
 
