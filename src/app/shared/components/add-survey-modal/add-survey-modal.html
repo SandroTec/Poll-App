@@ -1,25 +1,35 @@
 
 <dialog #dialog>
     <div>
-        <h2>Add a new survey</h2>
-        <button>cancel</button>
+        <h1>Add a new survey</h1>
+        <button (click)="closeModal()">cancel</button>
     </div>
 
     <div>
         <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
-            <div>
-                <label for="title">Survey name</label>
-                <input id="title" type="text" formControlName="title">
-
-                <label for="endDate">Set end date (optional)</label>
-                <input id="endDate" type="date" formControlName="ends_at">
-                
-                <label for="description">Describing text (optional)</label>
-                <input id="description" type="text" formControlName="description">
-                
-                <label for="categories">Choose category</label>
-                <input id="categories" type="text" formControlName="category">
+            <div class="survey-info-row">
+                <div class="survey-info-row-c">
+                    <div class="input-c">
+                        <label for="title">Survey name</label>
+                        <input id="title" type="text" formControlName="title">
+                    </div>
+                    <div class="date-category-c">
+                        <div class="input-c">
+                            <label for="endDate">Set end date (optional)</label>
+                            <input id="endDate" type="date" formControlName="ends_at">
+                        </div>
+                        <div class="input-c">
+                            <label for="categories">Choose category</label>
+                            <input id="categories" type="text" formControlName="category">
+                        </div>
+                    </div>
+                </div>
+                <div class="input-c">
+                    <label for="description">Describing text (optional)</label>
+                    <input id="description" type="text" formControlName="description">
+                </div>
             </div>
+            
 
             <div formArrayName="questions">
                 @for (question of surveyForm.controls.questions.controls; track $index; let questionIndex = $index) {
