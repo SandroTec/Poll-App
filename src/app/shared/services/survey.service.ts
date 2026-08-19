@@ -18,8 +18,41 @@ export class SurveyService {
   questionList = signal<Question[]>([]);
   answerList = signal<Answer[]>([]);
 
+  insertChannel;
+  deleteChannel;
+
   constructor() {
     this.getSurveys();
+
+    this.insertChannel = this.supabase.channel('custom-insert-channel')
+    .on(
+      'postgres_changes',
+      { event: 'INSERT', schema: 'public', table: 'surveys' },
+      (payload) => {
+        let tmpSurvey = new SurveyModel(payload.new)
+        this.surveyList.update(list => [...list, tmpSurvey]);
+      }
+    )
+    .subscribe()
+
+  this.deleteChannel = this.supabase.channel('custom-delete-channel')
+    .on(
+      'postgres_changes',
+      { event: 'DELETE', schema: 'public', table: 'surveys' },
+      (payload) => {
+        let tmpSurveyID = payload.old["id"]
+        this.surveyList.update(list => list.filter(survey => survey.id !== tmpSurveyID));
+      }
+    )
+    .subscribe()
+
+  }
+
+  ngOnDestory() {
+    //very important to unsubscribe from the channel when the component is destroyed, 
+    //otherwise we will get multiple subscriptions and multiple updates to the productlist signal
+    this.supabase.removeChannel(this.insertChannel);
+    this.supabase.removeChannel(this.deleteChannel);
   }
 
   // method to fetch surveys from the Supabase database and update the surveyList signal
