@@ -5,7 +5,7 @@
                 <td>
                     @for (answer of getAnswersForQuestion(question.id); track answer.id) {
                         <div> 
-                            <li>
+                            <li (click)="voting(answer.id)">
                                 {{ answer.title }}
                             </li> 
                         </div>

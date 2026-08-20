@@ -128,9 +128,14 @@ export class SurveyService {
     this.answerList.set((response.data ?? []) as Answer[]);
   }
 
+  async getVotes(answerIds: number[]) {
+    let response = await this.supabase.from('votes').select('*').in('answer_id', answerIds);
+    this.voteList.set((response.data ?? []) as Vote[]);
+  }
+
   async addSurvey(survey: SurveyModel) {
     const survey_data = survey.getCleanAddJson()
-    const { data, error } = await this.supabase
+    const { data, error } = await this.supabase 
       .from('surveys')
       .insert([survey_data])
       .select();
@@ -153,6 +158,17 @@ export class SurveyService {
       .from('question_answers')
       .insert([answer_data])
       .select();
+  }
 
+  async addVotes(vote: VoteModel) {
+    const vote_data = vote.getCleanAddJson();
+    const { data, error } = await this.supabase
+      .from('votes')
+      .insert([vote_data])
+      .select();
+
+    if (error) {
+      console.error(error);
+    }
   }
 }

@@ -1,7 +1,6 @@
 import { Vote } from '../interfaces/vote';
 
 type VoteFormData = {
-    title: string;
     answer_id: number;
 };
 

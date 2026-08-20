@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { SurveyService } from '../../services/survey.service';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { Answer } from '../../interfaces/answer';
+import { VoteModel } from '../../models/voteModel';
 
 @Component({
   selector: 'app-survey-detail',
@@ -29,5 +30,10 @@ export class SurveyDetail {
   // method to return the answers for a specific question by their question id
   getAnswersForQuestion(questionId: number) {
     return this.answerList().filter((answer: Answer) => answer.question_id === questionId)
+  }
+
+  voting(answer_id: number) {
+    const vote = new VoteModel({ answer_id });
+    this.surveyService.addVotes(vote);
   }
 }

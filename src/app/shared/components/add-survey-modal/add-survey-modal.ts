@@ -77,8 +77,7 @@ export class AddSurveyModal {
           ...questionValue,
           survey_id: createdSurvey.id
         });
-        const createdQuestion =
-          await this.surveySevice.addQuestion(question);
+        const createdQuestion = await this.surveySevice.addQuestion(question);
         for (const answerValue of questionValue.answers ?? []) {
           const answer = new AnswerModel({
             ...answerValue,
