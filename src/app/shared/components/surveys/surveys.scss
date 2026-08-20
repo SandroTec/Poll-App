@@ -1,3 +1,7 @@
+div {
+    max-width: 80dvw;
+}
+
 .days-left-bg {
     background: #ffcfa1;
     width: fit-content;
@@ -12,6 +16,7 @@
 .soon-ending-survey-rows {
     width: 100%;
     display: flex;
+    overflow-x: scroll;
 }
 
 .soon-ending-card {
