@@ -6,6 +6,8 @@ import { Answer } from '../interfaces/answer';
 import { SurveyModel } from '../models/surveyModel';
 import { QuestionModel } from '../models/questionModel';
 import { AnswerModel } from '../models/answerModel';
+import { Vote } from '../interfaces/vote';
+import { VoteModel } from '../models/voteModel';
 
 
 @Injectable({
@@ -18,13 +20,17 @@ export class SurveyService {
   questionList = signal<Question[]>([]);
   answerList = signal<Answer[]>([]);
 
-  insertChannel;
-  deleteChannel;
+  voteList = signal<Vote[]>([]);
+
+  surveyChannel;
+  questionChannel;
+  answerChannel;
+  voteChannel;
 
   constructor() {
     this.getSurveys();
 
-    this.insertChannel = this.supabase.channel('custom-insert-channel')
+    this.surveyChannel = this.supabase.channel('survey-change-channel')
     .on(
       'postgres_changes',
       { event: 'INSERT', schema: 'public', table: 'surveys' },
@@ -33,26 +39,73 @@ export class SurveyService {
         this.surveyList.update(list => [...list, tmpSurvey]);
       }
     )
-    .subscribe()
-
-  this.deleteChannel = this.supabase.channel('custom-delete-channel')
     .on(
       'postgres_changes',
       { event: 'DELETE', schema: 'public', table: 'surveys' },
       (payload) => {
-        let tmpSurveyID = payload.old["id"]
+        const tmpSurveyID = payload.old["id"]
         this.surveyList.update(list => list.filter(survey => survey.id !== tmpSurveyID));
+      }
+    )
+    .subscribe(status => {
+      console.log(
+        'channel status',
+        status
+      )
+    });
+
+    this.questionChannel = this.supabase.channel('question-change-channel')
+    .on(
+      'postgres_changes',
+      { event: 'INSERT', schema: 'public', table: 'survey_questions' },
+      (payload) => {
+        console.log('🔥 QUESTION REALTIME EVENT', payload);
+        let tmpQuestion = new QuestionModel(payload.new)
+        this.questionList.update(list => [...list, tmpQuestion]);
+      }
+    )
+    .subscribe(status => {
+      console.log(
+        'channel status',
+        status
+      )
+    });
+
+    this.answerChannel = this.supabase.channel('answer-change-channel')
+    .on(
+      'postgres_changes',
+      { event: 'INSERT', schema: 'public', table: 'question_answers' },
+      (payload) => {
+        let tmpAnswer = new AnswerModel(payload.new)
+        this.answerList.update(list => [...list, tmpAnswer]);
+      }
+    )
+    .subscribe(status => {
+      console.log(
+        'channel status',
+        status
+      )
+    });
+
+
+    this.voteChannel = this.supabase.channel('vote-insert-channel')
+    .on(
+      'postgres_changes',
+      { event: 'INSERT', schema: 'public', table: 'votes' },
+      (payload) => {
+        let tmpVote = new VoteModel(payload.new)
+        this.voteList.update(list => [...list, tmpVote]);
       }
     )
     .subscribe()
 
   }
 
-  ngOnDestory() {
+  ngOnDestroy() {
     //very important to unsubscribe from the channel when the component is destroyed, 
     //otherwise we will get multiple subscriptions and multiple updates to the productlist signal
-    this.supabase.removeChannel(this.insertChannel);
-    this.supabase.removeChannel(this.deleteChannel);
+    this.supabase.removeChannel(this.surveyChannel);
+    this.supabase.removeChannel(this.voteChannel);
   }
 
   // method to fetch surveys from the Supabase database and update the surveyList signal
@@ -65,7 +118,6 @@ export class SurveyService {
   async getQuestions(surveyId: number) {
     let response = await this.supabase.from('survey_questions').select('*').eq('survey_id', surveyId);
     this.questionList.set((response.data ?? []) as Question[]);
-
   }
 
   // method to fetch answers for specific questions from the Supabase database 

@@ -68,27 +68,27 @@ export class AddSurveyModal {
   }
 
   async onSubmit() {
-  if (this.surveyForm.valid) {
-    const formValue = this.surveyForm.value;
-    const survey = new SurveyModel(formValue);
-    const createdSurvey = await this.surveySevice.addSurvey(survey);
-    for (const questionValue of formValue.questions ?? []) {
-      const question = new QuestionModel({
-        ...questionValue,
-        survey_id: createdSurvey.id
-      });
-      const createdQuestion =
-        await this.surveySevice.addQuestion(question);
-      for (const answerValue of questionValue.answers ?? []) {
-        const answer = new AnswerModel({
-          ...answerValue,
-          question_id: createdQuestion.id
+    if (this.surveyForm.valid) {
+      const formValue = this.surveyForm.value;
+      const survey = new SurveyModel(formValue);
+      const createdSurvey = await this.surveySevice.addSurvey(survey);
+      for (const questionValue of formValue.questions ?? []) {
+        const question = new QuestionModel({
+          ...questionValue,
+          survey_id: createdSurvey.id
         });
-        await this.surveySevice.addAnswer(answer);
+        const createdQuestion =
+          await this.surveySevice.addQuestion(question);
+        for (const answerValue of questionValue.answers ?? []) {
+          const answer = new AnswerModel({
+            ...answerValue,
+            question_id: createdQuestion.id
+          });
+          await this.surveySevice.addAnswer(answer);
+        }
       }
+      
     }
-    
+    this.closeModal()
   }
-  this.closeModal()
-}
 }
