@@ -86,7 +86,6 @@ export class AddSurveyModal {
           await this.surveySevice.addAnswer(answer);
         }
       }
-      
     }
     this.closeModal()
   }

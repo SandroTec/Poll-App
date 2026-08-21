@@ -33,7 +33,7 @@
     @if (state == "active" || state == "") {
         @if (list().length > 0) {
             @for(survey of getActiveSurveys(); track survey.id; let index = $index) {
-                <div [routerLink]="['detail', survey.id]" role="link">
+                <div class="survey-list-c" [routerLink]="['detail', survey.id]" role="link">
                     <span>{{survey.category}}</span>
 
                     <p>{{survey.title}}</p>
