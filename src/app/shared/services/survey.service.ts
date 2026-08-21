@@ -19,7 +19,6 @@ export class SurveyService {
   surveyList = signal<Survey[]>([]);
   questionList = signal<Question[]>([]);
   answerList = signal<Answer[]>([]);
-
   voteList = signal<Vote[]>([]);
 
   surveyChannel;
@@ -105,6 +104,8 @@ export class SurveyService {
     //very important to unsubscribe from the channel when the component is destroyed, 
     //otherwise we will get multiple subscriptions and multiple updates to the productlist signal
     this.supabase.removeChannel(this.surveyChannel);
+    this.supabase.removeChannel(this.questionChannel);
+    this.supabase.removeChannel(this.answerChannel);
     this.supabase.removeChannel(this.voteChannel);
   }
 
@@ -170,5 +171,9 @@ export class SurveyService {
     if (error) {
       console.error(error);
     }
+  }
+
+  getVoteCount(answer_id:number) {
+    return this.voteList().filter(vote => vote.answer_id === answer_id).length
   }
 }

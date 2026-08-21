@@ -25,6 +25,9 @@ export class SurveyDetail {
     const questionIds = this.questionList().map((question) => question.id);
     // Fetch answers by using the question ids
     await this.surveyService.getAnswers(questionIds);
+    // Fetch votes by using answer ids
+    const answerIds = this.answerList().map(answer => answer.id)
+    await this.surveyService.getVotes(answerIds);
   }
 
   // method to return the answers for a specific question by their question id
@@ -35,5 +38,9 @@ export class SurveyDetail {
   voting(answer_id: number) {
     const vote = new VoteModel({ answer_id });
     this.surveyService.addVotes(vote);
+  }
+
+  voteCounting(answer_id: number) {
+    return this.surveyService.getVoteCount(answer_id);
   }
 }

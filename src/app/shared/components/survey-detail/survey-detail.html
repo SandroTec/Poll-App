@@ -6,7 +6,7 @@
                     @for (answer of getAnswersForQuestion(question.id); track answer.id) {
                         <div> 
                             <li (click)="voting(answer.id)">
-                                {{ answer.title }}
+                                {{ answer.title }} <span>| votes: {{ voteCounting(answer.id) }}</span>
                             </li> 
                         </div>
                     }
