@@ -52,3 +52,27 @@
     gap: 24px;
     background: #D9D9D914;
 }
+
+.activeBtn {
+    width: 119px;
+    height: 25px;
+    border-radius: 20px;
+    padding-top: 2px;
+    padding-right: 10px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    gap: 10px;
+    background: #ffb770;
+}
+
+.pastBtn {
+    width: 106px;
+    height: 25px;
+    border-radius: 20px;
+    padding-top: 2px;
+    padding-right: 10px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    gap: 10px;
+    background: #fee9d4;
+}
