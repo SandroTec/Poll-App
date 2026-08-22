@@ -14,6 +14,11 @@ export class Surveys {
   surveyService = inject(SurveyService);
   list = this.surveyService.surveyList;
   state:string = "";
+  categories = [
+    "All Surveys", "Team Activities", "Health & Wellness", 
+    "Gaming & Entertainment", "Education & Learning", 
+    "Lifestyle & Preferences", "Technology & Innovation"
+  ];
 
   // calculates and returns day remaining before survey is ending
   getEndingTime(surveyEndsAt: Date) {
