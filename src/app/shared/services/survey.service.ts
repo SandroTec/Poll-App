@@ -150,7 +150,6 @@ export class SurveyService {
       .insert([question_data])
       .select();
       return data?.[0]
-
   }
   
   async addAnswer(answer: AnswerModel) {
@@ -167,7 +166,6 @@ export class SurveyService {
       .from('votes')
       .insert([vote_data])
       .select();
-
     if (error) {
       console.error(error);
     }
