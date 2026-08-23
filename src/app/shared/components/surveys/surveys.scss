@@ -12,14 +12,12 @@
 .soon-ending-survey-rows {
     max-width: 50%;
     display: flex;
-    overflow-x: scroll;
     justify-content: center;
     align-items: center;
 }
 
 .soon-ending-card {
     width: 321px;
-    height: 310px;
     gap: 10px;
     border-top-right-radius: 80px;
     padding-top: 40px;
@@ -34,13 +32,11 @@
 .survey-list {
     display: flex;
     max-width: 100vw;
-    overflow-x: scroll;
 }
 
 .survey-list-c {
     cursor: pointer;
     width: 513px;
-    height: 130px;
     border-top-left-radius: 5px;
     border-top-right-radius: 50px;
     border-bottom-right-radius: 5px;
@@ -75,4 +71,8 @@
     padding-left: 10px;
     gap: 10px;
     background: #fee9d4;
+}
+
+li {
+    cursor: pointer;
 }
