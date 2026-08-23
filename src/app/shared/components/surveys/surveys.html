@@ -29,6 +29,23 @@
     Past Survey
 </button>
 
+<div class="drop-down-menu">
+    <button (click)="openMenu()">
+        Sort by Category
+        {{ selectedCategory }}
+    </button>
+    
+    @if (menuOpen()) {
+        <ul>
+            @for (category of categories; track category) {
+                <li (click)="sortCategories(category)">
+                    {{ category }}
+                </li>
+            }
+        </ul>
+    }
+</div>
+
 <div class="survey-list">
     @if (state == "active" || state == "") {
         @if (list().length > 0) {
@@ -51,7 +68,7 @@
     }@else if (state == "past") {
         @if (list().length > 0) {
             @for(survey of getPastSurveys(); track survey.id; let index = $index) {
-                <div [routerLink]="['detail', survey.id]" role="link">
+                <div class="survey-list-c"  [routerLink]="['detail', survey.id]" role="link">
                     <span>{{survey.category}}</span>
 
                     <p>{{survey.title}}</p>

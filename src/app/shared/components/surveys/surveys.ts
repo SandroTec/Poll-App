@@ -1,8 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { SurveyService } from '../../services/survey.service';
 import { RouterLink } from '@angular/router';
 import { Survey } from '../../interfaces/survey';
-
 
 @Component({
   selector: 'app-surveys',
@@ -19,6 +18,20 @@ export class Surveys {
     "Gaming & Entertainment", "Education & Learning", 
     "Lifestyle & Preferences", "Technology & Innovation"
   ];
+
+  selectedCategory = 'All Surveys';
+
+  menuOpen = signal(false);
+
+  openMenu() {
+    this.menuOpen.update(open => !open)
+  }
+
+  sortCategories(choosenCategory:string) {
+    this.selectedCategory = choosenCategory;
+    this.menuOpen.set(false);
+  }
+
 
   // calculates and returns day remaining before survey is ending
   getEndingTime(surveyEndsAt: Date) {
@@ -41,14 +54,18 @@ export class Surveys {
   getPastSurveys() {
     return this.list().filter((survey: Survey) => 
       survey.ends_at !== undefined &&
-      this.getEndingTime(survey.ends_at) <= 0 
+      this.getEndingTime(survey.ends_at) <= 0  &&
+      (this.selectedCategory === 'All Surveys' ||
+      survey.category === this.selectedCategory)
     );
   }
 
   getActiveSurveys() {
     return this.list().filter((survey: Survey) => 
       survey.ends_at !== undefined &&
-      this.getEndingTime(survey.ends_at) >= 0 
+      this.getEndingTime(survey.ends_at) >= 0 &&
+      (this.selectedCategory === 'All Surveys' ||
+      survey.category === this.selectedCategory)
     );
   }
 
