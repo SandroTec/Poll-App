@@ -13,12 +13,8 @@ export class Surveys {
   surveyService = inject(SurveyService);
   list = this.surveyService.surveyList;
   state:string = "";
-  categories = [
-    "All Surveys", "Team Activities", "Health & Wellness", 
-    "Gaming & Entertainment", "Education & Learning", 
-    "Lifestyle & Preferences", "Technology & Innovation"
-  ];
-
+  
+  categories = this.surveyService.categories
   selectedCategory = 'All Surveys';
 
   menuOpen = signal(false);

@@ -18,6 +18,8 @@ import { AnswerModel } from '../../models/answerModel';
 export class AddSurveyModal {
   router = inject(Router);
   surveySevice = inject(SurveyService);
+  categories = this.surveySevice.categories.slice(1);
+
 
   //safes dialog html element as dialog via ViewChild
   @ViewChild('dialog') dialog!: ElementRef<HTMLDialogElement>;

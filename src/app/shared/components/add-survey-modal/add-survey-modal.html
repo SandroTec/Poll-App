@@ -19,8 +19,14 @@
                             <input id="endDate" type="date" formControlName="ends_at">
                         </div>
                         <div class="input-c">
-                            <label for="categories">Choose category</label>
-                            <input id="categories" type="text" formControlName="category">
+                            <label for="categories">Choose a category</label>
+                            <select id="categories" formControlName="category">
+                                @for (category of categories; track category) {
+                                    <option [value]="category">
+                                        {{ category }}
+                                    </option>
+                                }
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -49,7 +55,6 @@
                                     <input [id]="'answers-' + questionIndex + '-' + answerIndex" type="text" formControlName="title">
                                 </div>
                             }
-
                             <button type="button" (click)="addAnswers(questionIndex)">Add answer</button>
                         </div>
                     </div>
