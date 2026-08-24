@@ -19,6 +19,8 @@ export class Surveys {
 
   menuOpen = signal(false);
 
+  showAlert = this.surveyService.showAlert
+
   openMenu() {
     this.menuOpen.update(open => !open)
   }

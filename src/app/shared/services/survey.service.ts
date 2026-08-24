@@ -21,6 +21,8 @@ export class SurveyService {
   answerList = signal<Answer[]>([]);
   voteList = signal<Vote[]>([]);
 
+  showAlert = signal(false);
+
   surveyChannel;
   questionChannel;
   answerChannel;
@@ -42,6 +44,7 @@ export class SurveyService {
       (payload) => {
         let tmpSurvey = new SurveyModel(payload.new)
         this.surveyList.update(list => [...list, tmpSurvey]);
+        this.showAlert.set(true)
       }
     )
     .on(
