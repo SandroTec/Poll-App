@@ -56,10 +56,12 @@
                     <p>{{survey.title}}</p>
                     <p>{{survey.description}}</p>
                     
-                    <span>Ends in:</span>
-                    @if (survey.ends_at) {
-                        <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
-                    }
+                    <div class="days-left-bg">
+                        <span>Ends in:</span>
+                        @if (survey.ends_at) {
+                            <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
+                        }
+                    </div>
                 </div>
             }
         } @else {
@@ -74,10 +76,12 @@
                     <p>{{survey.title}}</p>
                     <p>{{survey.description}}</p>
                     
-                    <span>Ends in:</span>
-                    @if (survey.ends_at) {
-                        <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
-                    }
+                    <div class="days-left-bg">
+                        <span>Ends in:</span>
+                        @if (survey.ends_at) {
+                            <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
+                        }
+                    </div>
                 </div>
             }
         } @else {
