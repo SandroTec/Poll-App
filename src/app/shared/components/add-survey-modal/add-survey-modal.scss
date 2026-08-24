@@ -86,3 +86,16 @@ h1 {
     border-radius: 10px;
     background: #FFCFA1;
 }
+
+input:focus {
+    background: #FEE9D4;
+}
+
+.clear-btn {
+    content: url('/assets/img/delete_icon.png');
+    cursor: pointer;
+}
+
+.clear-btn:hover {
+    content: url('/assets/img/delete_icon_hover.png');
+}

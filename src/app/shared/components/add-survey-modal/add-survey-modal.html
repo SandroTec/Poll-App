@@ -11,7 +11,10 @@
                 <div class="survey-info-row-c">
                     <div class="input-c">
                         <label for="title">Survey name</label>
-                        <input id="title" type="text" formControlName="title">
+                        <div>
+                            <input id="title" type="text" formControlName="title">
+                            <img class="clear-btn" src="" alt="delete-icon">
+                        </div>
                     </div>
                     <div class="date-category-c">
                         <div class="input-c">
@@ -32,33 +35,42 @@
                 </div>
                 <div class="input-c">
                     <label for="description">Describing text (optional)</label>
-                    <input id="description" type="text" formControlName="description">
+                    <div>
+                        <input id="description" type="text" formControlName="description">
+                        <img class="clear-btn" src="" alt="delete-icon">
+                    </div>
                 </div>
             </div>
             
 
             <div formArrayName="questions">
                 @for (question of surveyForm.controls.questions.controls; track $index; let questionIndex = $index) {
-                    <div [formGroupName]="questionIndex">
+                    <div [formGroupName]="questionIndex">    
                         <label [for]="'question-' + questionIndex">{{ questionIndex + 1 }}. Question</label>
-                        <input [id]="'question-' + questionIndex" type="text" formControlName="title">
-
+                        <div>    
+                            <input [id]="'question-' + questionIndex" type="text" formControlName="title">
+                            <img class="clear-btn" src="" alt="delete-icon">
+                        </div>
                         <button class="add-question-btn" type="button" (click)="addQuestion()">Add next question</button>
 
                         <label [for]="'multiple-answers-' + questionIndex">allow multiple answers</label>
                         <input [id]="'multiple-answers-' + questionIndex" type="checkbox" formControlName="allow_multiple_answers">   
-
+                        
                         <div formArrayName="answers">
                             @for (answer of question.controls.answers.controls; track $index; let answerIndex = $index) {
                                 <div [formGroupName]="answerIndex">
                                     <label [for]="'answers-' + questionIndex + '-' + answerIndex">{{ answerIndex + 1 }}. Answer</label>
-                                    <input [id]="'answers-' + questionIndex + '-' + answerIndex" type="text" formControlName="title">
+                                    <div>
+                                        <input [id]="'answers-' + questionIndex + '-' + answerIndex" type="text" formControlName="title">
+                                        <img class="clear-btn" src="" alt="delete-icon">
+                                    </div>
                                 </div>
                             }
-                            <button class="answer-btn" type="button" (click)="addAnswers(questionIndex)">Add answer</button>
                         </div>
                     </div>
+                <button class="answer-btn" type="button" (click)="addAnswers(questionIndex)">Add answer</button>
                 }
+                
             </div>
 
             <div class="publish-c">
