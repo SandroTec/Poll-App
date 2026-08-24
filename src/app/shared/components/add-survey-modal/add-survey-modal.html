@@ -1,7 +1,7 @@
 
 <dialog #dialog>
-    <div>
-        <h1>Add a new survey</h1>
+    <div class="modal-header">
+        <h1>Create new survey</h1>
         <button (click)="closeModal()">cancel</button>
     </div>
 
@@ -43,7 +43,7 @@
                         <label [for]="'question-' + questionIndex">{{ questionIndex + 1 }}. Question</label>
                         <input [id]="'question-' + questionIndex" type="text" formControlName="title">
 
-                        <button type="button" (click)="addQuestion()">Add next question</button>
+                        <button class="add-question-btn" type="button" (click)="addQuestion()">Add next question</button>
 
                         <label [for]="'multiple-answers-' + questionIndex">allow multiple answers</label>
                         <input [id]="'multiple-answers-' + questionIndex" type="checkbox" formControlName="allow_multiple_answers">   
@@ -55,13 +55,15 @@
                                     <input [id]="'answers-' + questionIndex + '-' + answerIndex" type="text" formControlName="title">
                                 </div>
                             }
-                            <button type="button" (click)="addAnswers(questionIndex)">Add answer</button>
+                            <button class="answer-btn" type="button" (click)="addAnswers(questionIndex)">Add answer</button>
                         </div>
                     </div>
                 }
             </div>
 
-            <button type="submit">Publish</button>
+            <div class="publish-c">
+                <button class="publish-btn" type="submit">Publish</button>
+            </div>
         </form>
     </div>
 </dialog>
