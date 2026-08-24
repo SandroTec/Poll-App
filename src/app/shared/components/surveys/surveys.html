@@ -21,29 +21,33 @@
     }
 </div>
 
-<button class="activeBtn" (click)="state = 'active'">
-    Active Survey
-</button>
-    
-<button class="pastBtn" (click)="state = 'past'">
-    Past Survey
-</button>
+<div class="btn-c">
+    <div>
+        <button class="activeBtn" (click)="state = 'active'">
+            Active Survey
+        </button>
+            
+        <button class="pastBtn" (click)="state = 'past'">
+            Past Survey
+        </button>
+    </div>
 
-<div class="drop-down-menu">
-    <button (click)="openMenu()">
-        Sort by Category
-        {{ selectedCategory }}
-    </button>
-    
-    @if (menuOpen()) {
-        <ul>
-            @for (category of categories; track category) {
-                <li (click)="sortCategories(category)">
-                    {{ category }}
-                </li>
-            }
-        </ul>
-    }
+    <div class="drop-down-menu">
+        <button (click)="openMenu()">
+            Sort by Category
+            {{ selectedCategory }}
+        </button>
+        
+        @if (menuOpen()) {
+            <ul>
+                @for (category of categories; track category) {
+                    <li (click)="sortCategories(category)">
+                        {{ category }}
+                    </li>
+                }
+            </ul>
+        }
+    </div>
 </div>
 
 <div class="survey-list">
