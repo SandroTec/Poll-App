@@ -1,3 +1,12 @@
+
+<body>
+    <header>
+        <img src="" alt="detail logo">
+
+        <button (click)="openSurveyModal()">create survey</button>
+
+    </header>
+    
     @if (questionList().length > 0) {
         @for(question of questionList(); track question.id; let index = $index) {
             <tr>
@@ -16,3 +25,7 @@
     } @else {
         <p>Keine items in der Liste</p>
     }
+</body>
+
+
+<app-add-survey-modal></app-add-survey-modal>

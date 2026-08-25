@@ -1,12 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { SurveyService } from '../../services/survey.service';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { Answer } from '../../interfaces/answer';
 import { VoteModel } from '../../models/voteModel';
+import { AddSurveyModal } from '../add-survey-modal/add-survey-modal';
 
 @Component({
   selector: 'app-survey-detail',
-  imports: [RouterLink],
+  imports: [RouterLink, AddSurveyModal],
   templateUrl: './survey-detail.html',
   styleUrl: './survey-detail.scss',
 })
@@ -16,6 +17,14 @@ export class SurveyDetail {
 
   questionList = this.surveyService.questionList;
   answerList = this.surveyService.answerList;
+
+  // safes AddSurveyModal component class as surveyModal
+  @ViewChild(AddSurveyModal) surveyModal!: AddSurveyModal;
+
+  //opens surveyModal in AddSurveyModal component
+  openSurveyModal() {
+    this.surveyModal.openModal();
+  }
 
   async ngOnInit() {
     const surveyId = Number(this.route.snapshot.paramMap.get('id'));
