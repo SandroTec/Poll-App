@@ -2,7 +2,7 @@ import { Survey } from '../interfaces/survey';
 
 type SurveyFormData = {
     title: string;
-    description: string;
+    description: string | null;
     category: string;
     ends_at: string | null;
 };
@@ -10,7 +10,7 @@ type SurveyFormData = {
 export class SurveyModel implements Survey {
     id: number;
     title: string;
-    description: string;
+    description?: string;
     category: string;
     created_at: Date;
     ends_at?: Date;
@@ -18,7 +18,7 @@ export class SurveyModel implements Survey {
     constructor(data: Partial<SurveyFormData> = {}) {
         this.id = 0;
         this.title = data.title ?? "";
-        this.description = data.description ?? "";
+        this.description = data.description ? "" : undefined;
         this.category = data.category ?? "";
         this.created_at = new Date();
         this.ends_at = data.ends_at ? new Date(data.ends_at) : undefined;

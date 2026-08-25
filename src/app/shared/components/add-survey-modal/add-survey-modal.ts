@@ -34,7 +34,7 @@ export class AddSurveyModal {
 
   surveyForm = new FormGroup({
     title: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
-    description: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
+    description: new FormControl('', {nonNullable: false}),
     category: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
     ends_at: new FormControl(''),
     questions: new FormArray([this.createQuestionForm()]),
