@@ -91,4 +91,9 @@ export class AddSurveyModal {
     }
     this.closeModal()
   }
+
+  //clears specific input field and set form to invalid
+  clearField(controlName:string) {
+    this.surveyForm.get(controlName)?.reset();
+  }
 }
