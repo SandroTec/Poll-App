@@ -1,3 +1,15 @@
+
+body {
+    height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+    padding: 20px 70px;
+}
+
+header img {
+    content: url('/assets/img/poll-app-logo-purple.png');
+}
+
 tr {
     display: flex;
     flex-direction: column;
