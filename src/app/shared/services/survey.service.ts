@@ -101,7 +101,6 @@ export class SurveyService {
       'postgres_changes',
       { event: 'INSERT', schema: 'public', table: 'votes' },
       (payload) => {
-        console.log('REALTIME VOTE:', payload.new);
         let tmpVote = new VoteModel(payload.new)
         this.voteList.update(list => [...list, tmpVote]);
         console.log('VOTE LIST:', this.voteList());

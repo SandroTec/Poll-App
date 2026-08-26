@@ -63,7 +63,6 @@ export class SurveyDetail {
     const storedState = sessionStorage.getItem(`survey-${surveyId}`);
     if (storedState) {
       const voteState: SurveyVoteState = JSON.parse(storedState);
-      console.log(voteState.completed)
       if (voteState.completed) return;
       voteState.selectedAnswers.push({questionId, answerId})
       this.saveVoteState(surveyId, voteState.selectedAnswers, false);
@@ -96,14 +95,6 @@ export class SurveyDetail {
         selectedAnswer => selectedAnswer.answerId === answer_id)
       ) {localVotes = 1}
     }
-   console.log(
-    'answer:', answer_id,
-    'db:', this.surveyService.getVoteCount(answer_id),
-    'local:', localVotes,
-    'completed:', storedState
-      ? JSON.parse(storedState).completed
-      : 'no state'
-  );
     return this.surveyService.getVoteCount(answer_id) + localVotes;
   }
 }
