@@ -14,7 +14,7 @@
                 <td>
                     @for (answer of getAnswersForQuestion(question.id); track answer.id) {
                         <div> 
-                            <li (click)="voting(answer.id)">
+                            <li (click)="updateVoteState(surveyId, question.id, answer.id)">
                                 {{ answer.title }} <span>| votes: {{ voteCounting(answer.id) }}</span>
                             </li> 
                         </div>
@@ -25,6 +25,10 @@
     } @else {
         <p>Keine items in der Liste</p>
     }
+
+    <footer>
+        <button (click)="voting()">complete survey</button>
+    </footer>
 </body>
 
 

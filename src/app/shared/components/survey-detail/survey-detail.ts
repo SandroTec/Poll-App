@@ -2,8 +2,10 @@ import { Component, inject, ViewChild } from '@angular/core';
 import { SurveyService } from '../../services/survey.service';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { Answer } from '../../interfaces/answer';
+import { SelectedAnswer } from "../../interfaces/selected-answer";
 import { VoteModel } from '../../models/voteModel';
 import { AddSurveyModal } from '../add-survey-modal/add-survey-modal';
+import { SurveyVoteState } from '../../interfaces/survey-vote-state';
 
 @Component({
   selector: 'app-survey-detail',
@@ -18,6 +20,8 @@ export class SurveyDetail {
   questionList = this.surveyService.questionList;
   answerList = this.surveyService.answerList;
 
+  surveyId!: number;
+
   // safes AddSurveyModal component class as surveyModal
   @ViewChild(AddSurveyModal) surveyModal!: AddSurveyModal;
 
@@ -27,9 +31,9 @@ export class SurveyDetail {
   }
 
   async ngOnInit() {
-    const surveyId = Number(this.route.snapshot.paramMap.get('id'));
+    this.surveyId = Number(this.route.snapshot.paramMap.get('id'));
     // Fetch questions by using the surveyId
-    await this.surveyService.getQuestions(surveyId);
+    await this.surveyService.getQuestions(this.surveyId);
     // map a new array with the question ids
     const questionIds = this.questionList().map((question) => question.id);
     // Fetch answers by using the question ids
@@ -44,12 +48,47 @@ export class SurveyDetail {
     return this.answerList().filter((answer: Answer) => answer.question_id === questionId)
   }
 
-  voting(answer_id: number) {
-    const vote = new VoteModel({ answer_id });
-    this.surveyService.addVotes(vote);
+  saveVoteState(surveyId:number, selectedAnswers:SelectedAnswer[]) {
+    const voteState: SurveyVoteState = {
+      selectedAnswers: selectedAnswers,
+      completed: false
+    };
+    sessionStorage.setItem(
+      `survey-${surveyId}`,
+      JSON.stringify(voteState)
+    );
+  }
+
+  updateVoteState(surveyId:number, questionId:number, answerId:number) {
+    const storedState = sessionStorage.getItem(`survey-${surveyId}`);
+    if (storedState) {
+      const voteState: SurveyVoteState = JSON.parse(storedState);
+      voteState.selectedAnswers.push({questionId, answerId})
+      this.saveVoteState(surveyId, voteState.selectedAnswers);
+    } else {
+      this.saveVoteState(surveyId, [{questionId, answerId}]);
+    };
+  }
+
+  voting() {
+    const storedState = sessionStorage.getItem(`survey-${this.surveyId}`);
+    if (!storedState) return;
+    const voteState: SurveyVoteState = JSON.parse(storedState);
+    voteState.selectedAnswers.forEach(selectedAnswer => {
+      const vote = new VoteModel({ answer_id: selectedAnswer.answerId });
+      this.surveyService.addVotes(vote);
+    })
   }
 
   voteCounting(answer_id: number) {
-    return this.surveyService.getVoteCount(answer_id);
+    const storedState = sessionStorage.getItem(`survey-${this.surveyId}`);
+    let localVotes = 0;
+    if (storedState) {
+      const voteState: SurveyVoteState = JSON.parse(storedState);
+      if (voteState.selectedAnswers.some(
+        selectedAnswer => selectedAnswer.answerId === answer_id)
+      ) {localVotes = 1}
+    }
+    return this.surveyService.getVoteCount(answer_id) + localVotes;
   }
 }
