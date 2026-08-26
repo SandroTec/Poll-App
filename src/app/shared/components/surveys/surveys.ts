@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { SurveyService } from '../../services/survey.service';
 import { RouterLink } from '@angular/router';
 import { Survey } from '../../interfaces/survey';
+import { SurveyVoteState } from '../../interfaces/survey-vote-state';
 
 @Component({
   selector: 'app-surveys',
@@ -67,5 +68,14 @@ export class Surveys {
     );
   }
 
+  isSurveyCompleted(surveyId: number): boolean {
+    const storedState = sessionStorage.getItem(`survey-${surveyId}`);
+
+    if (!storedState) return false;
+
+    const voteState: SurveyVoteState = JSON.parse(storedState);
+
+    return voteState.completed;
+}
 }
 
