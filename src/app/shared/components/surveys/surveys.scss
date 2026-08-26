@@ -1,3 +1,10 @@
+h2 {
+    display: flex;
+    justify-content: center;
+    color: #FFB770;
+
+}
+
 .days-left-bg {
     background: #ffcfa1;
     width: fit-content;
@@ -49,6 +56,16 @@
     background: #D9D9D914;
 }
 
+.survey-list-c:hover {
+    background: #D9D9D929;
+
+}
+
+.survey-list-c.completed {
+    opacity: 0.5;
+    filter: grayscale(1);
+}
+
 .btn-c {
     display: flex;
     justify-content: space-between;
@@ -78,10 +95,32 @@
     background: #fee9d4;
 }
 
+ul {
+    margin: 0;
+    padding: 0;
+}
+
 li {
     cursor: pointer;
     list-style: none;
     padding: 5px;
+}
+
+.drop-down-menu {
+    position: absolute;
+    z-index: 10;
+    width: 121px;
+    right: 70px;
+    gap: 8px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: dashed;
+    background: #FFFFFF;
+    color: #35273A;
+}
+
+.drop-down-menu ul li:hover {
+    background: #F4E9FB;
 }
 
 .alert {
