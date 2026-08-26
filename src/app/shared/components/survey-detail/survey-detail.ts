@@ -48,10 +48,10 @@ export class SurveyDetail {
     return this.answerList().filter((answer: Answer) => answer.question_id === questionId)
   }
 
-  saveVoteState(surveyId:number, selectedAnswers:SelectedAnswer[]) {
+  saveVoteState(surveyId:number, selectedAnswers:SelectedAnswer[], completed:boolean) {
     const voteState: SurveyVoteState = {
       selectedAnswers: selectedAnswers,
-      completed: false
+      completed: completed
     };
     sessionStorage.setItem(
       `survey-${surveyId}`,
@@ -63,21 +63,28 @@ export class SurveyDetail {
     const storedState = sessionStorage.getItem(`survey-${surveyId}`);
     if (storedState) {
       const voteState: SurveyVoteState = JSON.parse(storedState);
+      console.log(voteState.completed)
+      if (voteState.completed) return;
       voteState.selectedAnswers.push({questionId, answerId})
-      this.saveVoteState(surveyId, voteState.selectedAnswers);
+      this.saveVoteState(surveyId, voteState.selectedAnswers, false);
     } else {
-      this.saveVoteState(surveyId, [{questionId, answerId}]);
+      this.saveVoteState(surveyId, [{questionId, answerId}], false);
     };
   }
 
-  voting() {
+  async voting() {
     const storedState = sessionStorage.getItem(`survey-${this.surveyId}`);
     if (!storedState) return;
     const voteState: SurveyVoteState = JSON.parse(storedState);
-    voteState.selectedAnswers.forEach(selectedAnswer => {
-      const vote = new VoteModel({ answer_id: selectedAnswer.answerId });
-      this.surveyService.addVotes(vote);
-    })
+    if (voteState.completed) return;
+    await Promise.all( 
+      voteState.selectedAnswers.map(selectedAnswer => {
+        const vote = new VoteModel({ answer_id: selectedAnswer.answerId });
+        return this.surveyService.addVotes(vote);
+      })
+    )
+    voteState.completed = true;
+    this.saveVoteState(this.surveyId, voteState.selectedAnswers, true);
   }
 
   voteCounting(answer_id: number) {
@@ -85,10 +92,18 @@ export class SurveyDetail {
     let localVotes = 0;
     if (storedState) {
       const voteState: SurveyVoteState = JSON.parse(storedState);
-      if (voteState.selectedAnswers.some(
+      if (!voteState.completed && voteState.selectedAnswers.some(
         selectedAnswer => selectedAnswer.answerId === answer_id)
       ) {localVotes = 1}
     }
+   console.log(
+    'answer:', answer_id,
+    'db:', this.surveyService.getVoteCount(answer_id),
+    'local:', localVotes,
+    'completed:', storedState
+      ? JSON.parse(storedState).completed
+      : 'no state'
+  );
     return this.surveyService.getVoteCount(answer_id) + localVotes;
   }
 }
