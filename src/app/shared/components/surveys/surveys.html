@@ -17,7 +17,7 @@
                         
                         <div class="days-left-bg">
                             @if (survey.ends_at) {
-                                <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
+                                <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} day('s)</span>
                             }
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                     <div class="days-left-bg">
                         <span>Ends in:</span>
                         @if (survey.ends_at) {
-                            <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
+                            <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} day('s)</span>
                         }
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                     <div class="days-left-bg">
                         <span>Ends in:</span>
                         @if (survey.ends_at) {
-                            <span>{{ getEndingTime( survey.ends_at ) }} day('s)</span>
+                            <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} day('s)</span>
                         }
                     </div>
                 </div>

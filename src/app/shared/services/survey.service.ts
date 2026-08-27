@@ -202,5 +202,15 @@ export class SurveyService {
         }
     }
     return completed;
-}
+  }
+
+// calculates and returns day remaining before survey is ending
+  getEndingTime(surveyEndsAt: Date | undefined) {
+    if (!surveyEndsAt) return 4 // return 4 so they are not in the ending soon list if they got no ending time.
+    const now = new Date();
+    const endTime = new Date(surveyEndsAt);
+    const timeDifference = endTime.getTime() - now.getTime();
+    const daysRemaining = Math.ceil(timeDifference / (1000 * 3600 * 24));
+    return daysRemaining;
+  }
 }
