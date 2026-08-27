@@ -43,9 +43,12 @@ td {
 }
 
 .answer-li {
-    cursor: pointer;
     list-style: upper-latin;
     padding: 5px;
+}
+
+input {
+    cursor: pointer;
 }
 
 .question-li {

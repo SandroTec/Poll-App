@@ -72,24 +72,40 @@ export class SurveyDetail {
     );
   }
 
+  isAnswerSelected(questionId:number, answerId:number) {
+    const storedState = sessionStorage.getItem(`survey-${this.surveyId}`);
+    if (!storedState) return false;
+    const voteState: SurveyVoteState = JSON.parse(storedState);
+    return voteState.selectedAnswers.some(selectedAnswer =>
+      selectedAnswer.questionId === questionId &&
+      selectedAnswer.answerId === answerId
+    );
+  }
+
   updateVoteState(surveyId:number, questionId:number, answerId:number) {
     const storedState = sessionStorage.getItem(`survey-${surveyId}`);
     if (storedState) {
       const voteState: SurveyVoteState = JSON.parse(storedState);
       if (voteState.completed) return;
       const question = this.questionList().find(question => question.id === questionId);
-      if (question?.allow_multiple_answers) {
-        if (voteState.selectedAnswers.some( selectedAnswer => 
-          selectedAnswer.questionId === questionId && 
-          selectedAnswer.answerId === answerId)) {
+       if (question?.allow_multiple_answers) {
+        if (voteState.selectedAnswers.some(selectedAnswer => 
+          selectedAnswer.questionId === questionId && selectedAnswer.answerId === answerId)) {
             voteState.selectedAnswers = voteState.selectedAnswers.filter(selectedAnswer => 
-              selectedAnswer.questionId !== questionId || selectedAnswer.answerId !== answerId)
-          } else {
-            voteState.selectedAnswers.push({questionId, answerId})
-          }
-      } else {
-          voteState.selectedAnswers = voteState.selectedAnswers.filter(selectedAnswer => selectedAnswer.questionId !== questionId);
+            selectedAnswer.questionId !== questionId || selectedAnswer.answerId !== answerId);
+        } else {
           voteState.selectedAnswers.push({questionId, answerId});
+        }
+      } else {
+        if (voteState.selectedAnswers.some(selectedAnswer => 
+          selectedAnswer.questionId === questionId && selectedAnswer.answerId === answerId)) {
+            voteState.selectedAnswers = voteState.selectedAnswers.filter(selectedAnswer => 
+            selectedAnswer.questionId !== questionId);
+        } else {
+          voteState.selectedAnswers = voteState.selectedAnswers.filter(selectedAnswer => 
+            selectedAnswer.questionId !== questionId);
+          voteState.selectedAnswers.push({questionId, answerId});
+        }
       }
       this.saveVoteState(surveyId, voteState.selectedAnswers, false);
     } else {
@@ -117,10 +133,18 @@ export class SurveyDetail {
     let localVotes = 0;
     if (storedState) {
       const voteState: SurveyVoteState = JSON.parse(storedState);
-      if (!voteState.completed && voteState.selectedAnswers.some(
-        selectedAnswer => selectedAnswer.answerId === answer_id)
-      ) {localVotes = 1}
+      const isSelected = voteState.selectedAnswers.some(selectedAnswer =>
+        selectedAnswer.answerId === answer_id
+      );
+      if (!voteState.completed && isSelected) {localVotes = 1}
     }
     return this.surveyService.getVoteCount(answer_id) + localVotes;
   }
+
+  isSurveyCompleted() {
+    const storedState = sessionStorage.getItem(`survey-${this.surveyId}`);
+    if (!storedState) return false;
+    return JSON.parse(storedState).completed;
+  }
 }
+

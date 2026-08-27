@@ -27,8 +27,8 @@
                             {{question.title}}
                                 <ol>
                                     @for (answer of getAnswersForQuestion(question.id); track answer.id) {
-                                        <li class="answer-li" (click)="updateVoteState(surveyId, question.id, answer.id)">
-                                            {{ answer.title }}
+                                        <li class="answer-li">
+                                            <input type="checkbox" [disabled]="isSurveyCompleted()" [checked]="isAnswerSelected(question.id, answer.id)" (click)="updateVoteState(surveyId, question.id, answer.id)"> {{ answer.title }}
                                         </li> 
                                     }
                                 </ol>
@@ -50,7 +50,7 @@
                         <ol>
                             {{question.title}}
                             @for (answer of getAnswersForQuestion(question.id); track answer.id) {
-                                <li class="result-li" (click)="updateVoteState(surveyId, question.id, answer.id)">
+                                <li class="result-li">
                                     votes: {{ voteCounting(answer.id) }}
                                 </li>
                             }
