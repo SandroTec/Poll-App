@@ -1,13 +1,35 @@
 
 body {
-    height: 100vh;
-    width: 100vw;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 20px 70px;
 }
 
 header img {
     content: url('/assets/img/poll-app-logo-purple.png');
+}
+
+.survey-state {
+    background: #FFB770;
+    width: 94px;
+    height: 26px;
+    border-top-right-radius: 14px;
+    padding-top: 3px;
+    padding-right: 12px;
+    padding-bottom: 3px;
+    padding-left: 8px;
+
+}
+
+.headline-desc {
+    padding: 20px 0 40px 0;
 }
 
 tr {
@@ -20,10 +42,14 @@ td {
     flex-direction: column;
 }
 
-li {
+.answer-li {
     cursor: pointer;
     list-style: none;
     padding: 5px;
+}
+
+.question-li {
+    list-style: decimal;
 }
 
 .add-survey-btn {
@@ -36,4 +62,19 @@ li {
     gap: 10px;
     border-radius: 10px;
     background: #FFCFA1;
+}
+
+.content {
+    padding: 20px 70px;
+    display: flex;
+
+}
+
+.survey-c {
+    background: #8E70991A;
+    width: 50%;
+}
+
+.result-c {
+    width: 50%;
 }
