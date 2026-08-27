@@ -8,6 +8,7 @@ import { QuestionModel } from '../models/questionModel';
 import { AnswerModel } from '../models/answerModel';
 import { Vote } from '../interfaces/vote';
 import { VoteModel } from '../models/voteModel';
+import { SurveyVoteState } from '../interfaces/survey-vote-state';
 
 
 @Injectable({
@@ -22,6 +23,8 @@ export class SurveyService {
   voteList = signal<Vote[]>([]);
 
   showAlert = signal(false);
+
+  completedSurveys = signal<number[]>(this.getCompletedSurveys());
 
   surveyChannel;
   questionChannel;
@@ -67,7 +70,6 @@ export class SurveyService {
       'postgres_changes',
       { event: 'INSERT', schema: 'public', table: 'survey_questions' },
       (payload) => {
-        console.log('🔥 QUESTION REALTIME EVENT', payload);
         let tmpQuestion = new QuestionModel(payload.new)
         this.questionList.update(list => [...list, tmpQuestion]);
       }
@@ -184,4 +186,21 @@ export class SurveyService {
   getVoteCount(answer_id:number) {
     return this.voteList().filter(vote => vote.answer_id === answer_id).length
   }
+
+  // get all completed surveys from localStorage and return them into the completedSurveys-signal
+  getCompletedSurveys() {
+    const completed: number[] = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key?.startsWith('survey-')) {
+            const storedState = localStorage.getItem(key);
+            if (!storedState) continue;
+            const voteState: SurveyVoteState = JSON.parse(storedState);
+            if (voteState.completed) {
+                completed.push(Number(key.replace('survey-', '')));
+            }
+        }
+    }
+    return completed;
+}
 }

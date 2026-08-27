@@ -66,14 +66,14 @@ export class SurveyDetail {
       selectedAnswers: selectedAnswers,
       completed: completed
     };
-    sessionStorage.setItem(
+    localStorage.setItem(
       `survey-${surveyId}`,
       JSON.stringify(voteState)
     );
   }
 
   isAnswerSelected(questionId:number, answerId:number) {
-    const storedState = sessionStorage.getItem(`survey-${this.surveyId}`);
+    const storedState = localStorage.getItem(`survey-${this.surveyId}`);
     if (!storedState) return false;
     const voteState: SurveyVoteState = JSON.parse(storedState);
     return voteState.selectedAnswers.some(selectedAnswer =>
@@ -83,7 +83,7 @@ export class SurveyDetail {
   }
 
   updateVoteState(surveyId:number, questionId:number, answerId:number) {
-    const storedState = sessionStorage.getItem(`survey-${surveyId}`);
+    const storedState = localStorage.getItem(`survey-${surveyId}`);
     if (storedState) {
       const voteState: SurveyVoteState = JSON.parse(storedState);
       if (voteState.completed) return;
@@ -114,7 +114,7 @@ export class SurveyDetail {
   }
 
   async voting() {
-    const storedState = sessionStorage.getItem(`survey-${this.surveyId}`);
+    const storedState = localStorage.getItem(`survey-${this.surveyId}`);
     if (!storedState) return;
     const voteState: SurveyVoteState = JSON.parse(storedState);
     if (voteState.completed) return;
@@ -126,10 +126,11 @@ export class SurveyDetail {
     )
     voteState.completed = true;
     this.saveVoteState(this.surveyId, voteState.selectedAnswers, true);
+    this.surveyService.completedSurveys.update(ids => [...ids, this.surveyId]);
   }
 
   voteCounting(answer_id: number) {
-    const storedState = sessionStorage.getItem(`survey-${this.surveyId}`);
+    const storedState = localStorage.getItem(`survey-${this.surveyId}`);
     let localVotes = 0;
     if (storedState) {
       const voteState: SurveyVoteState = JSON.parse(storedState);
@@ -142,9 +143,18 @@ export class SurveyDetail {
   }
 
   isSurveyCompleted() {
-    const storedState = sessionStorage.getItem(`survey-${this.surveyId}`);
+    const storedState = localStorage.getItem(`survey-${this.surveyId}`);
     if (!storedState) return false;
     return JSON.parse(storedState).completed;
+  }
+
+  hasSelectedAnswers() {
+    const storedState = localStorage.getItem(`survey-${this.surveyId}`);
+    if (!storedState) return false;
+    const voteState: SurveyVoteState = JSON.parse(storedState);
+    return this.questionList().every(question =>
+      voteState.selectedAnswers.some(selectedAnswer => selectedAnswer.questionId === question.id)
+    );
   }
 }
 

@@ -39,7 +39,7 @@
                 <p>Keine items in der Liste</p>
             }
             <footer>
-                <button class="complete-btn" (click)="voting()" [routerLink]="['']">complete survey</button>
+                <button class="complete-btn" [disabled]="!hasSelectedAnswers()" (click)="voting()" [routerLink]="hasSelectedAnswers() ? [''] : null">complete survey</button>
             </footer>
         </div>
         <div class="result-c">

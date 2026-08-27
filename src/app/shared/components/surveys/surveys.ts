@@ -68,14 +68,8 @@ export class Surveys {
     );
   }
 
-  isSurveyCompleted(surveyId: number): boolean {
-    const storedState = sessionStorage.getItem(`survey-${surveyId}`);
-
-    if (!storedState) return false;
-
-    const voteState: SurveyVoteState = JSON.parse(storedState);
-
-    return voteState.completed;
-}
+  isSurveyCompleted(surveyId: number) {
+    return this.surveyService.completedSurveys().includes(surveyId)
+  }
 }
 
