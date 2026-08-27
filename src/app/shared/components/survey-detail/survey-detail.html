@@ -14,44 +14,54 @@
                 <p>Ends at: {{formatDate(getSurvey()?.ends_at)}}</p>
                 <p>Category: {{getSurvey()?.category}}</p>
             </div>
-
             <div class="headline-desc">
                 <h1>{{getSurvey()?.title}}</h1>
-
                 @if (getSurvey()?.description) {
                     <span>{{getSurvey()?.description}}</span>
                 }
             </div>
-
             @if (questionList().length > 0) {
                 @for(question of questionList(); track question.id; let index = $index) {
                     <li class="question-li">
-                        <tr>
-                            <td>{{question.title}}</td>
-                            <td>
-                                @for (answer of getAnswersForQuestion(question.id); track answer.id) {
-                                    <div> 
+                        <ol>
+                            {{question.title}}
+                                <ol>
+                                    @for (answer of getAnswersForQuestion(question.id); track answer.id) {
                                         <li class="answer-li" (click)="updateVoteState(surveyId, question.id, answer.id)">
-                                            {{ answer.title }} <span>| votes: {{ voteCounting(answer.id) }}</span>
+                                            {{ answer.title }}
                                         </li> 
-                                    </div>
-                                }
-                            </td>
-                        </tr>
+                                    }
+                                </ol>
+                        </ol>
                     </li>
                 }
             } @else {
                 <p>Keine items in der Liste</p>
             }
-
             <footer>
-                <button (click)="voting()" [routerLink]="['']">complete survey</button>
+                <button class="complete-btn" (click)="voting()" [routerLink]="['']">complete survey</button>
             </footer>
         </div>
-
         <div class="result-c">
-
+            <h2>Survey results live</h2>
+            @if (questionList().length > 0) {
+                @for(question of questionList(); track question.id; let index = $index) {
+                    <li class="question-li">
+                        <ol>
+                            {{question.title}}
+                            @for (answer of getAnswersForQuestion(question.id); track answer.id) {
+                                <li class="result-li" (click)="updateVoteState(surveyId, question.id, answer.id)">
+                                    votes: {{ voteCounting(answer.id) }}
+                                </li>
+                            }
+                        </ol>
+                    </li>
+                }
+            } @else {
+                <p>There are no answers yet.</p>
+            }
         </div>
+
     </div>
 </body>
 
