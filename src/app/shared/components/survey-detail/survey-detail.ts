@@ -2,6 +2,7 @@ import { Component, inject, ViewChild } from '@angular/core';
 import { SurveyService } from '../../services/survey.service';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { Answer } from '../../interfaces/answer';
+import { Survey } from '../../interfaces/survey';
 import { SelectedAnswer } from "../../interfaces/selected-answer";
 import { VoteModel } from '../../models/voteModel';
 import { AddSurveyModal } from '../add-survey-modal/add-survey-modal';
@@ -17,6 +18,7 @@ export class SurveyDetail {
   surveyService = inject(SurveyService);
   route = inject(ActivatedRoute)
 
+  surveyList = this.surveyService.surveyList;
   questionList = this.surveyService.questionList;
   answerList = this.surveyService.answerList;
 
@@ -43,9 +45,20 @@ export class SurveyDetail {
     await this.surveyService.getVotes(answerIds);
   }
 
+  getSurvey() {
+    const survey = this.surveyList().find((survey: Survey)=> survey.id === this.surveyId);
+    return survey;
+  }
+
+  formatDate(date:Date | undefined) {
+    if (!date) return 'no ending date'
+    const deDate = new Date(date)
+    return deDate.toLocaleDateString('de-DE');
+  }
+
   // method to return the answers for a specific question by their question id
   getAnswersForQuestion(questionId: number) {
-    return this.answerList().filter((answer: Answer) => answer.question_id === questionId)
+    return this.answerList().filter((answer: Answer) => answer.question_id === questionId);
   }
 
   saveVoteState(surveyId:number, selectedAnswers:SelectedAnswer[], completed:boolean) {
@@ -64,11 +77,24 @@ export class SurveyDetail {
     if (storedState) {
       const voteState: SurveyVoteState = JSON.parse(storedState);
       if (voteState.completed) return;
-      voteState.selectedAnswers.push({questionId, answerId})
+      const question = this.questionList().find(question => question.id === questionId);
+      if (question?.allow_multiple_answers) {
+        if (voteState.selectedAnswers.some( selectedAnswer => 
+          selectedAnswer.questionId === questionId && 
+          selectedAnswer.answerId === answerId)) {
+            voteState.selectedAnswers = voteState.selectedAnswers.filter(selectedAnswer => 
+              selectedAnswer.questionId !== questionId || selectedAnswer.answerId !== answerId)
+          } else {
+            voteState.selectedAnswers.push({questionId, answerId})
+          }
+      } else {
+          voteState.selectedAnswers = voteState.selectedAnswers.filter(selectedAnswer => selectedAnswer.questionId !== questionId);
+          voteState.selectedAnswers.push({questionId, answerId});
+      }
       this.saveVoteState(surveyId, voteState.selectedAnswers, false);
     } else {
       this.saveVoteState(surveyId, [{questionId, answerId}], false);
-    };
+    }; 
   }
 
   async voting() {
