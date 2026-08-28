@@ -54,9 +54,9 @@
                                     <div class="bar-c">
                                         <div class="bar">
                                             <div class="bar-fill"
-                                            [style.width.%]="surveyService.getPercentageForAnswer( answer.id, question.id)"></div>
+                                            [style.width.%]="getPercentageForAnswer( answer.id, question.id)"></div>
                                         </div>
-                                        <strong>{{ surveyService.getPercentageForAnswer( answer.id, question.id) }}%</strong>
+                                        <strong>{{ getPercentageForAnswer( answer.id, question.id) }}%</strong>
                                     </div>
                                 </li>
                             }

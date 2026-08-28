@@ -214,20 +214,4 @@ export class SurveyService {
     return daysRemaining;
   }
 
-  getTotalVotesForQuestion(questionId:number) {
-    const questionPool = this.answerList().filter((answer:Answer) => answer.question_id === questionId);
-    return questionPool.reduce((sum, answer) => {
-      const voteCount = this.getVoteCount(answer.id)
-
-      return sum + voteCount;
-    }, 0)
-  }
-
-  getPercentageForAnswer(answerId:number, questionId:number) {
-    const votes = this.getVoteCount(answerId);
-    const totalVotes = this.getTotalVotesForQuestion(questionId);
-    if (totalVotes === 0) return 0;
-    const percentage = (votes / totalVotes) * 100
-    return Math.round(percentage);
-  }
 }

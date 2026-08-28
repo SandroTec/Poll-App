@@ -156,5 +156,23 @@ export class SurveyDetail {
       voteState.selectedAnswers.some(selectedAnswer => selectedAnswer.questionId === question.id)
     );
   }
+
+  getTotalVotesForQuestion(questionId:number) {
+    const questionPool = this.answerList().filter((answer:Answer) => answer.question_id === questionId);
+    return questionPool.reduce((sum, answer) => {
+      const voteCount = this.voteCounting(answer.id)
+
+      return sum + voteCount;
+    }, 0)
+  }
+
+  getPercentageForAnswer(answerId:number, questionId:number) {
+    const votes = this.voteCounting(answerId);
+    const totalVotes = this.getTotalVotesForQuestion(questionId);
+    if (totalVotes === 0) return 0;
+    const percentage = (votes / totalVotes) * 100
+    return Math.round(percentage);
+  }
+
 }
 
