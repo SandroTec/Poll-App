@@ -51,7 +51,13 @@
                             {{question.title}}
                             @for (answer of getAnswersForQuestion(question.id); track answer.id) {
                                 <li class="result-li">
-                                    votes: {{ voteCounting(answer.id) }}
+                                    <div class="bar-c">
+                                        <div class="bar">
+                                            <div class="bar-fill"
+                                            [style.width.%]="surveyService.getPercentageForAnswer( answer.id, question.id)"></div>
+                                        </div>
+                                        <strong>{{ surveyService.getPercentageForAnswer( answer.id, question.id) }}%</strong>
+                                    </div>
                                 </li>
                             }
                         </ol>
