@@ -1,112 +1,108 @@
+    <h2>Your surveys</h2>
+        @if (getEndingSoonSurveys().length > 0) {
+                    <h3>Ending soon surveys</h3>
+        }
 
-<h2>Your surveys</h2>
+        <div class="soon-ending-survey-rows">
+            @if (list().length > 0) {
+                    @for(survey of getEndingSoonSurveys(); track survey.id; let index = $index) {
+                        <div class="soon-ending-card" [routerLink]="['detail', survey.id]" role="link">
+                            <span>{{survey.category}}</span>
 
+                            <p>{{survey.title}}</p>
+                            <p>{{survey.description}}</p>
+                            
+                            <div class="days-left-bg">
+                                @if (survey.ends_at) {
+                                    <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} day('s)</span>
+                                }
+                            </div>
+                        </div>
+                    }
+            }
+        </div>
 
-    @if (getEndingSoonSurveys().length > 0) {
-                <h3>Ending soon surveys</h3>
-    }
+    <div class="btn-c">
+        <div>
+            <button class="activeBtn" (click)="state = 'active'">
+                Active Survey
+            </button>
+                
+            <button class="pastBtn" (click)="state = 'past'">
+                Past Survey
+            </button>
+        </div>
 
-    <div class="soon-ending-survey-rows">
-        @if (list().length > 0) {
-                @for(survey of getEndingSoonSurveys(); track survey.id; let index = $index) {
-                    <div class="soon-ending-card" [routerLink]="['detail', survey.id]" role="link">
+        <div class="drop-down-menu">
+            <button (click)="openMenu()">
+                Sort by Category:
+                {{ selectedCategory }}
+            </button>
+            
+            @if (menuOpen()) {
+                <ul>
+                    @for (category of categories; track category) {
+                        <li (click)="sortCategories(category)">
+                            {{ category }}
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+
+<div class="content">
+    <div class="survey-list">
+        @if (state == "active" || state == "") {
+            @if (list().length > 0) {
+                @for(survey of getActiveSurveys(); track survey.id; let index = $index) {
+                    <div class="survey-list-c" [class.completed]="isSurveyCompleted(survey.id)"
+                        [routerLink]="['detail', survey.id]" role="link">
                         <span>{{survey.category}}</span>
 
                         <p>{{survey.title}}</p>
                         <p>{{survey.description}}</p>
                         
                         <div class="days-left-bg">
+                            <span>Ends in:</span>
                             @if (survey.ends_at) {
                                 <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} day('s)</span>
                             }
                         </div>
                     </div>
                 }
-            
-        }
-    </div>
+            } @else {
+                <p>Keine items in der Liste</p>
+            }
+        }@else if (state == "past") {
+            @if (list().length > 0) {
+                @for(survey of getPastSurveys(); track survey.id; let index = $index) {
+                    <div class="survey-list-c" [class.completed]="isSurveyCompleted(survey.id)"
+                        [routerLink]="['detail', survey.id]" role="link">
+                        <span>{{survey.category}}</span>
 
-
-<div class="btn-c">
-    <div>
-        <button class="activeBtn" (click)="state = 'active'">
-            Active Survey
-        </button>
-            
-        <button class="pastBtn" (click)="state = 'past'">
-            Past Survey
-        </button>
-    </div>
-
-    <div class="drop-down-menu">
-        <button (click)="openMenu()">
-            Sort by Category:
-            {{ selectedCategory }}
-        </button>
-        
-        @if (menuOpen()) {
-            <ul>
-                @for (category of categories; track category) {
-                    <li (click)="sortCategories(category)">
-                        {{ category }}
-                    </li>
+                        <p>{{survey.title}}</p>
+                        <p>{{survey.description}}</p>
+                        
+                        <div class="days-left-bg">
+                            <span>Ends in:</span>
+                            @if (survey.ends_at) {
+                                <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} day('s)</span>
+                            }
+                        </div>
+                    </div>
                 }
-            </ul>
+            } @else {
+                <p>Keine items in der Liste</p>
+            }
         }
     </div>
-</div>
 
-<div class="survey-list">
-    @if (state == "active" || state == "") {
-        @if (list().length > 0) {
-            @for(survey of getActiveSurveys(); track survey.id; let index = $index) {
-                <div class="survey-list-c" [class.completed]="isSurveyCompleted(survey.id)"
-                    [routerLink]="['detail', survey.id]" role="link">
-                    <span>{{survey.category}}</span>
-
-                    <p>{{survey.title}}</p>
-                    <p>{{survey.description}}</p>
-                    
-                    <div class="days-left-bg">
-                        <span>Ends in:</span>
-                        @if (survey.ends_at) {
-                            <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} day('s)</span>
-                        }
-                    </div>
-                </div>
-            }
-        } @else {
-            <p>Keine items in der Liste</p>
+    <footer>
+        @if (showAlert()) {
+            <div class="alert">
+                Survey succesfully published!
+            </div>
         }
-    }@else if (state == "past") {
-        @if (list().length > 0) {
-            @for(survey of getPastSurveys(); track survey.id; let index = $index) {
-                <div class="survey-list-c" [class.completed]="isSurveyCompleted(survey.id)"
-                    [routerLink]="['detail', survey.id]" role="link">
-                    <span>{{survey.category}}</span>
-
-                    <p>{{survey.title}}</p>
-                    <p>{{survey.description}}</p>
-                    
-                    <div class="days-left-bg">
-                        <span>Ends in:</span>
-                        @if (survey.ends_at) {
-                            <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} day('s)</span>
-                        }
-                    </div>
-                </div>
-            }
-        } @else {
-            <p>Keine items in der Liste</p>
-        }
-    }
+    </footer>
 </div>
-
-
-<footer>
-    @if (showAlert()) {
-        <div class="alert">
-            Survey succesfully published!
-        </div>
-    }
-</footer>

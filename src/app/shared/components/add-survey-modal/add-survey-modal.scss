@@ -48,6 +48,12 @@ h1 {
 .input-c {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+}
+
+.input-clear-c {
+    display: flex;
+    align-items: center;
 }
 
 .add-question-btn {
@@ -94,8 +100,21 @@ input:focus {
 .clear-btn {
     content: url('/assets/img/delete_icon.png');
     cursor: pointer;
+    height: 24px;
+    width: auto;
 }
 
 .clear-btn:hover {
     content: url('/assets/img/delete_icon_hover.png');
+}
+
+
+@media (max-width: 600px) {
+    .survey-info-row {
+        flex-direction: column;
+    }
+
+    label {
+        padding-top: 12px;
+    }
 }

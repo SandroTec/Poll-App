@@ -26,3 +26,20 @@ img:hover {
     border-radius: 10px;
     background: #FFCFA1;
 }
+
+@media (max-width: 950px) {
+    .design-c {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    img {
+        width: 300px;
+    }
+}
+
+@media (max-width: 400px) {
+    img {
+        width: 200px;
+    }
+}

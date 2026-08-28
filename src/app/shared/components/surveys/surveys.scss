@@ -17,10 +17,22 @@ h2 {
 }
 
 .soon-ending-survey-rows {
-    max-width: 50%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    overflow-x: auto;
+}
+
+.soon-ending-survey-rows::-webkit-scrollbar {
+    height: 6px;
+}
+
+.soon-ending-survey-rows::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.soon-ending-survey-rows::-webkit-scrollbar-thumb {
+    border-radius: 10px;
 }
 
 .soon-ending-card {
@@ -131,4 +143,54 @@ li {
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     background: #FEE9D4;
+}
+
+
+@media (max-width: 950px) {
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .survey-list {
+        flex-direction: column;
+    }
+
+    .survey-list-c {
+        width: 450px;
+        margin-top: 25px;
+    }
+
+    .soon-ending-card {
+        min-width: 220px;
+    }
+}
+
+@media (max-width: 600px) {
+    .drop-down-menu {
+        right: 20px;
+    }
+
+    .survey-list-c {
+        width: 320px;
+    }
+
+    .btn-c {
+        margin-top: 10px;
+        margin-bottom: 35px;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 450px) {
+    .drop-down-menu {
+        right: 0;
+        left: 20px;
+        margin-top: 28px;
+    }
+
+    .survey-list-c {
+        width: 220px;
+    }
 }

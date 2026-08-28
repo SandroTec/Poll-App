@@ -129,3 +129,30 @@ input {
     height: 100%;
     background: #FFB770;
 }
+
+
+@media (max-width: 950px) {
+    .content {
+        flex-direction: column;
+        padding: 20px 20px;
+    }
+
+    .survey-c {
+        width: 100%;
+    }
+
+    .result-c {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 450px) {
+    .survey-c {
+        padding: 18px;
+    }
+
+    .result-c {
+        padding: 18px;
+    }
+}
