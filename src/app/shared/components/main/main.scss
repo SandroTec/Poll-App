@@ -2,11 +2,11 @@ h1 {
     color: #FFB770;
 }
 
-img {
+.design-img {
     content: url('/assets/img/varriant1.png');
 }
 
-img:hover {
+.design-img:hover {
     content: url('/assets/img/varriant2.png');
 }
 
@@ -16,7 +16,10 @@ img:hover {
 }
 
 .add-survey-btn {
-    width: 138px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 152px;
     height: 48px;
     padding-top: 12px;
     padding-right: 16px;
@@ -27,19 +30,27 @@ img:hover {
     background: #FFCFA1;
 }
 
+.add-survey-btn:hover {
+    background: #FFB770;
+}
+
+.add-survey-btn:hover .add-icon {
+    content: url('/assets/img/add_circle.png');
+}
+
 @media (max-width: 950px) {
     .design-c {
         flex-direction: column;
         align-items: center;
     }
 
-    img {
+    .design-img {
         width: 300px;
     }
 }
 
 @media (max-width: 400px) {
-    img {
+    .design-img {
         width: 200px;
     }
 }
