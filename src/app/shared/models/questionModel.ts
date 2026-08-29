@@ -2,6 +2,7 @@
 import { Question } from '../interfaces/question';
 
 type QuestionFormData = {
+    id?:number;
     title: string;
     survey_id: number;
     allow_multiple_answers: boolean;
@@ -14,7 +15,7 @@ export class QuestionModel implements Question{
     allow_multiple_answers: boolean;
 
     constructor (data: Partial<QuestionFormData> = {}) {
-        this.id = 0;
+        this.id = data.id ?? 0;
         this.title = data.title ?? "";
         this.survey_id = data.survey_id ?? 0;
         this.allow_multiple_answers = data.allow_multiple_answers ?? false;

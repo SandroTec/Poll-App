@@ -2,6 +2,7 @@
 import { Answer } from '../interfaces/answer';
 
 type AnswerFormData = {
+    id?:number;
     title: string;
     question_id: number;
 };
@@ -12,7 +13,7 @@ export class AnswerModel implements Answer{
     question_id: number;
 
     constructor (data: Partial<AnswerFormData> = {}) {
-        this.id = 0;
+        this.id = data.id ?? 0;
         this.title = data.title ?? "";
         this.question_id = data.question_id ?? 0;
     }

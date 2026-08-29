@@ -36,6 +36,8 @@ export class SurveyDetail {
     this.surveyId = Number(this.route.snapshot.paramMap.get('id'));
     // Fetch questions by using the surveyId
     await this.surveyService.getQuestions(this.surveyId);
+    console.log('SURVEY ID:', this.surveyId);
+    console.log('QUESTIONS:', this.questionList());
     // map a new array with the question ids
     const questionIds = this.questionList().map((question) => question.id);
     // Fetch answers by using the question ids
