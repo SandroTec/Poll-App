@@ -131,7 +131,6 @@ li {
 .drop-down-menu {
     position: absolute;
     z-index: 10;
-    width: 121px;
     right: 70px;
     gap: 8px;
     border-radius: 5px;
@@ -149,9 +148,30 @@ li {
 }
 
 .drop-down-menu button {
+    display: flex;
+    align-items: center;
     background: transparent;
     color: white;
 }
+
+.arrow-icon {
+    content: url('/assets/img/arrow_drop_down.png');
+}
+
+.drop-down-menu:hover .arrow-icon {
+    content: url('/assets/img/arrow_drop_down_hover.png');
+}
+
+.drop-down-menu.open .arrow-icon {
+    content: url('/assets/img/arrow_drop_up.png');
+
+}
+
+.drop-down-menu.open:hover .arrow-icon {
+    content: url('/assets/img/arrow_drop_up_hover.png');
+
+}
+
 
 .alert {
     width: 357px;

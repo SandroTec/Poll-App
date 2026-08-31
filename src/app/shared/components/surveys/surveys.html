@@ -33,10 +33,9 @@
             </button>
         </div>
 
-        <div class="drop-down-menu">
+        <div class="drop-down-menu" [class.open]="menuOpen()">
             <button (click)="openMenu()">
-                Sort by Category:
-                {{ selectedCategory }}
+                Sort by Category <img class="arrow-icon" src="" alt="">
             </button>
             
             @if (menuOpen()) {
