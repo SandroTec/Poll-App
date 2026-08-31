@@ -17,7 +17,7 @@ h1 {
     justify-content: space-between;
 }
 
-.modal-header button {
+.cancel-btn {
     width: 111px;
     height: 40px;
     padding-top: 8px;
@@ -27,6 +27,11 @@ h1 {
     gap: 10px;
     border-radius: 10px;
     background: #FFB7704D;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background: #ffb77098;
 }
 
 .survey-info-row {
@@ -66,6 +71,11 @@ h1 {
     gap: 10px;
     border-radius: 10px;
     background: #FFB7704D;
+    color: white;
+}
+
+.add-question-btn:hover {
+    background: #ffb77098;
 }
 
 .answer-btn {
@@ -91,6 +101,10 @@ h1 {
     gap: 10px;
     border-radius: 10px;
     background: #FFCFA1;
+}
+
+.publish-btn:hover {
+    background: #FFB770;
 }
 
 input:focus {

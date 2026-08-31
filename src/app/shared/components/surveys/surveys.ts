@@ -31,9 +31,6 @@ export class Surveys {
     this.menuOpen.set(false);
   }
 
-
-  
-  
   // returns a list of all surveys ending in the next 2 days
   getEndingSoonSurveys() {
     return this.list().filter((survey: Survey) => 
