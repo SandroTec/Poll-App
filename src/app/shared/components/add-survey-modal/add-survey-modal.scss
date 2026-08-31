@@ -66,7 +66,9 @@ h1 {
 }
 
 .add-question-btn {
-    width: 204px;
+    display: flex;
+    align-items: center;
+    width: auto;
     height: 40px;
     padding-top: 8px;
     padding-right: 12px;
@@ -82,12 +84,23 @@ h1 {
     background: #ffb77098;
 }
 
+.add-icon {
+    content: url('/assets/img/add_circle_white.png');
+}
+
 .answer-btn {
+    display: flex;
+    align-items: center;
+    width: auto;
     border: none;
     background: transparent;
     text-decoration: underline;
     color: white;
     margin: 20px 0;
+}
+
+.answer-btn:hover {
+    background: #FAF5FE33;
 }
 
 .publish-c {
@@ -96,7 +109,7 @@ h1 {
 }
 
 .publish-btn {
-    width: 99px;
+    width: auto;
     height: 48px;
     padding-top: 12px;
     padding-right: 16px;
@@ -109,6 +122,10 @@ h1 {
 
 .publish-btn:hover {
     background: #FFB770;
+}
+
+.publish-btn:hover .check-icon {
+    content: url('/assets/img/check.png');
 }
 
 input:focus {

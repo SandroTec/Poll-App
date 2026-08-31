@@ -44,7 +44,7 @@
             
 
             <div formArrayName="questions">
-                <button class="add-question-btn" type="button" (click)="addQuestion()">Add next question</button>
+                <button class="add-question-btn" type="button" (click)="addQuestion()">Add next question <img class="add-icon" src="" alt=""></button>
                 <div class="question-rows">
                     @for (question of surveyForm.controls.questions.controls; track $index; let questionIndex = $index) {
                         <div>
@@ -70,14 +70,14 @@
                                     }
                                 </div>
                             </div>
-                        <button class="answer-btn" type="button" (click)="addAnswers(questionIndex)">Add answer</button>
+                        <button class="answer-btn" type="button" (click)="addAnswers(questionIndex)">Add answer <img class="add-icon" src="" alt=""></button>
                         </div>
                     }
                 </div>
             </div>
 
             <div class="publish-c">
-                <button class="publish-btn" type="submit" [disabled]="surveyForm.invalid">Publish</button>
+                <button class="publish-btn" type="submit" [disabled]="surveyForm.invalid">Publish <img class="check-icon" src="" alt=""></button>
             </div>
         </form>
     </div>
