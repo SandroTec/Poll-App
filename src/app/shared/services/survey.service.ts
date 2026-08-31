@@ -48,6 +48,9 @@ export class SurveyService {
         let tmpSurvey = new SurveyModel(payload.new)
         this.surveyList.update(list => [...list, tmpSurvey]);
         this.showAlert.set(true)
+        setTimeout(() => {
+          this.showAlert.set(false);
+        }, 3000);
       }
     )
     .on(
