@@ -51,7 +51,7 @@ h2 {
 }
 
 .survey-list {
-    height: 400px;
+    height: 300px;
     overflow-y: auto;
     display: grid;
     grid-template-columns: auto auto;
@@ -172,7 +172,6 @@ li {
 
 }
 
-
 .alert {
     width: 357px;
     height: 86px;
@@ -184,6 +183,7 @@ li {
     position: absolute;
     right: 70px;
     bottom: 20px;
+    font-family: Nerko One;
 }
 
 

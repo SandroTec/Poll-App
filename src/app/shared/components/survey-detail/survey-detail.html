@@ -15,7 +15,7 @@
                 <p>Category: {{getSurvey()?.category}}</p>
             </div>
             <div class="headline-desc">
-                <h1>{{getSurvey()?.title}}</h1>
+                <h2>{{getSurvey()?.title}}</h2>
                 @if (getSurvey()?.description) {
                     <span>{{getSurvey()?.description}}</span>
                 }
@@ -43,7 +43,7 @@
             </footer>
         </div>
         <div class="result-c">
-            <h2>Survey results live</h2>
+            <h3>Survey results <h2>live</h2></h3>
             @if (questionList().length > 0) {
                 @for(question of questionList(); track question.id; let index = $index) {
                     <li class="question-li">
