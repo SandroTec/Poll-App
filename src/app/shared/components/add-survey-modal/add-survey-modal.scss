@@ -53,12 +53,16 @@ h1 {
 .input-c {
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .input-clear-c {
     display: flex;
     align-items: center;
+}
+
+.question-rows {
+    display: grid;
+    grid-template-columns: auto auto;
 }
 
 .add-question-btn {
