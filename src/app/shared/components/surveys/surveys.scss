@@ -46,9 +46,18 @@ h2 {
     cursor: pointer;
 }
 
+.soon-ending-card:hover {
+    background: #F4E9FB;
+}
+
 .survey-list {
-    display: flex;
+    height: 400px;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: auto auto;
     max-width: 100vw;
+    margin-top: 20px;
+
 }
 
 .survey-list-c {
@@ -68,12 +77,15 @@ h2 {
 
 .survey-list-c:hover {
     background: #D9D9D929;
-
 }
 
 .survey-list-c.completed {
     opacity: 0.5;
     filter: grayscale(1);
+}
+
+.category-span {
+    color: #FFCFA1;
 }
 
 .btn-c {
@@ -125,12 +137,20 @@ li {
     border-radius: 5px;
     border-width: 1px;
     border-style: dashed;
-    background: #FFFFFF;
     color: #35273A;
+}
+
+.drop-down-menu ul li {
+    background: #FFFFFF;
 }
 
 .drop-down-menu ul li:hover {
     background: #F4E9FB;
+}
+
+.drop-down-menu button {
+    background: transparent;
+    color: white;
 }
 
 .alert {
@@ -141,6 +161,9 @@ li {
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     background: #FEE9D4;
+    position: absolute;
+    right: 70px;
+    bottom: 20px;
 }
 
 

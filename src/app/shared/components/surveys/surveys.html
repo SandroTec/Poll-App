@@ -58,7 +58,7 @@
                 @for(survey of getActiveSurveys(); track survey.id; let index = $index) {
                     <div class="survey-list-c" [class.completed]="isSurveyCompleted(survey.id)"
                         [routerLink]="['detail', survey.id]" role="link">
-                        <span>{{survey.category}}</span>
+                        <span class="category-span">{{survey.category}}</span>
 
                         <p>{{survey.title}}</p>
                         <p>{{survey.description}}</p>
@@ -79,7 +79,7 @@
                 @for(survey of getPastSurveys(); track survey.id; let index = $index) {
                     <div class="survey-list-c" [class.completed]="isSurveyCompleted(survey.id)"
                         [routerLink]="['detail', survey.id]" role="link">
-                        <span>{{survey.category}}</span>
+                        <span class="category-span">{{survey.category}}</span>
 
                         <p>{{survey.title}}</p>
                         <p>{{survey.description}}</p>
