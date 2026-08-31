@@ -40,6 +40,10 @@ export class AddSurveyModal {
     questions: new FormArray([this.createQuestionForm()]),
   })
 
+  get questions() {
+    return this.surveyForm.controls.questions;
+  }
+
   createQuestionForm() {
     return new FormGroup({
       title: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
@@ -49,6 +53,10 @@ export class AddSurveyModal {
         this.createAnswersForm()
       ], {validators: [Validators.required]}),
     });
+  }
+
+  getAnswers(questionIndex:number) {
+    return this.questions.at(questionIndex).controls.answers;
   }
 
   createAnswersForm() {
@@ -95,5 +103,26 @@ export class AddSurveyModal {
   //clears specific input field and set form to invalid
   clearField(controlName:string) {
     this.surveyForm.get(controlName)?.reset();
+  }
+
+  clearQuestion(questionIndex: number) {
+    const question = this.questions.at(questionIndex);
+
+    if (question.controls.title.value !== '') {
+        question.controls.title.reset();
+    } else if (questionIndex !== 0) {
+        this.questions.removeAt(questionIndex);
+    }
+  }
+
+  clearAnswer(questionIndex: number, answerIndex:number) {
+    const answers = this.getAnswers(questionIndex);
+    const answer = answers.at(answerIndex);
+
+    if (answer.controls.title.value !== '') {
+        answer.controls.title.reset();
+    } else if (answerIndex >= 2) {
+        answers.removeAt(answerIndex);
+    }
   }
 }
