@@ -9,10 +9,14 @@ import { AddSurveyModal } from '../add-survey-modal/add-survey-modal';
 })
 export class Main {
 
-  // safes AddSurveyModal component class as surveyModal
+  /**
+  * References the survey modal component.
+  */
   @ViewChild(AddSurveyModal) surveyModal!: AddSurveyModal;
 
-  //opens surveyModal in AddSurveyModal component
+  /**
+  * Opens the survey modal
+  */
   openSurveyModal() {
     this.surveyModal.openModal();
   }
