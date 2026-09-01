@@ -115,40 +115,59 @@ export class SurveyService {
 
   }
 
+  /**
+  * Unsubscribes from all Supabase channels when the service is destroyed.
+  */
   ngOnDestroy() {
-    //very important to unsubscribe from the channel when the component is destroyed, 
-    //otherwise we will get multiple subscriptions and multiple updates to the productlist signal
     this.supabase.removeChannel(this.surveyChannel);
     this.supabase.removeChannel(this.questionChannel);
     this.supabase.removeChannel(this.answerChannel);
     this.supabase.removeChannel(this.voteChannel);
   }
 
-  // method to fetch surveys from the Supabase database and update the surveyList signal
+  /**
+  * Fetches all surveys from the database and updates the survey list.
+  */
   async getSurveys() {
     let response = await this.supabase.from('surveys').select('*');
     this.surveyList.set((response.data ?? []) as Survey[]);
   }
 
-  // method to fetch questions for a specific survey from the Supabase database and update the questionList signal
+  /**
+  * Fetches all questions from the database and updates the question list.
+  * 
+  * @param surveyId - The ID of the survey.
+  */  
   async getQuestions(surveyId: number) {
     let response = await this.supabase.from('survey_questions').select('*').eq('survey_id', surveyId);
     this.questionList.set((response.data ?? []) as Question[]);
   }
 
-  // method to fetch answers for specific questions from the Supabase database 
-  // and update the answerList signal
-  // using .in() to filter by an array of question ids
+  /**
+  * Fetches all answers from the database and updates the answer list.
+  * 
+  * @param questionIds - The IDs of the questions.
+  */  
   async getAnswers(questionIds: number[]) {
     let response = await this.supabase.from('question_answers').select('*').in('question_id', questionIds);
     this.answerList.set((response.data ?? []) as Answer[]);
   }
 
+  /**
+  * Fetches all votes from the database and updates the vote list.
+  * 
+  * @param answerIds - The IDs of the answers.
+  */  
   async getVotes(answerIds: number[]) {
     let response = await this.supabase.from('votes').select('*').in('answer_id', answerIds);
     this.voteList.set((response.data ?? []) as Vote[]);
   }
 
+  /**
+  * Adds a survey to the database.
+  * 
+  * @param survey - The survey to insert into the database.
+  */  
   async addSurvey(survey: SurveyModel) {
     const survey_data = survey.getCleanAddJson()
     const { data, error } = await this.supabase 
@@ -158,6 +177,11 @@ export class SurveyService {
       return data?.[0]
   }
 
+  /**
+  * Adds a question to the database.
+  * 
+  * @param question - The question to insert into the database.
+  */  
   async addQuestion(question: QuestionModel) {
     const question_data = question.getCleanAddJson()
     const { data, error } = await this.supabase
@@ -167,6 +191,11 @@ export class SurveyService {
       return data?.[0]
   }
   
+  /**
+  * Adds an answer to the database.
+  * 
+  * @param answer - The answer to insert into the database.
+  */  
   async addAnswer(answer: AnswerModel) {
     const answer_data = answer.getCleanAddJson()
     const { data, error } = await this.supabase
@@ -175,6 +204,11 @@ export class SurveyService {
       .select();
   }
 
+  /**
+  * Adds a vote to the database.
+  * 
+  * @param vote - The vote to insert into the database.
+  */  
   async addVotes(vote: VoteModel) {
     const vote_data = vote.getCleanAddJson();
     const { data, error } = await this.supabase
@@ -186,11 +220,21 @@ export class SurveyService {
     }
   }
 
+  /**
+  * Returns the total amount of votes for a specific answer from the database.
+  * 
+  * @param answer_id - The ID of the answer.
+  * @returns The total amount of votes for a specific answer.
+  */  
   getVoteCount(answer_id:number) {
     return this.voteList().filter(vote => vote.answer_id === answer_id).length
   }
 
-  // get all completed surveys from localStorage and return them into the completedSurveys-signal
+  /**
+  * Returns the IDs of all completed surveys.
+  *
+  * @returns An array of completed survey IDs.
+  */ 
   getCompletedSurveys() {
     const completed: number[] = [];
     for (let i = 0; i < localStorage.length; i++) {
@@ -207,9 +251,14 @@ export class SurveyService {
     return completed;
   }
 
-// calculates and returns day remaining before survey is ending
+  /**
+   * Returns the remaining days until the survey ends or 4 if no end date is set.
+   *
+   * @param surveyEndsAt - The survey's end date or `undefined`.
+   * @returns The remaining days until the survey ends or 4 if no end date is set.
+   */
   getEndingTime(surveyEndsAt: Date | undefined) {
-    if (!surveyEndsAt) return 4 // return 4 so they are not in the ending soon list if they got no ending time.
+    if (!surveyEndsAt) return 4 
     const now = new Date();
     const endTime = new Date(surveyEndsAt);
     const timeDifference = endTime.getTime() - now.getTime();
