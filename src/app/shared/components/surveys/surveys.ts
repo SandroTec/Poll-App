@@ -22,16 +22,28 @@ export class Surveys {
 
   showAlert = this.surveyService.showAlert
 
+  /**
+  * Toggles the category menu.
+  */
   openMenu() {
     this.menuOpen.update(open => !open)
   }
 
-  sortCategories(choosenCategory:string) {
-    this.selectedCategory = choosenCategory;
+  /**
+  * Changes the selected category and closes the menu.
+  *
+  * @param chosenCategory - The category to select.
+  */
+  sortCategories(chosenCategory:string) {
+    this.selectedCategory = chosenCategory;
     this.menuOpen.set(false);
   }
 
-  // returns a list of all surveys ending in the next 2 days
+  /**
+  * Returns the surveys that are ending within the next 2 days.
+  *
+  * @returns Surveys ending within the next 2 days.
+  */
   getEndingSoonSurveys() {
     return this.list().filter((survey: Survey) => 
       survey.ends_at !== undefined &&
@@ -40,6 +52,11 @@ export class Surveys {
     );
   }
 
+  /**
+  * Returns all past surveys.
+  *
+  * @returns All past surveys.
+  */
   getPastSurveys() {
     return this.list().filter((survey: Survey) => 
       survey.ends_at !== undefined &&
@@ -49,6 +66,11 @@ export class Surveys {
     );
   }
 
+  /**
+  * Returns all active surveys.
+  *
+  * @returns All active surveys.
+  */
   getActiveSurveys() {
     return this.list().filter((survey: Survey) => 
       survey.ends_at !== undefined &&
@@ -58,6 +80,12 @@ export class Surveys {
     );
   }
 
+  /**
+  * Checks if the survey is completed.
+  *
+  * @param surveyId - The ID of the survey to check.
+  * @returns `true` if the survey is completed, otherwise `false`.
+  */
   isSurveyCompleted(surveyId: number) {
     return this.surveyService.completedSurveys().includes(surveyId)
   }
