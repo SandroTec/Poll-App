@@ -2,7 +2,6 @@ h2 {
     display: flex;
     justify-content: center;
     color: #FFB770;
-
 }
 
 .days-left-bg {
@@ -16,9 +15,24 @@ h2 {
     color: black;
 }
 
+.soon-ending-headline-c {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.soon-ending-survey-rows-c {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    min-width: 0;
+    width: 100%;
+}
+
 .soon-ending-survey-rows {
     display: flex;
-    overflow-x: auto;
+    overflow-x: auto !important;
+    width: 100%;
+    min-width: 0;
 }
 
 .soon-ending-survey-rows::-webkit-scrollbar {
@@ -35,7 +49,6 @@ h2 {
 
 .soon-ending-card {
     width: 321px;
-    gap: 10px;
     border-top-right-radius: 80px;
     padding-top: 40px;
     padding-right: 18px;
@@ -44,10 +57,16 @@ h2 {
     background: #faf5fe;
     color: black;
     cursor: pointer;
+    overflow: hidden;
 }
 
 .soon-ending-card:hover {
     background: #F4E9FB;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
 }
 
 .survey-list {
@@ -57,12 +76,12 @@ h2 {
     grid-template-columns: auto auto;
     max-width: 100vw;
     margin-top: 20px;
-
+    gap: 40px;
 }
 
 .survey-list-c {
     cursor: pointer;
-    width: 513px;
+    width: auto;
     border-top-left-radius: 5px;
     border-top-right-radius: 50px;
     border-bottom-right-radius: 5px;
@@ -188,33 +207,28 @@ li {
 
 
 @media (max-width: 950px) {
-    .content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
+    
     .survey-list {
         flex-direction: column;
     }
 
     .survey-list-c {
-        width: 450px;
+        width: auto;
         margin-top: 25px;
     }
 
     .soon-ending-card {
         min-width: 220px;
     }
+
+    .drop-down-menu {
+        right: 70px;
+    }
 }
 
 @media (max-width: 600px) {
     .drop-down-menu {
         right: 20px;
-    }
-
-    .survey-list-c {
-        width: 320px;
     }
 
     .btn-c {
@@ -229,9 +243,5 @@ li {
         right: 0;
         left: 20px;
         margin-top: 28px;
-    }
-
-    .survey-list-c {
-        width: 220px;
     }
 }

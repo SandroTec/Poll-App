@@ -1,10 +1,14 @@
     <h2>Your surveys</h2>
-        @if (getEndingSoonSurveys().length > 0) {
-                    <h3>Ending soon surveys</h3>
-        }
+        
 
-        <div class="soon-ending-survey-rows">
-            @if (list().length > 0) {
+        <div class="soon-ending-survey-rows-c">
+            <div class="soon-ending-headline-c">
+                @if (getEndingSoonSurveys().length > 0) {
+                    <h3>Ending soon surveys</h3>
+                }
+            </div>
+            <div class="soon-ending-survey-rows">
+                @if (list().length > 0) {
                     @for(survey of getEndingSoonSurveys(); track survey.id; let index = $index) {
                         <div class="soon-ending-card" [routerLink]="['detail', survey.id]" role="link">
                             <span>{{survey.category}}</span>
@@ -19,7 +23,8 @@
                             </div>
                         </div>
                     }
-            }
+                }
+            </div>
         </div>
 
     <div class="btn-c">
@@ -71,7 +76,7 @@
                     </div>
                 }
             } @else {
-                <p>Keine items in der Liste</p>
+                <p>This list is empty at the moment.</p>
             }
         }@else if (state == "past") {
             @if (list().length > 0) {
@@ -92,11 +97,10 @@
                     </div>
                 }
             } @else {
-                <p>Keine items in der Liste</p>
+                <p>Survey is not loaded yet</p>
             }
         }
     </div>
-
     <footer>
         @if (showAlert()) {
             <div class="alert">
