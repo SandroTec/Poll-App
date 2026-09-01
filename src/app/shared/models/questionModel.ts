@@ -21,6 +21,11 @@ export class QuestionModel implements Question{
         this.allow_multiple_answers = data.allow_multiple_answers ?? false;
     }
 
+    /**
+    * Returns the question data required to create an question.
+    *
+    * @returns The question data without the ID.
+    */
     getCleanAddJson() {
         return {
             title: this.title,

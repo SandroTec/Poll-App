@@ -25,6 +25,11 @@ export class SurveyModel implements Survey {
         this.ends_at = data.ends_at ? new Date(data.ends_at) : undefined;
     }
 
+    /**
+    * Returns the survey data required to create an survey.
+    *
+    * @returns The survey data without the ID.
+    */
     getCleanAddJson() {
         return {
             title: this.title,

@@ -18,6 +18,11 @@ export class AnswerModel implements Answer{
         this.question_id = data.question_id ?? 0;
     }
 
+    /**
+    * Returns the answer data required to create an answer.
+    *
+    * @returns The answer data without the ID.
+    */
     getCleanAddJson() {
         return {
             title: this.title,

@@ -13,6 +13,11 @@ export class VoteModel implements Vote{
         this.answer_id = data.answer_id ?? 0;
     }
 
+    /**
+    * Returns the vote data required to create an vote.
+    *
+    * @returns The vote data without the ID.
+    */
     getCleanAddJson() {
         return {
             answer_id: this.answer_id
