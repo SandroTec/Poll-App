@@ -1,11 +1,13 @@
 
 <dialog #dialog>
+    <p class="survey-state">Draft</p>
+
     <div class="modal-header">
         <h1>Create new survey</h1>
         <button class="cancel-btn" (click)="closeModal()">Cancel  X</button>
     </div>
 
-    <div>
+    <div>        
         <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
             <div class="survey-info-row">
                 <div class="survey-info-row-c">

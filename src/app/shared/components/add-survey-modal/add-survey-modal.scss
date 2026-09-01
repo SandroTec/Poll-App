@@ -12,6 +12,18 @@ h1 {
     color: #EE9236;
 }
 
+.survey-state {
+    background: #FFB770;
+    color: black;
+    width: 64px;
+    height: 26px;
+    border-top-right-radius: 14px;
+    padding-top: 3px;
+    padding-right: 12px;
+    padding-bottom: 3px;
+    padding-left: 8px;
+}
+
 .modal-header {
     display: flex;
     justify-content: space-between;
