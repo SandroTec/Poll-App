@@ -8,6 +8,10 @@ form {
     flex-direction: column;
 }
 
+input {
+    margin-top: 8px;
+}
+
 h1 {
     color: #EE9236;
 }
@@ -84,6 +88,55 @@ h1 {
 
 .date-category-c {
     display: flex;
+    padding: 20px 0;
+    gap: 20px;
+}
+
+#categories {
+    position: absolute;
+    cursor: pointer;
+    margin-top: -8px;
+    padding: 16px;
+    width: 200px;
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
+    outline: none;
+    text-indent: -9999px;
+}
+
+.arrow-icon {
+    content: url('/assets/img/arrow_drop_down.png');
+}
+
+.category-label {
+    display: flex;
+    align-items: center;
+}
+
+.category-label:hover .arrow-icon {
+    content: url('/assets/img/arrow_drop_down_hover.png');
+}
+
+.input-c-c:focus-within .arrow-icon {
+    content: url('/assets/img/arrow_drop_up.png');
+}
+
+.input-c-c:focus-within:hover .arrow-icon {
+    content: url('/assets/img/arrow_drop_up_hover.png');
+}
+
+.input-c-c {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.input-c-c:hover {
+    background: #D9D9D91F;
+    border-radius: 8px;
+
 }
 
 .input-c {
@@ -106,6 +159,7 @@ h1 {
     align-items: center;
     width: auto;
     height: 40px;
+    margin-bottom: 8px;
     padding-top: 8px;
     padding-right: 12px;
     padding-bottom: 8px;

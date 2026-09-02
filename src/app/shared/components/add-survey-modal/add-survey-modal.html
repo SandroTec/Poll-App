@@ -26,8 +26,8 @@
                             <label for="endDate">Set end date (optional)</label>
                             <input id="endDate" type="date" formControlName="ends_at">
                         </div>
-                        <div class="input-c">
-                            <label for="categories">Choose a category</label>
+                        <div class="input-c-c">
+                            <label class="category-label" for="categories">{{ surveyForm.get('category')?.value || 'Choose a category' }}<img class="arrow-icon" src="" alt=""></label>
                             <select id="categories" formControlName="category">
                                 @for (category of categories; track category) {
                                     <option [value]="category">
