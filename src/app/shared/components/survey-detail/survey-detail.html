@@ -1,15 +1,18 @@
 
 <body>
     <header>
-        <img src="" alt="detail logo">
+        <img class="purple-logo" src="" alt="detail logo" [routerLink]="['']">
 
-        <button class="add-survey-btn" (click)="openSurveyModal()">create survey</button>
+        <button class="add-survey-btn" (click)="openSurveyModal()">Create survey <img class="add-icon" src="" alt=""></button>
 
     </header>
     
     <div class="content">
         <div class="survey-c">
-            <p class="survey-state">published</p>
+            <div class="survey-header">
+                <p class="survey-state">Published</p>
+                <img [routerLink]="['']" class="closing-icon d-none-desktop" src="/assets/img/close.png" alt="closing icon">
+            </div>
             <div>
                 <p>Ends at: {{formatDate(getSurvey()?.ends_at)}}</p>
                 <p>Category: {{getSurvey()?.category}}</p>

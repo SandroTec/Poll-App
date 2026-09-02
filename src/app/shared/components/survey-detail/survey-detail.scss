@@ -12,8 +12,9 @@ header {
     padding: 20px 70px;
 }
 
-header img {
+.purple-logo {
     content: url('/assets/img/poll-app-logo-purple.png');
+    cursor: pointer;
 }
 
 .survey-state {
@@ -64,7 +65,10 @@ input {
 }
 
 .add-survey-btn {
-    width: 138px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
     height: 48px;
     padding-top: 12px;
     padding-right: 16px;
@@ -72,7 +76,16 @@ input {
     padding-left: 16px;
     gap: 10px;
     border-radius: 10px;
+    margin-top: 20px;
     background: #FFCFA1;
+}
+
+.add-survey-btn:hover {
+    background: #FFB770;
+}
+
+.add-survey-btn:hover .add-icon {
+    content: url('/assets/img/add_circle.png');
 }
 
 .content {
@@ -88,7 +101,29 @@ input {
     border-top-right-radius: 160px;
     gap: 8px;
     padding: 0 40px;
+}
 
+.survey-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0 40px 0;
+}
+
+.closing-icon {
+    cursor: pointer;
+    margin-right: 20px;
+    border-radius: 10px;
+    padding-top: 8px;
+    padding-right: 12px;
+    padding-bottom: 8px;
+    padding-left: 12px;
+    gap: 10px;
+    background: #FFCFA1;
+}
+
+.closing-icon:hover {
+    background: #FFB770;
 }
 
 .complete-btn {

@@ -66,3 +66,13 @@ label {
     line-height: 100%;
     letter-spacing: 0%;
 }
+
+.d-none-desktop {
+    display: none;
+}
+
+@media (max-width: 950px) {
+    .d-none-desktop {
+        display: flex;
+    }
+}
