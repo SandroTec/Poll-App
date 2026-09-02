@@ -179,6 +179,12 @@ input:focus {
     content: url('/assets/img/delete_icon_hover.png');
 }
 
+@media (max-width: 950px) {
+    .check-icon {
+        content: url('/assets/img/check.png');
+    }
+}
+
 
 @media (max-width: 600px) {
     .survey-info-row {
@@ -187,5 +193,9 @@ input:focus {
 
     label {
         padding-top: 12px;
+    }
+
+    .question-rows {
+        grid-template-columns: auto ;
     }
 }
