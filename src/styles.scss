@@ -71,8 +71,16 @@ label {
     display: none;
 }
 
+.d-none-mobile {
+    display: flex;
+}
+
 @media (max-width: 950px) {
     .d-none-desktop {
         display: flex;
+    }
+
+    .d-none-mobile {
+        display: none;
     }
 }
