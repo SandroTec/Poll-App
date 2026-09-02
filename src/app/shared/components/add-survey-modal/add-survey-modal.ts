@@ -1,7 +1,6 @@
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SurveyForm } from '../survey-form/survey-form';
 import { SurveyService } from '../../services/survey.service';
 import { SurveyModel } from '../../models/surveyModel';
 import { QuestionModel } from '../../models/questionModel';
