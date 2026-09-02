@@ -46,7 +46,10 @@
             </footer>
         </div>
         <div class="result-c">
-            <h3>Survey results <h2>live</h2></h3>
+            <div class="result-headline-c">
+                <h3>Survey results</h3>
+                <h2>live</h2>
+            </div>
             @if (questionList().length > 0) {
                 @for(question of questionList(); track question.id; let index = $index) {
                     <li class="question-li">
