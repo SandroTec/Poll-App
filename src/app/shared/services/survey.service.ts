@@ -61,12 +61,7 @@ export class SurveyService {
         this.surveyList.update(list => list.filter(survey => survey.id !== tmpSurveyID));
       }
     )
-    .subscribe(status => {
-      console.log(
-        'channel status',
-        status
-      )
-    });
+    .subscribe();
 
     this.questionChannel = this.supabase.channel('question-change-channel')
     .on(
@@ -77,12 +72,7 @@ export class SurveyService {
         this.questionList.update(list => [...list, tmpQuestion]);
       }
     )
-    .subscribe(status => {
-      console.log(
-        'channel status',
-        status
-      )
-    });
+    .subscribe();
 
     this.answerChannel = this.supabase.channel('answer-change-channel')
     .on(
@@ -93,12 +83,7 @@ export class SurveyService {
         this.answerList.update(list => [...list, tmpAnswer]);
       }
     )
-    .subscribe(status => {
-      console.log(
-        'channel status',
-        status
-      )
-    });
+    .subscribe();
 
 
     this.voteChannel = this.supabase.channel('vote-insert-channel')
@@ -108,7 +93,6 @@ export class SurveyService {
       (payload) => {
         let tmpVote = new VoteModel(payload.new)
         this.voteList.update(list => [...list, tmpVote]);
-        console.log('VOTE LIST:', this.voteList());
       }
     )
     .subscribe()
