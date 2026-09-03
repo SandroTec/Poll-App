@@ -109,7 +109,7 @@ export class AddSurveyModal {
 
   /**
   * Submits the survey form and creates the survey with its questions and answers.
-  * Closes the modal after submission.
+  * Closes the modal after submission and resets the form.
   */
   async onSubmit() {
     if (this.surveyForm.valid) {
@@ -125,6 +125,7 @@ export class AddSurveyModal {
         }
       }
     }
+    this.surveyForm.reset();
     this.closeModal()
   }
 
