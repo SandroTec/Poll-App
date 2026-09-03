@@ -216,7 +216,16 @@ li {
     position: absolute;
     right: 70px;
     bottom: 20px;
+    
+}
+
+.alert p {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     font-family: Nerko One;
+    color: black;
+    padding-left: 10px;
 }
 
 

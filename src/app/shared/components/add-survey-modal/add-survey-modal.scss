@@ -107,7 +107,7 @@ h1 {
 }
 
 .arrow-icon {
-    content: url('/assets/img/arrow_drop_down.png');
+    content: url('assets/img/arrow_drop_down.png');
 }
 
 .category-label {
@@ -116,15 +116,15 @@ h1 {
 }
 
 .category-label:hover .arrow-icon {
-    content: url('/assets/img/arrow_drop_down_hover.png');
+    content: url('assets/img/arrow_drop_down_hover.png');
 }
 
 .input-c-c:focus-within .arrow-icon {
-    content: url('/assets/img/arrow_drop_up.png');
+    content: url('assets/img/arrow_drop_up.png');
 }
 
 .input-c-c:focus-within:hover .arrow-icon {
-    content: url('/assets/img/arrow_drop_up_hover.png');
+    content: url('assets/img/arrow_drop_up_hover.png');
 }
 
 .input-c-c {
@@ -175,7 +175,7 @@ h1 {
 }
 
 .add-icon {
-    content: url('/assets/img/add_circle_white.png');
+    content: url('assets/img/add_circle_white.png');
 }
 
 .answer-btn {
