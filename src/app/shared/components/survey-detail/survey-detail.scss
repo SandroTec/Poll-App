@@ -13,7 +13,7 @@ header {
 }
 
 .purple-logo {
-    content: url('/assets/img/poll-app-logo-purple.png');
+    content: url('assets/img/poll-app-logo-purple.png');
     cursor: pointer;
 }
 
@@ -85,7 +85,7 @@ input {
 }
 
 .add-survey-btn:hover .add-icon {
-    content: url('/assets/img/add_circle.png');
+    content: url('assets/img/add_circle.png');
 }
 
 .content {
@@ -186,7 +186,7 @@ input {
     }
 
     .add-icon {
-        content: url('/assets/img/add_circle.png');
+        content: url('assets/img/add_circle.png');
     }
 
 }

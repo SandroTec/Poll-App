@@ -188,20 +188,20 @@ li {
 }
 
 .arrow-icon {
-    content: url('/assets/img/arrow_drop_down.png');
+    content: url('assets/img/arrow_drop_down.png');
 }
 
 .drop-down-menu:hover .arrow-icon {
-    content: url('/assets/img/arrow_drop_down_hover.png');
+    content: url('assets/img/arrow_drop_down_hover.png');
 }
 
 .drop-down-menu.open .arrow-icon {
-    content: url('/assets/img/arrow_drop_up.png');
+    content: url('assets/img/arrow_drop_up.png');
 
 }
 
 .drop-down-menu.open:hover .arrow-icon {
-    content: url('/assets/img/arrow_drop_up_hover.png');
+    content: url('assets/img/arrow_drop_up_hover.png');
 
 }
 

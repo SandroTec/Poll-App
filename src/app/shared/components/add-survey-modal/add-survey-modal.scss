@@ -215,7 +215,7 @@ h1 {
 }
 
 .publish-btn:hover .check-icon {
-    content: url('/assets/img/check.png');
+    content: url('assets/img/check.png');
 }
 
 input:focus {
@@ -223,19 +223,19 @@ input:focus {
 }
 
 .clear-btn {
-    content: url('/assets/img/delete_icon.png');
+    content: url('assets/img/delete_icon.png');
     cursor: pointer;
     height: 24px;
     width: auto;
 }
 
 .clear-btn:hover {
-    content: url('/assets/img/delete_icon_hover.png');
+    content: url('assets/img/delete_icon_hover.png');
 }
 
 @media (max-width: 950px) {
     .check-icon {
-        content: url('/assets/img/check.png');
+        content: url('assets/img/check.png');
     }
 }
 

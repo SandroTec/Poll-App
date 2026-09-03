@@ -3,11 +3,11 @@ h1 {
 }
 
 .design-img {
-    content: url('/assets/img/varriant1.png');
+    content: url('assets/img/varriant1.png');
 }
 
 .design-img:hover {
-    content: url('/assets/img/varriant2.png');
+    content: url('assets/img/varriant2.png');
 }
 
 .design-c {
@@ -37,7 +37,7 @@ h1 {
 }
 
 .add-survey-btn:hover .add-icon {
-    content: url('/assets/img/add_circle.png');
+    content: url('assets/img/add_circle.png');
 }
 
 @media (max-width: 950px) {
@@ -51,7 +51,7 @@ h1 {
     }
 
     .add-icon {
-        content: url('/assets/img/add_circle.png');
+        content: url('assets/img/add_circle.png');
     }
 }
 
