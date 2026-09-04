@@ -10,7 +10,7 @@
         <button class="cancel-btn d-none-mobile" (click)="closeModal()">Cancel <img src="assets/img/close_white.png" alt="closing icon"></button>
     </div>
 
-    <div>        
+    <div class="form-content">        
         <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
             <div class="survey-info-row">
                 <div class="survey-info-row-c">
@@ -31,7 +31,7 @@
                             <select id="categories" formControlName="category">
                                 @for (category of categories; track category) {
                                     <option [value]="category">
-                                        {{ category }}
+                                        <span>{{ category }}</span>
                                     </option>
                                 }
                             </select>

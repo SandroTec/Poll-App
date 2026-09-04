@@ -1,6 +1,19 @@
 dialog {
     background: #433249;
     color: white;
+    max-width: 1166px;
+    max-height: auto;
+    opacity: 1;
+    gap: 48px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding-top: 40px;
+    padding-right: 54px;
+    padding-bottom: 40px;
+    padding-left: 54px;
+
 }
 
 form {
@@ -40,6 +53,21 @@ h1 {
     padding: 20px 0 40px 0;
 }
 
+.form-content {
+    max-width: 1052px;
+    height: auto;
+    opacity: 1;
+    gap: 64px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 80px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding-top: 40px;
+    padding-right: 32px;
+    padding-bottom: 40px;
+    padding-left: 32px;
+    background: #8E709929;
+}
 
 .closing-icon {
     cursor: pointer;
