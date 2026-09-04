@@ -16,6 +16,10 @@ dialog {
 
 }
 
+dialog::backdrop {
+    background: #000000b9;
+}
+
 form {
     display: flex;
     flex-direction: column;
