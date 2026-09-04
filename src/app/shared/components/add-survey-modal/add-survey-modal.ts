@@ -38,6 +38,23 @@ export class AddSurveyModal {
     this.dialog.nativeElement.close()
   }
 
+  /**
+  * Closes modal when clicking on the backdrop
+  */
+  onDialogClick(event: MouseEvent) {
+    const rect = this.dialog.nativeElement.getBoundingClientRect();
+    const isClickOutside = (
+      event.clientX < rect.left ||
+      event.clientX > rect.right ||
+      event.clientY < rect.top ||
+      event.clientY > rect.bottom
+    );
+    if (isClickOutside) {
+      this.closeModal();
+    }
+  }
+  
+
   surveyForm = new FormGroup({
     title: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
     description: new FormControl('', {nonNullable: false}),

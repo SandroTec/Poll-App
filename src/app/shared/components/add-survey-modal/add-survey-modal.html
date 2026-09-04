@@ -1,5 +1,5 @@
 
-<dialog #dialog>
+<dialog #dialog (click)="onDialogClick($event)">
     <div class="over-header">
                 <p class="survey-state">Draft</p>
                 <img (click)="closeModal()" class="closing-icon d-none-desktop" src="assets/img/close_white.png" alt="closing icon">
