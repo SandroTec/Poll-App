@@ -246,8 +246,14 @@ h1 {
     background: #FFB770;
 }
 
-.publish-btn:hover .check-icon {
+.check-icon {
     content: url('assets/img/check.png');
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.publish-btn:hover .check-icon {
+    opacity: 1;
 }
 
 input:focus {

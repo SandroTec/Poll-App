@@ -3,11 +3,35 @@ h1 {
 }
 
 .design-img {
-    content: url('assets/img/varriant1.png');
+    width: 400px;
+    height: 400px;
+    position: relative;
+    
+    background-image: url('assets/img/varriant1.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: auto;
 }
 
-.design-img:hover {
-    content: url('assets/img/varriant2.png');
+.design-img::after {
+    content: ""; 
+    display: block; 
+    position: absolute;
+    inset: 0;
+    background-image: url('assets/img/varriant2.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    z-index: 1; 
+}
+
+.design-img:hover::after {
+    opacity: 1;
 }
 
 .design-c {
@@ -36,8 +60,14 @@ h1 {
     background: #FFB770;
 }
 
-.add-survey-btn:hover .add-icon {
+.add-icon {
     content: url('assets/img/add_circle.png');
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.add-survey-btn:hover .add-icon {
+    opacity: 1;
 }
 
 @media (max-width: 950px) {

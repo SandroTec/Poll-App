@@ -94,8 +94,15 @@ input {
     background: #FFB770;
 }
 
-.add-survey-btn:hover .add-icon {
+.add-icon {
     content: url('assets/img/add_circle.png');
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+
+.add-survey-btn:hover .add-icon {
+    opacity: 1;
 }
 
 .content {
