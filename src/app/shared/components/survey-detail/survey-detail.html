@@ -1,79 +1,81 @@
 
 <body>
-    <header>
-        <img class="purple-logo" src="" alt="detail logo" [routerLink]="['']">
+    <div class="max-content">
+        <header>
+            <img class="purple-logo" src="" alt="detail logo" [routerLink]="['']">
 
-        <button class="add-survey-btn" (click)="openSurveyModal()">Create survey <img class="add-icon" src="" alt=""></button>
+            <button class="add-survey-btn" (click)="openSurveyModal()">Create survey <img class="add-icon" src="" alt=""></button>
 
-    </header>
-    
-    <div class="content">
-        <div class="survey-c">
-            <div class="survey-header">
-                <p class="survey-state">Published</p>
-                <img [routerLink]="['']" class="closing-icon d-none-desktop" src="assets/img/close.png" alt="closing icon">
-            </div>
-            <div>
-                <p>Ends at: {{formatDate(getSurvey()?.ends_at)}}</p>
-                <p>Category: {{getSurvey()?.category}}</p>
-            </div>
-            <div class="headline-desc">
-                <h2>{{getSurvey()?.title}}</h2>
-                @if (getSurvey()?.description) {
-                    <span>{{getSurvey()?.description}}</span>
+        </header>
+        
+        <div class="content">
+            <div class="survey-c">
+                <div class="survey-header">
+                    <p class="survey-state">Published</p>
+                    <img [routerLink]="['']" class="closing-icon d-none-desktop" src="assets/img/close.png" alt="closing icon">
+                </div>
+                <div>
+                    <p>Ends at: {{formatDate(getSurvey()?.ends_at)}}</p>
+                    <p>Category: {{getSurvey()?.category}}</p>
+                </div>
+                <div class="headline-desc">
+                    <h2>{{getSurvey()?.title}}</h2>
+                    @if (getSurvey()?.description) {
+                        <span>{{getSurvey()?.description}}</span>
+                    }
+                </div>
+                @if (questionList().length > 0) {
+                    @for(question of questionList(); track question.id; let index = $index) {
+                        <li class="question-li">
+                            <ol>
+                                <p>{{question.title}}</p>
+                                    <ol>
+                                        @for (answer of getAnswersForQuestion(question.id); track answer.id) {
+                                            <li class="answer-li">
+                                                <input type="checkbox" [disabled]="isSurveyCompleted() || (this.surveyService.getEndingTime(getSurvey()?.ends_at) < 0)" [checked]="isAnswerSelected(question.id, answer.id)" (click)="updateVoteState(surveyId, question.id, answer.id)"> <span>{{ answer.title }}</span>
+                                            </li> 
+                                        }
+                                    </ol>
+                            </ol>
+                        </li>
+                    }
+                }@else {
+                    <p>Survey is not loaded yet.</p>
                 }
+                <footer>
+                    <button class="complete-btn" [disabled]="!hasSelectedAnswers() || (this.surveyService.getEndingTime(getSurvey()?.ends_at) < 0)" (click)="voting()" [routerLink]="(hasSelectedAnswers() && !isSurveyCompleted())? [''] : null">complete survey</button>
+                </footer>
             </div>
-            @if (questionList().length > 0) {
-                @for(question of questionList(); track question.id; let index = $index) {
-                    <li class="question-li">
-                        <ol>
-                            {{question.title}}
-                                <ol>
-                                    @for (answer of getAnswersForQuestion(question.id); track answer.id) {
-                                        <li class="answer-li">
-                                            <input type="checkbox" [disabled]="isSurveyCompleted() || (this.surveyService.getEndingTime(getSurvey()?.ends_at) < 0)" [checked]="isAnswerSelected(question.id, answer.id)" (click)="updateVoteState(surveyId, question.id, answer.id)"> {{ answer.title }}
-                                        </li> 
-                                    }
-                                </ol>
-                        </ol>
-                    </li>
-                }
-            }@else {
-                <p>Survey is not loaded yet.</p>
-            }
-            <footer>
-                <button class="complete-btn" [disabled]="!hasSelectedAnswers() || (this.surveyService.getEndingTime(getSurvey()?.ends_at) < 0)" (click)="voting()" [routerLink]="(hasSelectedAnswers() && !isSurveyCompleted())? [''] : null">complete survey</button>
-            </footer>
-        </div>
-        <div class="result-c">
-            <div class="result-headline-c">
-                <h3>Survey results</h3>
-                <h2>live</h2>
-            </div>
-            @if (questionList().length > 0) {
-                @for(question of questionList(); track question.id; let index = $index) {
-                    <li class="question-li">
-                        <ol>
-                            {{question.title}}
-                            @for (answer of getAnswersForQuestion(question.id); track answer.id) {
-                                <li class="result-li">
-                                    <div class="bar-c">
-                                        <div class="bar">
-                                            <div class="bar-fill"
-                                            [style.width.%]="getPercentageForAnswer( answer.id, question.id)"></div>
+            <div class="result-c">
+                <div class="result-headline-c">
+                    <h3>Survey results</h3>
+                    <h2>live</h2>
+                </div>
+                @if (questionList().length > 0) {
+                    @for(question of questionList(); track question.id; let index = $index) {
+                        <li class="question-li">
+                            <ol>
+                                <p>{{question.title}}</p>
+                                @for (answer of getAnswersForQuestion(question.id); track answer.id) {
+                                    <li class="result-li">
+                                        <div class="bar-c">
+                                            <div class="bar">
+                                                <div class="bar-fill"
+                                                [style.width.%]="getPercentageForAnswer( answer.id, question.id)"></div>
+                                            </div>
+                                            <strong>{{ getPercentageForAnswer( answer.id, question.id) }}%</strong>
                                         </div>
-                                        <strong>{{ getPercentageForAnswer( answer.id, question.id) }}%</strong>
-                                    </div>
-                                </li>
-                            }
-                        </ol>
-                    </li>
+                                    </li>
+                                }
+                            </ol>
+                        </li>
+                    }
+                } @else {
+                    <p>There are no answers yet.</p>
                 }
-            } @else {
-                <p>There are no answers yet.</p>
-            }
-        </div>
+            </div>
 
+        </div>
     </div>
 </body>
 

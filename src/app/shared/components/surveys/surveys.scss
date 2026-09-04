@@ -23,8 +23,6 @@ h2 {
 .soon-ending-survey-rows-c {
     display: flex;
     flex-direction: column;
-    min-width: 0;
-    width: 100%;
 }
 
 .soon-ending-survey-rows {
@@ -32,6 +30,7 @@ h2 {
     overflow-x: auto !important;
     width: 100%;
     min-width: 0;
+    gap: 20px;
 }
 
 .soon-ending-survey-rows::-webkit-scrollbar {
@@ -247,6 +246,11 @@ li {
     .drop-down-menu {
         right: 70px;
     }
+
+    .max-content {
+        padding: 20px 20px;
+    }
+
 }
 
 @media (max-width: 600px) {
@@ -272,4 +276,5 @@ li {
         left: 20px;
         margin-top: 28px;
     }
+
 }

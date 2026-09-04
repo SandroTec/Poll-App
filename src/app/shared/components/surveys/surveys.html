@@ -29,24 +29,24 @@
     <div class="btn-c">
         <div>
             <button class="activeBtn" (click)="state = 'active'">
-                Active
+                <span>Active</span>
             </button>
                 
             <button class="pastBtn" (click)="state = 'past'">
-                Past
+                <span>Past</span>
             </button>
         </div>
 
         <div class="drop-down-menu" [class.open]="menuOpen()">
             <button (click)="openMenu()">
-                Sort by Category <img class="arrow-icon" src="" alt="">
+                <span>Sort by Category</span> <img class="arrow-icon" src="" alt="">
             </button>
             
             @if (menuOpen()) {
                 <ul>
                     @for (category of categories; track category) {
                         <li (click)="sortCategories(category)">
-                            {{ category }}
+                            <span>{{ category }}</span>
                         </li>
                     }
                 </ul>

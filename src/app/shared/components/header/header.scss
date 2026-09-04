@@ -1,3 +1,9 @@
+header {
+    display: flex;
+    justify-content: flex-start;
+    max-width: 1440px;
+}
+
 img {
     content: url('assets/img/poll-app-logo-orange.png');
 }
