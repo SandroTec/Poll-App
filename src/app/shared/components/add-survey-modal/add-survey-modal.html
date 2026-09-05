@@ -20,11 +20,21 @@
                             <input id="title" type="text" formControlName="title">
                             <img (click)="clearField('title')" class="clear-btn" src="" alt="delete-icon">
                         </div>
+                        @if (surveyForm.controls.title.touched && surveyForm.controls.title.errors) {
+                            <div class="error-msg">
+                            @if (surveyForm.controls.title.errors['required']) { <span>Survey name is required.</span> }
+                            @if (surveyForm.controls.title.errors['minlength']) { <span>Must be at least 3 characters long.</span> }
+                            @if (surveyForm.controls.title.errors['maxlength']) { <span>Maximum 100 characters allowed.</span> }
+                            </div>
+                        }
                     </div>
                     <div class="date-category-c">
                         <div class="input-c">
                             <label for="endDate">Set end date (optional)</label>
                             <input id="endDate" type="date" formControlName="ends_at">
+                            @if (surveyForm.controls.ends_at.touched && surveyForm.controls.ends_at.errors?.['pastDate']) {
+                                <span class="error-msg">End date must be in the future.</span>
+                            }
                         </div>
                         <div class="input-c-c">
                             <label class="category-label" for="categories">{{ surveyForm.get('category')?.value || 'Choose a category' }}<img class="arrow-icon" src="" alt=""></label>
@@ -35,6 +45,9 @@
                                     </option>
                                 }
                             </select>
+                            @if (surveyForm.controls.category.touched && surveyForm.controls.category.errors?.['required']) {
+                                <span class="error-msg">Please select a category.</span>
+                            }
                         </div>
                     </div>
                 </div>
@@ -59,10 +72,15 @@
                                     <input [id]="'question-' + questionIndex" type="text" formControlName="title">
                                     <img (click)="clearQuestion(questionIndex)" class="clear-btn" src="" alt="delete-icon">
                                 </div>
-                                
-                                <label [for]="'multiple-answers-' + questionIndex">allow multiple answers</label>
-                                <input [id]="'multiple-answers-' + questionIndex" type="checkbox" formControlName="allow_multiple_answers">   
-                                
+                                <div class="fl-direction-c">
+                                    @if (question.controls.title.touched && question.controls.title.errors) {
+                                        <span class="error-msg">Question field can't be empty.</span>
+                                    }
+                                    <div>
+                                        <label [for]="'multiple-answers-' + questionIndex">allow multiple answers</label>
+                                        <input [id]="'multiple-answers-' + questionIndex" type="checkbox" formControlName="allow_multiple_answers">   
+                                    </div>
+                                </div>
                                 <div formArrayName="answers">
                                     @for (answer of question.controls.answers.controls; track $index; let answerIndex = $index) {
                                         <div [formGroupName]="answerIndex">
@@ -71,7 +89,13 @@
                                                 <input [id]="'answers-' + questionIndex + '-' + answerIndex" type="text" formControlName="title">
                                                 <img (click)="clearAnswer(questionIndex, answerIndex)" class="clear-btn" src="" alt="delete-icon">
                                             </div>
+                                            @if (answer.controls.title.touched && answer.controls.title.errors?.['required']) {
+                                                <span class="error-msg">Answer text cannot be empty.</span>
+                                            }
                                         </div>
+                                    }
+                                    @if (question.controls.answers.touched && question.controls.answers.errors?.['minLengthArray']) {
+                                        <span class="error-msg">At least 2 answers are required.</span>
                                     }
                                 </div>
                             </div>
@@ -82,7 +106,7 @@
             </div>
 
             <div class="publish-c">
-                <button class="publish-btn" type="submit" [disabled]="surveyForm.invalid">Publish <img class="check-icon" src="" alt=""></button>
+                <button class="publish-btn" type="submit">Publish <img class="check-icon" src="" alt=""></button>
             </div>
         </form>
     </div>

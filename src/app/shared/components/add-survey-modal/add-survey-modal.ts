@@ -1,11 +1,44 @@
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, ReactiveFormsModule, Validators, FormArray } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn, FormGroup, FormControl, ReactiveFormsModule, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SurveyService } from '../../services/survey.service';
 import { SurveyModel } from '../../models/surveyModel';
 import { QuestionModel } from '../../models/questionModel';
 import { AnswerModel } from '../../models/answerModel';
 
+
+/**
+*Checks if the selected date is today or in the future.
+*
+* @returns A ValidatorFn that returns { pastDate: true } if the date is
+* in the past, or null if the date is valid or empty.
+*/
+export function futureDateValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (!control.value) return null;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const inputDate = new Date(control.value);
+    return inputDate >= today ? null : { pastDate: true };
+  };
+}
+
+/**
+* Creates a validator that checks whether a FormArray contains at least
+* the specified number of items.
+* @param min - The minimum number of items required in the FormArray.
+* @returns A ValidatorFn that returns a minLengthArray error containing
+* the required and actual lengths when the minimum is not met, or null
+* when the validation succeeds.
+*/
+export function minArrayLength(min: number): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (control instanceof FormArray && control.length < min) {
+      return { minLengthArray: { requiredLength: min, actualLength: control.length } };
+    }
+    return null;
+  };
+}
 
 @Component({
   selector: 'app-add-survey-modal',
@@ -27,7 +60,8 @@ export class AddSurveyModal {
 
   /**
   * opens the survey modal 
-  */  openModal() {
+  */  
+  openModal() {
     this.dialog.nativeElement.showModal()
   }
 
@@ -53,15 +87,15 @@ export class AddSurveyModal {
       this.closeModal();
     }
   }
-  
 
   surveyForm = new FormGroup({
-    title: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
-    description: new FormControl('', {nonNullable: false}),
+    title: new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.minLength(3), Validators.maxLength(100)]
+    }),
+    description: new FormControl('', {nonNullable: false, validators: [Validators.maxLength(500)]}),
     category: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
-    ends_at: new FormControl(''),
-    questions: new FormArray([this.createQuestionForm()]),
-  })
+    ends_at: new FormControl('', {validators: [futureDateValidator()]}),
+    questions: new FormArray([this.createQuestionForm()], {validators: [minArrayLength(1)]}),
+  });
 
   get questions() {
     return this.surveyForm.controls.questions;
@@ -74,12 +108,11 @@ export class AddSurveyModal {
   */
   createQuestionForm() {
     return new FormGroup({
-      title: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
-      allow_multiple_answers: new FormControl(false, {nonNullable: true}),
-      answers: new FormArray([
-        this.createAnswersForm(),
-        this.createAnswersForm()
-      ], {validators: [Validators.required]}),
+      title: new FormControl('', {
+        nonNullable: true, 
+        validators: [Validators.required, Validators.minLength(3)]}),
+      allow_multiple_answers: new FormControl(false, { nonNullable: true }),
+      answers: new FormArray([this.createAnswersForm(), this.createAnswersForm()], { validators: [minArrayLength(2)] }),
     });
   }
 
@@ -100,7 +133,7 @@ export class AddSurveyModal {
   */
   createAnswersForm() {
     return new FormGroup({
-      title: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
+      title: new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.minLength(1)]}),
     });
   }
 
@@ -141,9 +174,11 @@ export class AddSurveyModal {
           await this.surveySevice.addAnswer(answer);
         }
       }
-    }
     this.surveyForm.reset();
     this.closeModal()
+    } else {
+      this.surveyForm.markAllAsTouched();
+    }
   }
 
   /**
