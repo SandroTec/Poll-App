@@ -25,9 +25,10 @@
                     }
                 </div>
                 @if (questionList().length > 0) {
-                    @for(question of questionList(); track question.id; let index = $index) {
+                    <div class="grid-container">
+                        @for(question of questionList(); track question.id; let index = $index) {
                         <li class="question-li">
-                            <ol>
+                            
                                 <p>{{question.title}}</p>
                                     <ol>
                                         @for (answer of getAnswersForQuestion(question.id); track answer.id) {
@@ -36,9 +37,10 @@
                                             </li> 
                                         }
                                     </ol>
-                            </ol>
+                            
                         </li>
                     }
+                    </div>
                 }@else {
                     <p>Survey is not loaded yet.</p>
                 }

@@ -29,7 +29,7 @@ header {
 
 .survey-state {
     background: #FFB770;
-    width: 94px;
+    width: auto;
     height: 26px;
     border-top-right-radius: 14px;
     padding-top: 3px;
@@ -38,9 +38,7 @@ header {
     padding-left: 8px;
 }
 
-.headline-desc {
-    padding: 20px 0 40px 0;
-}
+
 
 tr {
     display: flex;
@@ -59,6 +57,11 @@ td {
 
 input {
     cursor: pointer;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
 }
 
 .question-li {
@@ -96,12 +99,14 @@ input {
 
 .add-icon {
     content: url('assets/img/add_circle.png');
+    width: 0;
     opacity: 0;
-    transition: opacity 0.6s ease;
+    overflow: hidden;
+    transition: width 0.6s ease, opacity 0.6s ease;
 }
 
-
 .add-survey-btn:hover .add-icon {
+    width: 24px;
     opacity: 1;
 }
 
@@ -208,6 +213,8 @@ input {
 
     .add-icon {
         content: url('assets/img/add_circle.png');
+        width: 24px;
+        opacity: 1;
     }
 
     .max-content {
@@ -218,6 +225,14 @@ input {
         padding: 20px 20px;
     }
 
+    
+}
+
+@media (max-width: 600px) {
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto;
+    }
 }
 
 @media (max-width: 450px) {

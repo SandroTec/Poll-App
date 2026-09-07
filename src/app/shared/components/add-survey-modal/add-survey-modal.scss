@@ -248,11 +248,15 @@ h1 {
 
 .check-icon {
     content: url('assets/img/check.png');
+    width: 0;
+    height: 14px;
     opacity: 0;
-    transition: opacity 0.6s ease;
+    overflow: hidden;
+    transition: width 0.6s ease, opacity 0.6s ease;
 }
 
 .publish-btn:hover .check-icon {
+    width: 18px;
     opacity: 1;
 }
 
@@ -291,6 +295,8 @@ input:focus {
 @media (max-width: 950px) {
     .check-icon {
         content: url('assets/img/check.png');
+        opacity: 1;
+        width: 24px;
     }
 
     .date-category-c {
