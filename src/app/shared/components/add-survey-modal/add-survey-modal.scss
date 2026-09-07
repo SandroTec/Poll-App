@@ -292,10 +292,18 @@ input:focus {
     .check-icon {
         content: url('assets/img/check.png');
     }
+
+    .date-category-c {
+        flex-direction: column;
+    }
 }
 
 
 @media (max-width: 600px) {
+    dialog {
+        padding: 0;
+    }
+
     .survey-info-row {
         flex-direction: column;
     }
