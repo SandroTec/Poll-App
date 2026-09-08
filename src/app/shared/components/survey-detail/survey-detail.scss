@@ -38,7 +38,10 @@ header {
     padding-left: 8px;
 }
 
-
+.date-category-c {
+    display: flex;
+    justify-content: space-between;
+}
 
 tr {
     display: flex;
@@ -129,12 +132,11 @@ input {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0 40px 0;
 }
 
 .closing-icon {
     cursor: pointer;
-    margin-right: 20px;
+    margin-right: 35px;
     border-radius: 10px;
     padding-top: 8px;
     padding-right: 12px;

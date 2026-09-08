@@ -14,9 +14,9 @@
                     <p class="survey-state">Published</p>
                     <img [routerLink]="['']" class="closing-icon d-none-desktop" src="assets/img/close.png" alt="closing icon">
                 </div>
-                <div>
-                    <p>Ends at: {{formatDate(getSurvey()?.ends_at)}}</p>
-                    <p>Category: {{getSurvey()?.category}}</p>
+                <div class="date-category-c">
+                    <span>Ends at: {{formatDate(getSurvey()?.ends_at)}}</span>
+                    <span>Category: {{getSurvey()?.category}}</span>
                 </div>
                 <div class="headline-desc">
                     <h2>{{getSurvey()?.title}}</h2>
