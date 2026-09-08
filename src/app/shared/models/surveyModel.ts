@@ -19,7 +19,7 @@ export class SurveyModel implements Survey {
     constructor(data: Partial<SurveyFormData> = {}) {
         this.id = data.id ?? 0;
         this.title = data.title ?? "";
-        this.description = data.description ? "" : undefined;
+        this.description = data.description ?? undefined;
         this.category = data.category ?? "";
         this.created_at = new Date();
         this.ends_at = data.ends_at ? new Date(data.ends_at) : undefined;
