@@ -31,6 +31,7 @@ h2 {
     width: 100%;
     min-width: 0;
     gap: 20px;
+    margin-bottom: 10px;
 }
 
 .soon-ending-survey-rows::-webkit-scrollbar {
@@ -47,7 +48,7 @@ h2 {
 }
 
 .soon-ending-card {
-    width: 321px;
+    min-width: 321px;
     border-top-right-radius: 80px;
     padding-top: 40px;
     padding-right: 18px;
