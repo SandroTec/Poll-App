@@ -71,11 +71,11 @@ h2 {
 .content {
     display: flex;
     flex-direction: column;
-    height: 30%;
+    height: auto;
 }
 
 .survey-list {
-    height: 300px;
+    height: 275px;
     overflow-y: auto;
     display: grid;
     grid-template-columns: auto auto;

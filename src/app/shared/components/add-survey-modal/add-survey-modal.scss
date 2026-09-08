@@ -310,6 +310,16 @@ input:focus {
         padding: 0;
     }
 
+    .over-header {
+        box-sizing: border-box;
+        padding: 0 20px;
+    }
+
+    .modal-header {
+        box-sizing: border-box;
+        padding: 0 20px;
+    }
+
     .survey-info-row {
         flex-direction: column;
     }

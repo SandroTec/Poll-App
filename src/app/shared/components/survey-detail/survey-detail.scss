@@ -10,7 +10,6 @@ body {
 .max-content {
     max-width: 1440px;
     width: 100%;
-    padding:  20px 70px;
     box-sizing: border-box;
     margin: 0 auto;
 }
@@ -65,11 +64,12 @@ input {
 .grid-container {
     display: grid;
     grid-template-columns: auto auto;
-    gap: 24px;
+    gap: 70px
 }
 
 .question-li {
     list-style: decimal;
+    font-size: 24px;
 }
 
 .result-li {
@@ -123,7 +123,7 @@ input {
 .survey-c {
     box-sizing: border-box;
     background: #8E70991A;
-    width: 50%;
+    width: auto;
     border-top-right-radius: 160px;
     gap: 8px;
     padding: 0 40px;
@@ -170,9 +170,8 @@ input {
 
 .result-c {
     box-sizing: border-box;
-    width: 50%;
-    gap: 8px;
     padding: 0 40px;
+    width: 400px;
 }
 
 .result-headline-c {
@@ -185,10 +184,11 @@ input {
     display: flex;
     align-items: center;
     color: #FFB770;
+    width: 320px;
 }
 
 .bar {
-    width: 300px;
+    width: 250px;
     height: 15px;
     background: lightgray;
     margin: 5px 0;
@@ -228,7 +228,16 @@ input {
         padding: 20px 20px;
     }
 
-    
+    .bar-c {
+    display: flex;
+    align-items: center;
+    color: #FFB770;
+    width: 100%;
+    }
+
+    .bar {
+        width: 60%;
+    }
 }
 
 @media (max-width: 600px) {
@@ -240,11 +249,11 @@ input {
 
 @media (max-width: 450px) {
     .survey-c {
-        padding: 18px;
+        padding: 24px;
     }
 
     .result-c {
-        padding: 18px;
+        padding: 24px;
     }
 
     .max-content {

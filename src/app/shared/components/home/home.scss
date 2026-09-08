@@ -3,7 +3,8 @@ body {
     background: #35263a;
     color: white;
     box-sizing: border-box;
-    min-height: 100vh;
+    height: auto;
+    min-height: 100dvh;
     margin: 0;
 }
 
@@ -19,7 +20,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 40px;
-    max-height: 100vh;
 }
 
 .survey-lists {
