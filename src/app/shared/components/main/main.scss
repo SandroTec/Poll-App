@@ -43,6 +43,12 @@ h1 {
     height: 30%;
 }
 
+.design-c-c {
+    display: flex;
+    flex-direction: column;
+
+}
+
 .add-survey-btn {
     display: flex;
     justify-content: center;
@@ -82,11 +88,6 @@ h1 {
         line-height: 50px;
     }
 
-    .design-c {
-        flex-direction: column;
-        align-items: center;
-    }
-
     .design-img {
         width: 300px;
     }
@@ -96,10 +97,34 @@ h1 {
         width: 24px;
         opacity: 1;
     }
+
+    .design-c {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .design-c-c {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .design-c h1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .design-c p {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 @media (max-width: 400px) {
     .design-img {
         width: 200px;
+        height: 200px;
     }
 }

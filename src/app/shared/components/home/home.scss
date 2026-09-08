@@ -22,6 +22,11 @@ body {
     max-height: 100vh;
 }
 
+.survey-lists {
+    box-sizing: border-box;
+    padding: 0 70px;
+}
+
 @media (max-width: 950px) {
     .max-content {
         padding: 20px;
@@ -36,5 +41,13 @@ body {
 
     .max-content {
         padding: 10px;
+    }
+
+    .content {
+        align-items: center;
+    }
+
+    .survey-lists {
+        padding: 0;
     }
 }
