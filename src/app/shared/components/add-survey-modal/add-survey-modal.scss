@@ -1,8 +1,8 @@
 dialog {
     background: #433249;
     color: white;
-    max-width: 1166px;
-    max-height: auto;
+    max-width: auto -300px;
+    max-height: auto -300px;
     opacity: 1;
     gap: 48px;
     border-top-left-radius: 5px;
@@ -27,6 +27,19 @@ form {
 
 input {
     margin-top: 8px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: none;
+    padding-top: 7px;
+    padding-right: 13px;
+    padding-bottom: 7px;
+    padding-left: 13px;
+}
+
+input:focus {
+    border: none;
 }
 
 h1 {
@@ -206,6 +219,11 @@ h1 {
     background: #ffb77098;
 }
 
+.add-btn-c {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .add-icon {
     content: url('assets/img/add_circle_white.png');
 }
@@ -330,5 +348,9 @@ input:focus {
 
     .question-rows {
         grid-template-columns: auto ;
+    }
+
+    .add-btn-c {
+        margin-top: 40px;
     }
 }

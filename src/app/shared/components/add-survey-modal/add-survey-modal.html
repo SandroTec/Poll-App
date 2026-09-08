@@ -62,7 +62,9 @@
             
 
             <div formArrayName="questions">
-                <button class="add-question-btn" type="button" (click)="addQuestion()">Add next question <img class="add-icon" src="" alt=""></button>
+                <div class="add-btn-c">
+                    <button class="add-question-btn" type="button" (click)="addQuestion()">Add next question <img class="add-icon" src="" alt=""></button>
+                </div>
                 <div class="question-rows">
                     @for (question of surveyForm.controls.questions.controls; track $index; let questionIndex = $index) {
                         <div>
