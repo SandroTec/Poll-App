@@ -1,7 +1,7 @@
 
 <dialog #dialog (click)="onDialogClick($event)">
     <div class="over-header">
-                <p class="survey-state">Draft</p>
+                <span class="survey-state">Draft</span>
                 <img (click)="closeModal()" class="closing-icon d-none-desktop" src="assets/img/close_white.png" alt="closing icon">
     </div>
 
@@ -78,9 +78,9 @@
                                     @if (question.controls.title.touched && question.controls.title.errors) {
                                         <span class="error-msg">Question field can't be empty.</span>
                                     }
-                                    <div>
+                                    <div class="flex-c">
                                         <label [for]="'multiple-answers-' + questionIndex">allow multiple answers</label>
-                                        <input [id]="'multiple-answers-' + questionIndex" type="checkbox" formControlName="allow_multiple_answers">   
+                                        <input class="ckeckbox-input" [id]="'multiple-answers-' + questionIndex" type="checkbox" formControlName="allow_multiple_answers">   
                                     </div>
                                 </div>
                                 <div formArrayName="answers">

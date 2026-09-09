@@ -1,19 +1,32 @@
 dialog {
+    box-sizing: border-box;
     background: #433249;
     color: white;
-    max-width: auto -300px;
-    max-height: auto -300px;
+    max-width: 1140px;
+    width: 80%;
+    height: min-content;
     opacity: 1;
     gap: 48px;
     border-top-left-radius: 5px;
     border-top-right-radius: 100px;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    padding-top: 40px;
-    padding-right: 54px;
-    padding-bottom: 40px;
-    padding-left: 54px;
+    padding: auto;
     border: none;
+    overflow-y: auto;
+}
+
+dialog::-webkit-scrollbar {
+    width: 8px;
+}
+
+dialog::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+dialog::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #FFB770;
 }
 
 dialog::backdrop {
@@ -26,6 +39,8 @@ form {
 }
 
 input {
+    max-width: 400px;
+    width: 100%;
     margin-top: 8px;
     border-top-left-radius: 5px;
     border-top-right-radius: 20px;
@@ -34,12 +49,16 @@ input {
     border: none;
     padding-top: 7px;
     padding-right: 13px;
-    padding-bottom: 7px;
+    padding-bottom: 16px;
     padding-left: 13px;
 }
 
 input:focus {
     border: none;
+}
+
+.ckeckbox-input {
+    width: 20px !important;
 }
 
 h1 {
@@ -56,6 +75,9 @@ h1 {
     padding-right: 12px;
     padding-bottom: 3px;
     padding-left: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-header {
@@ -67,7 +89,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0 40px 0;
+    margin-top: 22px;
 }
 
 .form-content {
@@ -103,6 +125,9 @@ h1 {
 }
 
 .cancel-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 111px;
     height: 40px;
     padding-top: 8px;
@@ -122,7 +147,8 @@ h1 {
 .survey-info-row {
     width: 100%;
     height: 300px;
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto;
     padding-top: 50px;
 }
 
@@ -134,7 +160,7 @@ h1 {
 .date-category-c {
     display: flex;
     padding: 20px 0;
-    gap: 20px;
+    gap: 60px;
 }
 
 #categories {
@@ -184,6 +210,10 @@ h1 {
 
 }
 
+#description {
+    height: 80px;
+}
+
 .input-c {
     display: flex;
     flex-direction: column;
@@ -199,8 +229,16 @@ h1 {
     grid-template-columns: auto auto;
 }
 
+.flex-c {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    max-width: 400px;
+}
+
 .add-question-btn {
     display: flex;
+    justify-content: center;
     align-items: center;
     width: auto;
     height: 40px;
@@ -226,6 +264,7 @@ h1 {
 
 .add-icon {
     content: url('assets/img/add_circle_white.png');
+    
 }
 
 .answer-btn {
@@ -270,7 +309,7 @@ h1 {
     height: 14px;
     opacity: 0;
     overflow: hidden;
-    transition: width 0.6s ease, opacity 0.6s ease;
+    transition: width 0.4s ease, opacity 0.4s ease;
 }
 
 .publish-btn:hover .check-icon {
@@ -319,6 +358,13 @@ input:focus {
 
     .date-category-c {
         flex-direction: column;
+        gap: 20px;
+    }
+
+    .survey-info-row {
+        height: auto;
+        grid-template-columns: auto;
+        margin-bottom: 20px;
     }
 }
 
@@ -338,9 +384,7 @@ input:focus {
         padding: 0 20px;
     }
 
-    .survey-info-row {
-        flex-direction: column;
-    }
+    
 
     label {
         padding-top: 12px;

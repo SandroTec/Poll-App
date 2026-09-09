@@ -12,15 +12,7 @@ button {
     line-height: 100%;
     letter-spacing: 0%;
     transition: all 0.5s ease;
-}
-
-button:hover {
-    transform: scale(1.04); 
-    box-shadow: 0 0 15px rgba(157, 72, 188, 0.5); 
-}
-
-.button:active {
-  transform: scale(0.98);
+    border: none;
 }
 
 h1 {
@@ -93,19 +85,19 @@ label {
 }
 
 .d-none-desktop {
-    display: none;
+    display: none !important;
 }
 
 .d-none-mobile {
-    display: flex;
+    display: flex !important;
 }
 
 @media (max-width: 950px) {
     .d-none-desktop {
-        display: flex;
+        display: flex !important;
     }
 
     .d-none-mobile {
-        display: none;
+        display: none !important;
     }
 }
