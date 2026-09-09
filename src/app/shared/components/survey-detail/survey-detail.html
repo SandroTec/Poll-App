@@ -27,9 +27,9 @@
                 @if (questionList().length > 0) {
                     <div class="grid-container">
                         @for(question of questionList(); track question.id; let index = $index) {
-                        <li class="question-li">
-                            
-                                <p>{{question.title}}</p>
+                            <li class="question-li"> 
+                            {{question.title}}
+                        
                                     <ol>
                                         @for (answer of getAnswersForQuestion(question.id); track answer.id) {
                                             <li class="answer-li">
@@ -38,7 +38,7 @@
                                         }
                                     </ol>
                             
-                        </li>
+                            </li>
                     }
                     </div>
                 }@else {
@@ -55,7 +55,7 @@
                 </div>
                 @if (questionList().length > 0) {
                     @for(question of questionList(); track question.id; let index = $index) {
-                        <li class="question-li">
+                        <li class="question-li li-pos-o">
                             <ol>
                                 <p>{{question.title}}</p>
                                 @for (answer of getAnswersForQuestion(question.id); track answer.id) {

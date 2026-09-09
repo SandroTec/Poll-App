@@ -21,6 +21,10 @@ header {
     padding: 20px 70px;
 }
 
+p {
+    font-weight: 400 !important;
+}
+
 .purple-logo {
     content: url('assets/img/poll-app-logo-purple.png');
     cursor: pointer;
@@ -57,10 +61,7 @@ td {
     flex-direction: column;
 }
 
-.answer-li {
-    list-style: upper-latin;
-    padding: 5px;
-}
+
 
 input {
     cursor: pointer;
@@ -68,22 +69,44 @@ input {
 
 .grid-container {
     display: grid;
-    grid-template-columns: auto auto;
-    gap: 70px
+    grid-template-columns: 50% 50%;
+    gap: 20px;
 }
 
 .question-li {
     list-style: decimal;
+    list-style-position: inside;
     font-size: 24px;
+    padding-left: 0;
+}
+
+.question-li ol {
+    list-style: upper-latin;
+    list-style-position: inside;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.answer-li {
+    list-style: upper-latin;
+    list-style-position: inside;
+    padding-left: 0;
+    margin-left: 0;
 }
 
 .result-li {
     list-style: upper-latin;
-    gap: 5px;
+    list-style-position: outside;
+    padding-left: 0;
+    margin-left: 0;
 }
 
 .result-li strong {
     margin: 0 5px;
+}
+
+.li-pos-o {
+    list-style-position: outside !important;
 }
 
 .add-survey-btn {

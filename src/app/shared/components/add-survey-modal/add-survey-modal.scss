@@ -11,7 +11,7 @@ dialog {
     border-top-right-radius: 100px;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    padding: auto;
+    padding: 20px 70px 70px 70px;
     border: none;
     overflow-y: auto;
 }
@@ -125,10 +125,7 @@ h1 {
     border-top-right-radius: 80px;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    padding-top: 40px;
-    padding-right: 32px;
-    padding-bottom: 40px;
-    padding-left: 32px;
+    padding: 50px 60px;
     background: #8E709929;
 }
 
@@ -172,8 +169,9 @@ h1 {
     width: 100%;
     height: 300px;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 50% 50%;
     padding-top: 50px;
+    gap: 40px;
 }
 
 .survey-info-row-c {
@@ -250,7 +248,8 @@ h1 {
 
 .question-rows {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 50% 50%;
+    gap: 40px;
 }
 
 .flex-c {
@@ -370,6 +369,8 @@ h1 {
 }
 
 @media (max-width: 950px) {
+    
+
     .check-icon {
         content: url('assets/img/check.png');
         opacity: 1;
@@ -385,6 +386,18 @@ h1 {
         height: auto;
         grid-template-columns: auto;
         margin-bottom: 20px;
+    }
+
+    label {
+        padding-top: 12px;
+    }
+
+    .question-rows {
+        grid-template-columns: auto ;
+    }
+
+    .add-btn-c {
+        margin-top: 40px;
     }
 }
 
@@ -402,19 +415,5 @@ h1 {
     .modal-header {
         box-sizing: border-box;
         padding: 0 20px;
-    }
-
-    
-
-    label {
-        padding-top: 12px;
-    }
-
-    .question-rows {
-        grid-template-columns: auto ;
-    }
-
-    .add-btn-c {
-        margin-top: 40px;
     }
 }
