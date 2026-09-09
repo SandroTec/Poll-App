@@ -89,9 +89,8 @@ export class AddSurveyModal {
   }
 
   surveyForm = new FormGroup({
-    title: new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.minLength(3), Validators.maxLength(100)]
-    }),
-    description: new FormControl('', {nonNullable: false, validators: [Validators.maxLength(500)]}),
+    title: new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.minLength(3), Validators.maxLength(50)]}),
+    description: new FormControl('', {nonNullable: false, validators: [Validators.maxLength(150)]}),
     category: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
     ends_at: new FormControl('', {validators: [futureDateValidator()]}),
     questions: new FormArray([this.createQuestionForm()], {validators: [minArrayLength(1)]}),
@@ -108,9 +107,7 @@ export class AddSurveyModal {
   */
   createQuestionForm() {
     return new FormGroup({
-      title: new FormControl('', {
-        nonNullable: true, 
-        validators: [Validators.required, Validators.minLength(3)]}),
+      title: new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.minLength(3), Validators.maxLength(50)]}),
       allow_multiple_answers: new FormControl(false, { nonNullable: true }),
       answers: new FormArray([this.createAnswersForm(), this.createAnswersForm()], { validators: [minArrayLength(2)] }),
     });
@@ -133,7 +130,7 @@ export class AddSurveyModal {
   */
   createAnswersForm() {
     return new FormGroup({
-      title: new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.minLength(1)]}),
+      title: new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.minLength(1), Validators.maxLength(50)]}),
     });
   }
 
