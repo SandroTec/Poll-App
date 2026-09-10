@@ -46,6 +46,14 @@ p {
     align-items: center;
 }
 
+.headline-desc {
+    margin: 40px 0;
+}
+
+.hl-color {
+    color: #FFB770;
+}
+
 .date-category-c {
     display: flex;
     justify-content: space-between;
@@ -73,10 +81,16 @@ input {
     gap: 20px;
 }
 
+.flex-c {
+    display: flex;
+    align-items: center;
+}
+
 .question-li {
     list-style: decimal;
     list-style-position: inside;
-    font-size: 24px;
+    font-size: 18px;
+    font-weight: 700;
     padding-left: 0;
 }
 
@@ -88,10 +102,9 @@ input {
 }
 
 .answer-li {
+    display: list-item;
     list-style: upper-latin;
     list-style-position: inside;
-    padding-left: 0;
-    margin-left: 0;
 }
 
 .result-li {

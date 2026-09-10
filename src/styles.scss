@@ -36,8 +36,9 @@ h2 {
 }
 
 h3 {
-    font-family: Mulish;
-    font-weight: 900;
+    font-family: Nerko One;
+    font-weight: 400;
+    font-size: 32px;
     font-style: Bold;
     line-height: 100%;
     letter-spacing: 0%;
@@ -54,7 +55,7 @@ p {
 
 span {
     font-family: Mulish;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 16px;
     line-height: 100%;
     letter-spacing: 0%;
@@ -62,7 +63,7 @@ span {
 
 li {
     font-family: Mulish;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 16px;
     line-height: 100%;
     letter-spacing: 0%;
@@ -70,8 +71,8 @@ li {
 
 ol {
     font-family: Mulish;
-    font-weight: 600;
-    font-size: 16px;
+    font-weight: 700;
+    font-size: 18px;
     line-height: 100%;
     letter-spacing: 0%;
 }
@@ -80,6 +81,15 @@ label {
     font-family: Mulish;
     font-weight: 400;
     font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+.alert {
+    font-family: Nerko One;
+    font-weight: 400;
+    color: #35273A;
+    font-size: 24px;
     line-height: 100%;
     letter-spacing: 0%;
 }

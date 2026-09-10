@@ -30,13 +30,16 @@
                             <li class="question-li"> 
                             {{question.title}}
                         
-                                    <ol>
-                                        @for (answer of getAnswersForQuestion(question.id); track answer.id) {
+                                <ol>
+                                    @for (answer of getAnswersForQuestion(question.id); track answer.id) {
+                                        <div class="flex-c">
+                                            <input type="checkbox" [disabled]="isSurveyCompleted() || (this.surveyService.getEndingTime(getSurvey()?.ends_at) < 0)" [checked]="isAnswerSelected(question.id, answer.id)" (click)="updateVoteState(surveyId, question.id, answer.id)">
                                             <li class="answer-li">
-                                                <input type="checkbox" [disabled]="isSurveyCompleted() || (this.surveyService.getEndingTime(getSurvey()?.ends_at) < 0)" [checked]="isAnswerSelected(question.id, answer.id)" (click)="updateVoteState(surveyId, question.id, answer.id)"> <span>{{ answer.title }}</span>
-                                            </li> 
-                                        }
-                                    </ol>
+                                                <span>{{ answer.title }}</span>
+                                            </li>
+                                        </div>
+                                    }
+                                </ol>
                             
                             </li>
                     }
@@ -51,13 +54,13 @@
             <div class="result-c">
                 <div class="result-headline-c">
                     <h3>Survey results</h3>
-                    <h2>live</h2>
+                    <h3 class="hl-color">live</h3>
                 </div>
                 @if (questionList().length > 0) {
                     @for(question of questionList(); track question.id; let index = $index) {
                         <li class="question-li li-pos-o">
                             <ol>
-                                <p>{{question.title}}</p>
+                                {{question.title}}
                                 @for (answer of getAnswersForQuestion(question.id); track answer.id) {
                                     <li class="result-li">
                                         <div class="bar-c">

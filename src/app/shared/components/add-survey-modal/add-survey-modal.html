@@ -10,102 +10,117 @@
         <button class="cancel-btn d-none-mobile" (click)="closeModal()">Cancel <img src="assets/img/close_white.png" alt="closing icon"></button>
     </div>
 
-    <div class="form-content">        
+          
         <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
-            <div class="survey-info-row">
-                <div class="survey-info-row-c">
-                    <div class="input-c">
-                        <label for="title">Survey name</label>
-                        <div class="input-clear-c">
-                            <input id="title" type="text" formControlName="title">
-                            <img (click)="clearField('title')" class="clear-btn" src="" alt="delete-icon">
+            <div class="form-content">  
+                <div class="survey-info-row">
+                    <div class="survey-info-row-c">
+                        <div class="input-c">
+                            <label for="title">Survey name</label>
+                            <div class="input-clear-c">
+                                <input id="title" type="text" formControlName="title">
+                                <img (click)="clearField('title')" class="clear-btn" src="" alt="delete-icon">
+                            </div>
+                            @if (surveyForm.controls.title.touched && surveyForm.controls.title.errors) {
+                                <div class="error-msg">
+                                @if (surveyForm.controls.title.errors['required']) { <span>Survey name is required.</span> }
+                                @if (surveyForm.controls.title.errors['minlength']) { <span>Must be at least 3 characters long.</span> }
+                                @if (surveyForm.controls.title.errors['maxlength']) { <span>Maximum 50 characters allowed.</span> }
+                                </div>
+                            }
                         </div>
-                        @if (surveyForm.controls.title.touched && surveyForm.controls.title.errors) {
+                        <div class="date-category-c">
+                            <div class="input-c">
+                                <label for="endDate">Set end date (optional)</label>
+                                <input id="endDate" type="date" formControlName="ends_at">
+                                @if (surveyForm.controls.ends_at.touched && surveyForm.controls.ends_at.errors?.['pastDate']) {
+                                    <span class="error-msg">End date must be in the future.</span>
+                                }
+                            </div>
+                            <div class="input-c-c">
+                                <label class="category-label" for="categories">{{ surveyForm.get('category')?.value || 'Choose a category' }}<img class="arrow-icon" src="" alt=""></label>
+                                <select id="categories" formControlName="category">
+                                    @for (category of categories; track category) {
+                                        <option [value]="category">
+                                            <span>{{ category }}</span>
+                                        </option>
+                                    }
+                                </select>
+                                @if (surveyForm.controls.category.touched && surveyForm.controls.category.errors?.['required']) {
+                                    <span class="error-msg">Please select a category.</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-c">
+                        <label for="description">Describing text (optional)</label>
+                        <div class="input-clear-c align-start">
+                            <textarea id="description" type="text" formControlName="description"></textarea>
+                            <img (click)="clearField('description')" class="clear-btn" src="" alt="delete-icon">
+                        </div>
+                        @if (surveyForm.controls.description.touched && surveyForm.controls.description.errors) {
                             <div class="error-msg">
-                            @if (surveyForm.controls.title.errors['required']) { <span>Survey name is required.</span> }
-                            @if (surveyForm.controls.title.errors['minlength']) { <span>Must be at least 3 characters long.</span> }
-                            @if (surveyForm.controls.title.errors['maxlength']) { <span>Maximum 100 characters allowed.</span> }
+                                @if (surveyForm.controls.description.errors['maxlength']) { <span>Maximum 150 characters allowed.</span> }
                             </div>
                         }
                     </div>
-                    <div class="date-category-c">
-                        <div class="input-c">
-                            <label for="endDate">Set end date (optional)</label>
-                            <input id="endDate" type="date" formControlName="ends_at">
-                            @if (surveyForm.controls.ends_at.touched && surveyForm.controls.ends_at.errors?.['pastDate']) {
-                                <span class="error-msg">End date must be in the future.</span>
-                            }
-                        </div>
-                        <div class="input-c-c">
-                            <label class="category-label" for="categories">{{ surveyForm.get('category')?.value || 'Choose a category' }}<img class="arrow-icon" src="" alt=""></label>
-                            <select id="categories" formControlName="category">
-                                @for (category of categories; track category) {
-                                    <option [value]="category">
-                                        <span>{{ category }}</span>
-                                    </option>
-                                }
-                            </select>
-                            @if (surveyForm.controls.category.touched && surveyForm.controls.category.errors?.['required']) {
-                                <span class="error-msg">Please select a category.</span>
-                            }
-                        </div>
-                    </div>
                 </div>
-                <div class="input-c">
-                    <label for="description">Describing text (optional)</label>
-                    <div class="input-clear-c align-start">
-                        <textarea id="description" type="text" formControlName="description"></textarea>
-                        <img (click)="clearField('description')" class="clear-btn" src="" alt="delete-icon">
-                    </div>
-                </div>
-            </div>
-            
+                
 
-            <div formArrayName="questions">
-                <div class="add-btn-c">
-                    <button class="add-question-btn" type="button" (click)="addQuestion()">Add next question <img class="add-icon" src="" alt=""></button>
-                </div>
-                <div class="question-rows">
-                    @for (question of surveyForm.controls.questions.controls; track $index; let questionIndex = $index) {
-                        <div>
-                            <div [formGroupName]="questionIndex">    
-                                <label [for]="'question-' + questionIndex">{{ questionIndex + 1 }}. Question</label>
-                                <div class="input-clear-c">    
-                                    <input [id]="'question-' + questionIndex" type="text" formControlName="title">
-                                    <img (click)="clearQuestion(questionIndex)" class="clear-btn" src="" alt="delete-icon">
-                                </div>
-                                <div class="fl-direction-c">
-                                    @if (question.controls.title.touched && question.controls.title.errors) {
-                                        <span class="error-msg">Question field can't be empty.</span>
-                                    }
-                                    <div class="flex-c">
-                                        <label [for]="'multiple-answers-' + questionIndex">allow multiple answers</label>
-                                        <input class="ckeckbox-input" [id]="'multiple-answers-' + questionIndex" type="checkbox" formControlName="allow_multiple_answers">   
+                <div formArrayName="questions">
+                    <div class="add-btn-c">
+                        <button class="add-question-btn" type="button" (click)="addQuestion()">Add next question <img class="add-icon" src="" alt=""></button>
+                    </div>
+                    <div class="question-rows">
+                        @for (question of surveyForm.controls.questions.controls; track $index; let questionIndex = $index) {
+                            <div>
+                                <div [formGroupName]="questionIndex">    
+                                    <label [for]="'question-' + questionIndex">{{ questionIndex + 1 }}. Question</label>
+                                    <div class="input-clear-c">    
+                                        <input [id]="'question-' + questionIndex" type="text" formControlName="title">
+                                        <img (click)="clearQuestion(questionIndex)" class="clear-btn" src="" alt="delete-icon">
                                     </div>
-                                    <span>Answers</span>
-                                </div>
-                                <div formArrayName="answers" {counter-reset: answer}>
-                                    @for (answer of question.controls.answers.controls; track $index; let answerIndex = $index) {
-                                        <li class="answer-li" [formGroupName]="answerIndex">
-                                            <div class="fl-direction-c">
-                                                <div class="input-clear-c">
-                                                    <input [id]="'answers-' + questionIndex + '-' + answerIndex" type="text" formControlName="title">
-                                                    <img (click)="clearAnswer(questionIndex, answerIndex)" class="clear-btn" src="" alt="delete-icon">
-                                                </div>
-                                                @if (answer.controls.title.touched && answer.controls.title.errors?.['required']) {
-                                                    <span class="error-msg">Answer text can't be empty.</span>
-                                                }
+                                    <div class="fl-direction-c">
+                                        @if (question.controls.title.touched && question.controls.title.errors) {
+                                            <div class="error-msg">
+                                                @if (question.controls.title.errors['required']) {<span>Question field can't be empty.</span>}
+                                            
+                                                @if (question.controls.title.errors['maxlength']) { <span>Maximum 50 characters allowed.</span> }
                                             </div>
-                                        </li>
-                                    }
-                                    @if (question.controls.answers.touched && question.controls.answers.errors?.['minLengthArray']) {
-                                        <span class="error-msg">At least 2 answers are required.</span>
-                                    }
+                                        }
+                                        <div class="flex-c">
+                                            <label [for]="'multiple-answers-' + questionIndex">allow multiple answers</label>
+                                            <input class="ckeckbox-input" [id]="'multiple-answers-' + questionIndex" type="checkbox" formControlName="allow_multiple_answers">   
+                                        </div>
+                                        <span>Answers</span>
+                                    </div>
+                                    <div formArrayName="answers" {counter-reset: answer}>
+                                        @for (answer of question.controls.answers.controls; track $index; let answerIndex = $index) {
+                                            <li class="answer-li" [formGroupName]="answerIndex">
+                                                <div class="fl-direction-c">
+                                                    <div class="input-clear-c">
+                                                        <input [id]="'answers-' + questionIndex + '-' + answerIndex" type="text" formControlName="title">
+                                                        <img (click)="clearAnswer(questionIndex, answerIndex)" class="clear-btn" src="" alt="delete-icon">
+                                                    </div>
+                                                    @if (answer.controls.title.touched && answer.controls.title.errors) {
+                                                        <div class="error-msg">
+                                                            @if (answer.controls.title.errors['required']) { <span>Answer text can't be empty.</span> }
+                                                            @if (answer.controls.title.errors['maxlength']) { <span>Maximum 50 characters allowed.</span> }
+                                                        </div>
+                                                        
+                                                    }
+                                                </div>
+                                            </li>
+                                        }
+                                        @if (question.controls.answers.touched && question.controls.answers.errors?.['minLengthArray']) {
+                                            <span class="error-msg">At least 2 answers are required.</span>
+                                        }
+                                    </div>
                                 </div>
+                            <button class="answer-btn" type="button" (click)="addAnswers(questionIndex)">Add answer <img class="add-icon" src="" alt=""></button>
                             </div>
-                        <button class="answer-btn" type="button" (click)="addAnswers(questionIndex)">Add answer <img class="add-icon" src="" alt=""></button>
-                        </div>
-                    }
+                        }
+                    </div>
                 </div>
             </div>
 
@@ -113,5 +128,5 @@
                 <button class="publish-btn" type="submit">Publish <img class="check-icon" src="" alt=""></button>
             </div>
         </form>
-    </div>
+    
 </dialog>
