@@ -290,6 +290,20 @@ h1 {
     
 }
 
+.answer-li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    list-style: none;
+    counter-increment: answer;
+}
+
+.answer-li::before {
+    content: counter(answer, upper-alpha) ".";
+    flex-shrink: 0;
+    width: 20px;
+}
+
 .answer-btn {
     display: flex;
     align-items: center;
@@ -303,6 +317,12 @@ h1 {
 
 .answer-btn:hover {
     background: #FAF5FE33;
+}
+
+.answer-li .input-clear-c {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .publish-c {
@@ -352,6 +372,7 @@ h1 {
 }
 
 .fl-direction-c {
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
