@@ -147,6 +147,18 @@ h2 {
     background: #ffb770;
 }
 
+.activeBtn {
+    background: #fee9d4;
+
+    &:hover {
+        background: #ffcfa1;
+    }
+
+    &.selected {
+        background: #ffb770;
+    }
+}
+
 .pastBtn {
     width: auto;
     height: 25px;
@@ -156,7 +168,18 @@ h2 {
     padding-bottom: 2px;
     padding-left: 10px;
     gap: 10px;
+}
+
+.pastBtn {
     background: #fee9d4;
+
+    &:hover {
+        background: #ffcfa1;
+    }
+
+    &.selected {
+        background: #ffb770;
+    }
 }
 
 ul {

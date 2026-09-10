@@ -27,11 +27,11 @@
 
     <div class="btn-c">
         <div class="gap-c">
-            <button class="activeBtn" (click)="state = 'active'">
+            <button class="activeBtn" (click)="state = 'active'" [class.selected]="state === 'active' || state === ''">
                 <span>Active survey</span>
             </button>
                 
-            <button class="pastBtn" (click)="state = 'past'">
+            <button class="pastBtn" (click)="state = 'past'" [class.selected]="state === 'past'">
                 <span>Past survey</span>
             </button>
         </div>
