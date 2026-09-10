@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject } from '@angular/core';
 import { createClient } from '@supabase/supabase-js';
 import { Survey } from '../interfaces/survey';
 import { Question } from '../interfaces/question';
@@ -9,6 +9,7 @@ import { AnswerModel } from '../models/answerModel';
 import { Vote } from '../interfaces/vote';
 import { VoteModel } from '../models/voteModel';
 import { SurveyVoteState } from '../interfaces/survey-vote-state';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -25,6 +26,8 @@ export class SurveyService {
   showAlert = signal(false);
 
   completedSurveys = signal<number[]>(this.getCompletedSurveys());
+
+  private router = inject(Router);
 
   surveyChannel;
   questionChannel;
@@ -50,6 +53,7 @@ export class SurveyService {
         this.showAlert.set(true)
         setTimeout(() => {
           this.showAlert.set(false);
+          this.openSurvey(tmpSurvey.id)
         }, 3000);
       }
     )
@@ -107,6 +111,14 @@ export class SurveyService {
     this.supabase.removeChannel(this.questionChannel);
     this.supabase.removeChannel(this.answerChannel);
     this.supabase.removeChannel(this.voteChannel);
+  }
+
+  /**
+  * Navigates to detail.
+  * @param surveyId - Index of the survey to navigate to.
+  */
+  openSurvey(surveyId: number) {
+    this.router.navigate(['detail', surveyId]);
   }
 
   /**
