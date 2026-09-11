@@ -49,7 +49,9 @@ export class Surveys {
       survey.ends_at !== undefined &&
       this.surveyService.getEndingTime(survey.ends_at) <= 2 && 
       this.surveyService.getEndingTime(survey.ends_at) >= 0
-    );
+    )
+    .sort((a, b) => this.surveyService.getEndingTime(a.ends_at!) - this.surveyService.getEndingTime(b.ends_at!))
+    .slice(0, 3)
   }
 
   /**
@@ -63,7 +65,8 @@ export class Surveys {
       this.surveyService.getEndingTime(survey.ends_at) <= 0  &&
       (this.selectedCategory === 'All Surveys' ||
       survey.category === this.selectedCategory)
-    );
+    )
+    .sort((a, b) => this.surveyService.getEndingTime(b.ends_at!) - this.surveyService.getEndingTime(a.ends_at!))
   }
 
   /**
@@ -77,7 +80,9 @@ export class Surveys {
       this.surveyService.getEndingTime(survey.ends_at) >= 0 &&
       (this.selectedCategory === 'All Surveys' ||
       survey.category === this.selectedCategory)
-    );
+    )
+    .sort((a, b) => this.surveyService.getEndingTime(a.ends_at!) - this.surveyService.getEndingTime(b.ends_at!))
+
   }
 
   /**
