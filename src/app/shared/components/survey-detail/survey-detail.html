@@ -48,7 +48,7 @@
                     <p>Survey is not loaded yet.</p>
                 }
                 <footer>
-                    <button class="complete-btn" [disabled]="!hasSelectedAnswers() || (this.surveyService.getEndingTime(getSurvey()?.ends_at) < 0)" (click)="voting()" [routerLink]="(hasSelectedAnswers() && !isSurveyCompleted())? [''] : null">complete survey</button>
+                    <button class="complete-btn" [disabled]="!hasSelectedAnswers() || (this.surveyService.getEndingTime(getSurvey()?.ends_at) < 0) || isSurveyCompleted()" (click)="voting()" [routerLink]="(hasSelectedAnswers() && !isSurveyCompleted())? [''] : null">complete survey</button>
                 </footer>
             </div>
             <div class="result-c">

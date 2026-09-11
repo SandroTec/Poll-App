@@ -206,7 +206,7 @@ input {
     border: none;
 }
 
-.complete-btn:hover {
+.complete-btn:not(:disabled):hover {
     background: #FFB770;
 }
 
