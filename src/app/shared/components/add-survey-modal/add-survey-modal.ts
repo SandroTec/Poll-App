@@ -130,7 +130,7 @@ export class AddSurveyModal {
   */
   createAnswersForm() {
     return new FormGroup({
-      title: new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.minLength(1), Validators.maxLength(50)]}),
+      title: new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.maxLength(50)]}),
     });
   }
 

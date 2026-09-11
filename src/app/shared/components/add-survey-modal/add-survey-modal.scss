@@ -379,15 +379,14 @@ h1 {
 }
 
 .error-msg {
-    font-size: 12px;
+    font-size: 16px;
     color: red;
-    
+    visibility: hidden;
+    min-height: 20px;
 }
 
-.error-msg span {
-    font-size: 12px;
-    color: red;
-    
+.error-msg.error-visible {
+    visibility: visible;
 }
 
 @media (max-width: 950px) {
