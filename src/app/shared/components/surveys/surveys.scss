@@ -51,6 +51,8 @@ h2 {
     box-sizing: border-box;
     min-width: 321px !important;
     max-width: 321px !important;
+    min-height: 310px;
+    max-height: 310px;
     border-top-right-radius: 80px;
     padding-top: 40px;
     padding-right: 18px;
@@ -59,7 +61,9 @@ h2 {
     background: #faf5fe;
     color: black;
     cursor: pointer;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .soon-ending-card:hover {
