@@ -391,7 +391,9 @@ h1 {
 }
 
 @media (max-width: 950px) {
-    
+    .form-content {
+        padding: 20px 30px;
+    }
 
     .check-icon {
         content: url('assets/img/check.png');
@@ -408,6 +410,8 @@ h1 {
         height: auto;
         grid-template-columns: auto;
         margin-bottom: 20px;
+        gap: 0;
+        padding: 0;
     }
 
     label {

@@ -157,7 +157,8 @@ input {
 
 .content {
     padding: 20px 70px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 50% 50%;
 
 }
 
@@ -243,7 +244,7 @@ input {
 
 @media (max-width: 950px) {
     .content {
-        flex-direction: column;
+        grid-template-columns: auto;
         padding: 20px 20px;
     }
 
