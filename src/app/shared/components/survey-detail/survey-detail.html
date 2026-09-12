@@ -16,7 +16,7 @@
                 </div>
                 <div class="date-category-c">
                     <span>Ends at: {{formatDate(getSurvey()?.ends_at)}}</span>
-                    <span>Category: {{getSurvey()?.category}}</span>
+                    <span>Category: <br> {{getSurvey()?.category}}</span>
                 </div>
                 <div class="headline-desc">
                     <h2>{{getSurvey()?.title}}</h2>
@@ -48,7 +48,7 @@
                     <p>Survey is not loaded yet.</p>
                 }
                 <footer>
-                    <button class="complete-btn" [disabled]="!hasSelectedAnswers() || (this.surveyService.getEndingTime(getSurvey()?.ends_at) < 0) || isSurveyCompleted()" (click)="voting()" [routerLink]="(hasSelectedAnswers() && !isSurveyCompleted())? [''] : null">complete survey</button>
+                    <button class="complete-btn" [disabled]="!hasSelectedAnswers() || (surveyService.getEndingTime(getSurvey()?.ends_at) < 0) || isSurveyCompleted()" (click)="voting()" [routerLink]="(hasSelectedAnswers() && !isSurveyCompleted())? [''] : null">complete survey</button>
                 </footer>
             </div>
             <div class="result-c">
