@@ -122,97 +122,175 @@ export class SurveyService {
   }
 
   /**
-  * Fetches all surveys from the database and updates the survey list.
-  */
+   * Fetches all surveys from the database and updates the survey list.
+   */
   async getSurveys() {
-    let response = await this.supabase.from('surveys').select('*');
-    this.surveyList.set((response.data ?? []) as Survey[]);
+    try {
+      const { data, error } = await this.supabase.from('surveys').select('*');
+      
+      if (error) {
+        console.error('Error fetching surveys:', error.message);
+        this.surveyList.set([]);
+        return;
+      }
+
+      this.surveyList.set((data ?? []) as Survey[]);
+    } catch (err) {
+      console.error('Unexpected error fetching surveys:', err);
+      this.surveyList.set([]);
+    }
   }
 
   /**
-  * Fetches all questions from the database and updates the question list.
-  * 
-  * @param surveyId - The ID of the survey.
-  */  
+   * Fetches all questions from the database and updates the question list.
+   * 
+   * @param surveyId - The ID of the survey.
+   */   
   async getQuestions(surveyId: number) {
-    let response = await this.supabase.from('survey_questions').select('*').eq('survey_id', surveyId);
-    this.questionList.set((response.data ?? []) as Question[]);
+    try {
+      const { data, error } = await this.supabase.from('survey_questions').select('*').eq('survey_id', surveyId);
+      if (error) {
+        console.error(`Error fetching questions for survey ${surveyId}:`, error.message);
+        this.questionList.set([]);
+        return;
+      }
+      this.questionList.set((data ?? []) as Question[]);
+    } catch (err) {
+      console.error('Unexpected error fetching questions:', err);
+      this.questionList.set([]);
+    }
   }
 
   /**
-  * Fetches all answers from the database and updates the answer list.
-  * 
-  * @param questionIds - The IDs of the questions.
-  */  
+   * Fetches all answers from the database and updates the answer list.
+   * 
+   * @param questionIds - The IDs of the questions.
+   */   
   async getAnswers(questionIds: number[]) {
-    let response = await this.supabase.from('question_answers').select('*').in('question_id', questionIds);
-    this.answerList.set((response.data ?? []) as Answer[]);
+    if (!questionIds || questionIds.length === 0) {
+      this.answerList.set([]);
+      return;
+    }
+    try {
+      const { data, error } = await this.supabase
+        .from('question_answers').select('*').in('question_id', questionIds);
+      if (error) {
+        console.error('Error fetching answers:', error.message);
+        this.answerList.set([]);
+        return;
+      }
+      this.answerList.set((data ?? []) as Answer[]);
+    } catch (err) {
+      console.error('Unexpected error fetching answers:', err);
+      this.answerList.set([]);
+    }
   }
 
   /**
-  * Fetches all votes from the database and updates the vote list.
-  * 
-  * @param answerIds - The IDs of the answers.
-  */  
+   * Fetches all votes from the database and updates the vote list.
+   * 
+   * @param answerIds - The IDs of the answers.
+   */   
   async getVotes(answerIds: number[]) {
-    let response = await this.supabase.from('votes').select('*').in('answer_id', answerIds);
-    this.voteList.set((response.data ?? []) as Vote[]);
+    if (!answerIds || answerIds.length === 0) {
+      this.voteList.set([]);
+      return;
+    }
+    try {
+      const { data, error } = await this.supabase.from('votes').select('*').in('answer_id', answerIds);
+      if (error) {
+        console.error('Error fetching votes:', error.message);
+        this.voteList.set([]);
+        return;
+      }
+      this.voteList.set((data ?? []) as Vote[]);
+    } catch (err) {
+      console.error('Unexpected error fetching votes:', err);
+      this.voteList.set([]);
+    }
   }
 
   /**
-  * Adds a survey to the database.
-  * 
-  * @param survey - The survey to insert into the database.
-  */  
+   * Adds a survey to the database.
+   * 
+   * @param survey - The survey to insert into the database.
+   * @returns The inserted survey object or null if failed.
+   */  
   async addSurvey(survey: SurveyModel) {
-    const survey_data = survey.getCleanAddJson()
-    const { data, error } = await this.supabase 
-      .from('surveys')
-      .insert([survey_data])
-      .select();
-      return data?.[0]
+    try {
+      const survey_data = survey.getCleanAddJson();
+      const { data, error } = await this.supabase .from('surveys').insert([survey_data]).select();
+      if (error) {
+        console.error('Error inserting survey:', error.message);
+        return null;
+      }
+      return data?.[0] ?? null;
+    } catch (err) {
+      console.error('Unexpected error in addSurvey:', err);
+      return null;
+    }
   }
 
   /**
-  * Adds a question to the database.
-  * 
-  * @param question - The question to insert into the database.
-  */  
+   * Adds a question to the database.
+   * 
+   * @param question - The question to insert into the database.
+   * @returns The inserted question object or null if failed.
+   */  
   async addQuestion(question: QuestionModel) {
-    const question_data = question.getCleanAddJson()
-    const { data, error } = await this.supabase
-      .from('survey_questions')
-      .insert([question_data])
-      .select();
-      return data?.[0]
-  }
-  
-  /**
-  * Adds an answer to the database.
-  * 
-  * @param answer - The answer to insert into the database.
-  */  
-  async addAnswer(answer: AnswerModel) {
-    const answer_data = answer.getCleanAddJson()
-    const { data, error } = await this.supabase
-      .from('question_answers')
-      .insert([answer_data])
-      .select();
+    try {
+      const question_data = question.getCleanAddJson();
+      const { data, error } = await this.supabase.from('survey_questions').insert([question_data]).select();
+      if (error) {
+        console.error('Error inserting question:', error.message);
+        return null;
+      }
+      return data?.[0] ?? null;
+    } catch (err) {
+      console.error('Unexpected error in addQuestion:', err);
+      return null;
+    }
   }
 
   /**
-  * Adds a vote to the database.
-  * 
-  * @param vote - The vote to insert into the database.
-  */  
+   * Adds an answer to the database.
+   * 
+   * @param answer - The answer to insert into the database.
+   * @returns The inserted answer object or null if failed.
+   */  
+  async addAnswer(answer: AnswerModel) {
+    try {
+      const answer_data = answer.getCleanAddJson();
+      const { data, error } = await this.supabase.from('question_answers').insert([answer_data]).select();
+      if (error) {
+        console.error('Error inserting answer:', error.message);
+        return null;
+      }
+      return data?.[0] ?? null;
+    } catch (err) {
+      console.error('Unexpected error in addAnswer:', err);
+      return null;
+    }
+  }
+
+  /**
+   * Adds a vote to the database.
+   * 
+   * @param vote - The vote to insert into the database.
+   * @returns The inserted vote object or null if failed.
+   */  
   async addVotes(vote: VoteModel) {
-    const vote_data = vote.getCleanAddJson();
-    const { data, error } = await this.supabase
-      .from('votes')
-      .insert([vote_data])
-      .select();
-    if (error) {
-      console.error(error);
+    try {
+      const vote_data = vote.getCleanAddJson();
+      const { data, error } = await this.supabase.from('votes').insert([vote_data]).select();
+      if (error) {
+        console.error('Error inserting vote:', error.message);
+        return null;
+      }
+      return data?.[0] ?? null;
+    } catch (err) {
+      console.error('Unexpected error in addVotes:', err);
+      return null;
     }
   }
 

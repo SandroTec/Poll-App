@@ -44,8 +44,10 @@ export class SurveyDetail {
     this.surveyId = Number(this.route.snapshot.paramMap.get('id'));
     await this.surveyService.getQuestions(this.surveyId);
     const questionIds = this.questionList().map((question) => question.id);
+    if (questionIds.length === 0) return;
     await this.surveyService.getAnswers(questionIds);
     const answerIds = this.answerList().map(answer => answer.id)
+    if (answerIds.length === 0) return;
     await this.surveyService.getVotes(answerIds);
   }
 
@@ -163,24 +165,29 @@ export class SurveyDetail {
       return voteState;
   }
 
+  isSubmitting = false;
   /**
   * Saves the selected votes to the database and marks the survey as completed.
   *
   */
   async voting() {
+    if (this.isSubmitting) return;
     const storedState = localStorage.getItem(`survey-${this.surveyId}`);
     if (!storedState) return;
     const voteState: SurveyVoteState = JSON.parse(storedState);
     if (voteState.completed) return;
-    await Promise.all( 
-      voteState.selectedAnswers.map(selectedAnswer => {
+    try {
+      this.isSubmitting = true;
+      for (const selectedAnswer of voteState.selectedAnswers) {
         const vote = new VoteModel({ answer_id: selectedAnswer.answerId });
-        return this.surveyService.addVotes(vote);
-      })
-    )
-    voteState.completed = true;
-    this.saveVoteState(this.surveyId, voteState.selectedAnswers, true);
-    this.surveyService.completedSurveys.update(ids => [...ids, this.surveyId]);
+        await this.surveyService.addVotes(vote);
+      }
+      voteState.completed = true;
+      this.saveVoteState(this.surveyId, voteState.selectedAnswers, true);
+      this.surveyService.completedSurveys.update(ids => [...ids, this.surveyId]);
+    } finally {
+      this.isSubmitting = false;
+    }
   }
 
   /**
