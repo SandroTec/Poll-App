@@ -10,13 +10,22 @@
                 @if (list().length > 0) {
                     @for(survey of getEndingSoonSurveys(); track survey.id; let index = $index) {
                         <div class="soon-ending-card" [routerLink]="['detail', survey.id]" role="link">
-                            <span>{{survey.category}}</span>
-
-                            <p>{{survey.title}}</p>
+                            <div>
+                                <span>{{survey.category}}</span>
+                                <p>{{survey.title}}</p>
+                            </div>
                             
                             <div class="days-left-bg">
-                                @if (survey.ends_at) {
-                                    <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} day('s)</span>
+                                <span>Ends in: </span>
+                                @if (survey.ends_at && (surveyService.getEndingTime(survey.ends_at) > 1)) {
+                                    <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} days</span>
+                                }
+                                @if (survey.ends_at && (surveyService.getEndingTime(survey.ends_at) == 1)) {
+                                    <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} day</span>
+                                }
+                                @if ((surveyService.getEndingTime(survey.ends_at) == 0)) {
+                                    <span>today</span>
+
                                 }
                             </div>
                         </div>
@@ -65,9 +74,16 @@
                         <p>{{survey.title}}</p>
                         
                         <div class="days-left-bg">
-                            <span>Ends in:</span>
-                            @if (survey.ends_at) {
-                                <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} day('s)</span>
+                            <span>Ends in: </span>
+                            @if (survey.ends_at && (surveyService.getEndingTime(survey.ends_at) > 1)) {
+                                <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} days</span>
+                            }
+                            @if (survey.ends_at && (surveyService.getEndingTime(survey.ends_at) == 1)) {
+                                <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} day</span>
+                            }
+                            @if ((surveyService.getEndingTime(survey.ends_at) == 0)) {
+                                <span> today</span>
+
                             }
                         </div>
                     </div>
@@ -85,9 +101,14 @@
                         <p>{{survey.title}}</p>
                         
                         <div class="days-left-bg">
-                            <span>Ends in:</span>
+                            <span>Ended:</span>
                             @if (survey.ends_at) {
-                                <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} day('s)</span>
+                                @if (surveyService.getEndingTime(survey.ends_at) == -1) {
+                                    <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} day</span>
+                                }@else if (surveyService.getEndingTime(survey.ends_at) < -1) {
+                                    <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} days</span>
+
+                                }
                             }
                         </div>
                     </div>

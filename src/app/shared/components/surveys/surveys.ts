@@ -62,7 +62,7 @@ export class Surveys {
   getPastSurveys() {
     return this.list().filter((survey: Survey) => 
       survey.ends_at !== undefined &&
-      this.surveyService.getEndingTime(survey.ends_at) <= 0  &&
+      this.surveyService.getEndingTime(survey.ends_at) < 0  &&
       (this.selectedCategory === 'All Surveys' ||
       survey.category === this.selectedCategory)
     )
