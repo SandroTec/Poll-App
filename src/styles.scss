@@ -1,8 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
 body {
     margin: 0;
     padding: 0;
 }
+
+body:has(dialog[open]) {
+    overflow: hidden;
+}
+
 
 button {
     cursor: pointer;
