@@ -193,6 +193,12 @@ input {
     background: #FFB770;
 }
 
+footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 .complete-btn {
     background: #FFB7704D;
     width: 159px;
@@ -245,7 +251,7 @@ input {
 @media (max-width: 950px) {
     .content {
         grid-template-columns: auto;
-        padding: 20px 20px;
+        padding: 8px 8px;
     }
 
     .survey-c {

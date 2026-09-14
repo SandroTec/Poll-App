@@ -49,8 +49,8 @@ h2 {
 
 .soon-ending-card {
     box-sizing: border-box;
-    min-width: 321px !important;
-    max-width: 321px !important;
+    min-width: 321px;
+    max-width: 321px;
     min-height: 310px;
     max-height: 310px;
     border-top-right-radius: 80px;
@@ -314,11 +314,13 @@ li {
     .soon-ending-card {
         min-width: 250px;
         max-width: 250px;
+        min-height: 233px;
+        max-height: 233px;
 
     }
 
     .max-content {
-        padding: 20px 20px;
+        padding: 8px 8px;
     }
 
     .soon-ending-survey-rows::-webkit-scrollbar {
@@ -326,9 +328,9 @@ li {
     }
 
 
-.soon-ending-survey-rows::-webkit-scrollbar-thumb {
-    background: transparent;
-}
+    .soon-ending-survey-rows::-webkit-scrollbar-thumb {
+        background: transparent;
+    }
 
 }
 
