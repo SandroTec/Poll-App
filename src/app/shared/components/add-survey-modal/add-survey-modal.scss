@@ -192,7 +192,7 @@ h1 {
     cursor: pointer;
     margin-top: -12px;
     padding: 20px;
-    width: 140px;
+    width: 150px;
     appearance: none;
     -webkit-appearance: none;
     background: transparent;
@@ -399,6 +399,35 @@ h1 {
     visibility: visible;
 }
 
+@media (max-width: 1300px) {
+    
+    #categories {
+        width: 180px;
+    }
+}
+
+@media (max-width: 1150px) {
+    
+    #categories {
+        width: 160px;
+    }
+}
+
+@media (max-width: 1060px) {
+    
+    #categories {
+        width: 140px;
+    }
+}
+
+@media (max-width: 1000px) {
+    
+    #categories {
+        width: 130px;
+    }
+}
+
+
 @media (max-width: 950px) {
     .form-content {
         padding: 20px 30px;
@@ -417,6 +446,10 @@ h1 {
 
     .category-c {
         height: 40px;
+    }
+
+    #categories {
+        width: 520px;
     }
 
     .survey-info-row {
@@ -450,6 +483,12 @@ h1 {
     }
 }
 
+@media (max-width: 800px) {
+    #categories {
+        width: 380px;
+    }
+}
+
 
 @media (max-width: 600px) {
     dialog {
@@ -464,5 +503,15 @@ h1 {
     .modal-header {
         box-sizing: border-box;
         padding: 0 20px;
+    }
+
+    #categories {
+        width: 280px;
+    }
+}
+
+@media (max-width: 400px) {
+    #categories {
+        width: 200px;
     }
 }
