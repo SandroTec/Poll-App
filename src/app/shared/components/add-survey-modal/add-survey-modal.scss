@@ -11,7 +11,7 @@ dialog {
     border-top-right-radius: 100px;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    padding: 20px 70px 70px 70px;
+    padding: 20px 50px 20px 50px;
     border: none;
     overflow-y: auto;
 }
@@ -39,7 +39,6 @@ form {
 }
 
 input {
-    max-width: 400px;
     width: 100%;
     margin-top: 8px;
     border-top-left-radius: 5px;
@@ -48,9 +47,7 @@ input {
     border-bottom-left-radius: 5px;
     border: none;
     padding-top: 7px;
-    padding-right: 13px;
     padding-bottom: 16px;
-    padding-left: 13px;
 }
 
 input:focus {
@@ -61,7 +58,6 @@ input:focus {
 
 #description {
     height: 80px;
-    max-width: 400px;
     width: 100%;
     margin-top: 8px;
     border-top-left-radius: 5px;
@@ -70,9 +66,7 @@ input:focus {
     border-bottom-left-radius: 5px;
     border: none;
     padding-top: 7px;
-    padding-right: 13px;
     padding-bottom: 16px;
-    padding-left: 13px;
 }
 
 textarea:focus {
@@ -125,7 +119,7 @@ h1 {
     border-top-right-radius: 80px;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    padding: 50px 60px;
+    padding: 20px 80px 10px 20px;
     background: #8E709929;
 }
 
@@ -167,11 +161,10 @@ h1 {
 
 .survey-info-row {
     width: 100%;
-    height: 300px;
     display: grid;
     grid-template-columns: 50% 50%;
-    padding-top: 50px;
-    gap: 40px;
+    padding-top: 10px;
+    gap: 20px;
 }
 
 .survey-info-row-c {
@@ -182,7 +175,16 @@ h1 {
 .date-category-c {
     display: flex;
     padding: 20px 0;
-    gap: 60px;
+    gap: 20px;
+}
+
+.category-c {
+    height: 70px;
+}
+
+.selected-category {
+    color: #FFB770;
+    font-size: 16px;
 }
 
 #categories {
@@ -239,6 +241,12 @@ h1 {
 
 .input-clear-c {
     display: flex;
+    align-items: center;
+}
+
+.label-clear-c {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -328,7 +336,7 @@ h1 {
 .publish-c {
     display: flex;
     justify-content: flex-end;
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 .publish-btn {
@@ -405,6 +413,10 @@ h1 {
         gap: 20px;
     }
 
+    .category-c {
+        height: 40px;
+    }
+
     .survey-info-row {
         height: auto;
         grid-template-columns: auto;
@@ -423,6 +435,16 @@ h1 {
 
     .add-btn-c {
         margin-top: 40px;
+    }
+
+    .answer-li {
+        align-items: baseline;
+        gap: 0;
+    }
+
+    .mobile-column {
+        flex-direction: column-reverse;
+        align-items: flex-end !important;
     }
 }
 

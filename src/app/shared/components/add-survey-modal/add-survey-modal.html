@@ -17,7 +17,7 @@
                     <div class="survey-info-row-c">
                         <div class="input-c">
                             <label for="title">Survey name</label>
-                            <div class="input-clear-c">
+                            <div class="input-clear-c mobile-column">
                                 <input maxlength="50" id="title" type="text" formControlName="title">
                                 <img (click)="clearField('title')" class="clear-btn" src="" alt="delete-icon">
                             </div>
@@ -41,14 +41,15 @@
                                 <span class="error-msg" [class.error-visible]="surveyForm.controls.ends_at.touched && surveyForm.controls.ends_at.errors?.['pastDate']">End date must be in the future.</span>
                                 
                             </div>
-                            <div class="input-c-c">
-                                <label class="category-label" for="categories">{{ surveyForm.get('category')?.value || 'Choose a category' }}<img class="arrow-icon" src="" alt=""></label>
+                            <div class="input-c-c category-c">
+                                <label class="category-label" for="categories">Choose a category<img class="arrow-icon" src="" alt=""></label>
+                                <span class="selected-category">{{ surveyForm.controls.category.value }}</span>
                                 <select id="categories" formControlName="category">
                                     @for (category of categories; track category) {
                                         <option [value]="category">
                                             <span>{{ category }}</span>
                                         </option>
-                                    }
+                                                                        }
                                 </select>
                                 <span class="error-msg" [class.error-visible]="surveyForm.controls.category.touched && surveyForm.controls.category.errors?.['required']">Please select a category.</span>
                                 
@@ -57,7 +58,7 @@
                     </div>
                     <div class="input-c">
                         <label for="description">Describing text (optional)</label>
-                        <div class="input-clear-c align-start">
+                        <div class="input-clear-c align-start mobile-column">
                             <textarea maxlength="150" id="description" type="text" formControlName="description"></textarea>
                             <img (click)="clearField('description')" class="clear-btn" src="" alt="delete-icon">
                         </div>
@@ -75,11 +76,11 @@
                         @for (question of surveyForm.controls.questions.controls; track $index; let questionIndex = $index) {
                             <div>
                                 <div [formGroupName]="questionIndex">    
-                                    <label [for]="'question-' + questionIndex">{{ questionIndex + 1 }}. Question</label>
-                                    <div class="input-clear-c">    
-                                        <input maxlength="50" [id]="'question-' + questionIndex" type="text" formControlName="title">
+                                    <div class="label-clear-c">  
+                                        <label [for]="'question-' + questionIndex">{{ questionIndex + 1 }}. Question</label>  
                                         <img (click)="clearQuestion(questionIndex)" class="clear-btn" src="" alt="delete-icon">
                                     </div>
+                                    <input maxlength="50" [id]="'question-' + questionIndex" type="text" formControlName="title">
                                     <div class="fl-direction-c">
                                             <div class="error-msg" [class.error-visible]="question.controls.title.touched">
                                                 @if (question.controls.title.touched && question.controls.title.errors?.['required']) {
@@ -103,7 +104,7 @@
                                         @for (answer of question.controls.answers.controls; track $index; let answerIndex = $index) {
                                             <li class="answer-li" [formGroupName]="answerIndex">
                                                 <div class="fl-direction-c">
-                                                    <div class="input-clear-c">
+                                                    <div class="input-clear-c mobile-column">
                                                         <input maxlength="50" [id]="'answers-' + questionIndex + '-' + answerIndex" type="text" formControlName="title">
                                                         <img (click)="clearAnswer(questionIndex, answerIndex)" class="clear-btn" src="" alt="delete-icon">
                                                     </div>
