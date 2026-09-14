@@ -25,6 +25,8 @@ export class SurveyDetail {
 
   surveyId!: number;
 
+  resultsOpen:boolean = true;
+
   /**
   * References the survey modal component.
   */

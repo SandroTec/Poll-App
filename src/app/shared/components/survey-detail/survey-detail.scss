@@ -69,8 +69,6 @@ td {
     flex-direction: column;
 }
 
-
-
 input {
     cursor: pointer;
 }
@@ -228,6 +226,14 @@ footer {
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+.result-btn:hover .arrow-up-purple {
+    content: url('assets/img/arrow_drop_up_hover.png');
+}
+
+.result-open-btn:hover .arrow-down-purple {
+    content: url('assets/img/arrow_drop_down_hover.png');
 }
 
 .bar-c {
