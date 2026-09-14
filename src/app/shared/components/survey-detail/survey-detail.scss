@@ -228,8 +228,19 @@ footer {
     gap: 20px;
 }
 
+.result-btn {
+    background: transparent;
+    font-size: 24px;
+}
+
 .result-btn:hover .arrow-up-purple {
     content: url('assets/img/arrow_drop_up_hover.png');
+
+}
+
+.result-open-btn {
+    background: transparent;
+    font-size: 24px;
 }
 
 .result-open-btn:hover .arrow-down-purple {
