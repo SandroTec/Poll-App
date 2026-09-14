@@ -51,7 +51,7 @@ export class AddSurveyModal {
   router = inject(Router);
   surveySevice = inject(SurveyService);
   categories = this.surveySevice.categories.slice(1);
-
+  today = new Date().toISOString().split('T')[0];
 
   /**
   * References the dialog element used for the survey modal.

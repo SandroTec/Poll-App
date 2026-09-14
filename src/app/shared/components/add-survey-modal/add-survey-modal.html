@@ -37,7 +37,7 @@
                         <div class="date-category-c">
                             <div class="input-c">
                                 <label for="endDate">Set end date (optional)</label>
-                                <input id="endDate" type="date" formControlName="ends_at">
+                                <input class="date-input" [min]="today" id="endDate" type="date" formControlName="ends_at">
                                 <span class="error-msg" [class.error-visible]="surveyForm.controls.ends_at.touched && surveyForm.controls.ends_at.errors?.['pastDate']">End date must be in the future.</span>
                                 
                             </div>
@@ -56,11 +56,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input-c">
-                        <label for="description">Describing text (optional)</label>
-                        <div class="input-clear-c align-start mobile-column">
+                    <div class="input-c description-c-mobile">
+                        <div class="space-between">
+                            <label for="description">Describing text (optional)</label>
+                            <img (click)="clearField('description')" class="clear-btn d-none-desktop" src="" alt="delete-icon">
+                        </div>
+                        
+                        <div class="input-clear-c align-start">
                             <textarea maxlength="150" id="description" type="text" formControlName="description"></textarea>
-                            <img (click)="clearField('description')" class="clear-btn" src="" alt="delete-icon">
+                            <img (click)="clearField('description')" class="clear-btn d-none-mobile" src="" alt="delete-icon">
                         </div>
                         <span class="error-msg" [class.error-visible]="surveyForm.controls.description.touched && surveyForm.controls.description.errors?.['maxlength']">Maximum 150 characters allowed.</span>
                         
@@ -98,7 +102,7 @@
                                             <label [for]="'multiple-answers-' + questionIndex">allow multiple answers</label>
                                             <input class="ckeckbox-input" [id]="'multiple-answers-' + questionIndex" type="checkbox" formControlName="allow_multiple_answers">   
                                         </div>
-                                        <span>Answers</span>
+                                        <label>Answers</label>
                                     </div>
                                     <div formArrayName="answers" {counter-reset: answer}>
                                         @for (answer of question.controls.answers.controls; track $index; let answerIndex = $index) {

@@ -170,6 +170,7 @@ h1 {
 .survey-info-row-c {
     display: flex;
     flex-direction: column;
+    gap: 8px;
 }
 
 .date-category-c {
@@ -177,13 +178,22 @@ h1 {
     gap: 20px;
 }
 
+.date-input {
+    padding-right: 8px;
+}
+
 .category-c {
     height: 70px;
+    gap: 8px;
 }
 
 .selected-category {
     color: #FFB770;
     font-size: 16px;
+}
+
+select {
+    border-radius: 10px;
 }
 
 #categories {
@@ -196,6 +206,7 @@ h1 {
     -webkit-appearance: none;
     background: transparent;
     border: none;
+    border-radius: 8px;
     outline: none;
     text-indent: -9999px;
 }
@@ -450,6 +461,16 @@ h1 {
         width: 520px;
     }
 
+    .description-c-mobile {
+        margin-top: 8px;
+    }
+
+    .space-between {
+        display: flex;
+        justify-content: space-between;
+    }
+
+
     .survey-info-row {
         height: auto;
         grid-template-columns: auto;
@@ -464,10 +485,6 @@ h1 {
 
     .question-rows {
         grid-template-columns: auto ;
-    }
-
-    .add-btn-c {
-        margin-top: 40px;
     }
 
     .answer-li {
