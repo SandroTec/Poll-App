@@ -174,7 +174,6 @@ h1 {
 
 .date-category-c {
     display: flex;
-    padding: 20px 0;
     gap: 20px;
 }
 
@@ -192,7 +191,7 @@ h1 {
     cursor: pointer;
     margin-top: -12px;
     padding: 20px;
-    width: 150px;
+    width: 200px;
     appearance: none;
     -webkit-appearance: none;
     background: transparent;
@@ -322,7 +321,6 @@ h1 {
     background: transparent;
     text-decoration: underline;
     color: white;
-    margin: 20px 0;
 }
 
 .answer-btn:hover {
