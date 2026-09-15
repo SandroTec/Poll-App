@@ -52,6 +52,7 @@ export class AddSurveyModal {
   surveySevice = inject(SurveyService);
   categories = this.surveySevice.categories.slice(1);
   today = new Date().toISOString().split('T')[0];
+  categoryDropdownOpen = false;
 
   /**
   * References the dialog element used for the survey modal.
@@ -217,5 +218,15 @@ export class AddSurveyModal {
     } else if (answerIndex >= 2) {
         answers.removeAt(answerIndex);
     }
+  }
+
+  toggleCategoryDropdown(): void {
+    this.categoryDropdownOpen = !this.categoryDropdownOpen;
+  }
+
+  selectCategory(category: string): void {
+    this.surveyForm.controls.category.setValue(category);
+    this.surveyForm.controls.category.markAsTouched();
+    this.categoryDropdownOpen = false;
   }
 }

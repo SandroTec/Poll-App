@@ -39,20 +39,27 @@
                                 <label for="endDate">Set end date (optional)</label>
                                 <input class="date-input" [min]="today" id="endDate" type="date" formControlName="ends_at">
                                 <span class="error-msg" [class.error-visible]="surveyForm.controls.ends_at.touched && surveyForm.controls.ends_at.errors?.['pastDate']">End date must be in the future.</span>
-                                
                             </div>
                             <div class="input-c-c category-c">
-                                <label class="category-label" for="categories">Choose a category<img class="arrow-icon" src="" alt=""></label>
-                                <span class="selected-category">{{ surveyForm.controls.category.value }}</span>
-                                <select id="categories" formControlName="category">
-                                    @for (category of categories; track category) {
-                                        <option [value]="category">
-                                            <span>{{ category }}</span>
-                                        </option>
-                                                                        }
-                                </select>
+                                <div class="custom-select">
+                                    <button type="button" class="select-trigger" (click)="toggleCategoryDropdown()">
+                                        <label>Choose a category</label>
+                                        <img class="arrow-icon" [class.open]="categoryDropdownOpen" src="assets/img/arrow_drop_down.png" alt="">
+                                    </button>
+                                    <span class="selected-category">
+                                        {{ surveyForm.controls.category.value }}
+                                    </span>
+                                    @if (categoryDropdownOpen) {
+                                        <div class="select-options">
+                                            @for (category of categories; track category) {
+                                                <button type="button" class="select-option" [class.selected]="surveyForm.controls.category.value === category" (click)="selectCategory(category)">
+                                                    {{ category }}
+                                                </button>
+                                            }
+                                        </div>
+                                    }
+                                </div>
                                 <span class="error-msg" [class.error-visible]="surveyForm.controls.category.touched && surveyForm.controls.category.errors?.['required']">Please select a category.</span>
-                                
                             </div>
                         </div>
                     </div>
@@ -73,9 +80,6 @@
                 
 
                 <div formArrayName="questions">
-                    <div class="add-btn-c">
-                        <button class="add-question-btn" type="button" (click)="addQuestion()">Add next question <img class="add-icon" src="" alt=""></button>
-                    </div>
                     <div class="question-rows">
                         @for (question of surveyForm.controls.questions.controls; track $index; let questionIndex = $index) {
                             <div>
@@ -133,6 +137,11 @@
                             <button class="answer-btn" type="button" (click)="addAnswers(questionIndex)">Add answer <img class="add-icon" src="" alt=""></button>
                             </div>
                         }
+                        <div class="add-btn-c d-none-mobile">
+                            <button class="add-question-btn" type="button" (click)="addQuestion()">Add next question <img class="add-icon" src="" alt=""></button>
+                        </div>
+                        <button class="add-question-btn d-none-desktop" type="button" (click)="addQuestion()">Add next question <img class="add-icon" src="" alt=""></button>
+
                     </div>
                 </div>
             </div>
