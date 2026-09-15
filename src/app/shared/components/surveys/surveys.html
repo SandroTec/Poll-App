@@ -3,7 +3,7 @@
         <div class="soon-ending-survey-rows-c">
             <div class="soon-ending-headline-c">
                 @if (getEndingSoonSurveys().length > 0) {
-                    <h3>Ending soon surveys</h3>
+                    <h4>Ending soon surveys</h4>
                 }
             </div>
             <div class="soon-ending-survey-rows">
@@ -12,7 +12,7 @@
                         <div class="soon-ending-card" [routerLink]="['detail', survey.id]" role="link">
                             <div>
                                 <span>{{survey.category}}</span>
-                                <p>{{survey.title}}</p>
+                                <p class="card-txt">{{survey.title}}</p>
                             </div>
                             
                             <div class="days-left-bg">

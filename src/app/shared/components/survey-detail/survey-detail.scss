@@ -47,7 +47,17 @@ p {
 }
 
 .headline-desc {
-    margin: 40px 0;
+    margin: 12px 0;
+}
+
+.headline {
+    font-family: Nerko One;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 56px;
+    line-height: 50px;
+    letter-spacing: 0%;
+    margin: 8px 0;
 }
 
 .hl-color {
@@ -326,7 +336,7 @@ footer {
 
 @media (max-width: 450px) {
     .survey-c {
-        padding: 24px;
+        padding: 25px 5px;
     }
 
     .result-c {
