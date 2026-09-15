@@ -220,10 +220,20 @@ export class AddSurveyModal {
     }
   }
 
+  /**
+  * Toggles category custom select drop down menu.
+  *
+  */
   toggleCategoryDropdown(): void {
     this.categoryDropdownOpen = !this.categoryDropdownOpen;
   }
 
+  /**
+  * Set selected category to form value category.
+  * Marks formfield as touched.
+  *
+  * @param category - Selected category.
+  */
   selectCategory(category: string): void {
     this.surveyForm.controls.category.setValue(category);
     this.surveyForm.controls.category.markAsTouched();
