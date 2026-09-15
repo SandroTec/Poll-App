@@ -231,16 +231,25 @@ footer {
 .result-btn {
     background: transparent;
     font-size: 24px;
+    transition: transform 0.4s ease;
+}
+
+.arrow-up-purple.open {
+    transform: rotate(180deg);
 }
 
 .result-btn:hover .arrow-up-purple {
     content: url('assets/img/arrow_drop_up_hover.png');
-
 }
 
 .result-open-btn {
     background: transparent;
     font-size: 24px;
+    transition: transform 0.4s ease;
+}
+
+.arrow-down-purple.open {
+    transform: rotate(180deg);
 }
 
 .result-open-btn:hover .arrow-down-purple {
@@ -305,6 +314,7 @@ footer {
     .bar {
         width: 60%;
     }
+
 }
 
 @media (max-width: 600px) {

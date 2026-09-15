@@ -55,7 +55,7 @@
             @if (resultsOpen) {
 
                 <div class="result-c">
-                    <button class="d-none-desktop result-btn" (click)="resultsOpen = false">open results <img class="arrow-up-purple" src="assets/img/arrow_drop_up-purple.png" alt="arrow icon purple"></button>
+                    <button [class.open]="resultsOpen" class="d-none-desktop result-btn" (click)="resultsOpen = false">Close results <img class="arrow-up-purple" src="assets/img/arrow_drop_up-purple.png" alt="arrow icon purple"></button>
                     <div class="result-headline-c">
                         <h3>Survey results</h3>
                         <h3 class="hl-color">live</h3>
@@ -85,7 +85,7 @@
                 </div>
             } @else {
                 <div class="result-c">
-                    <button class="d-none-desktop result-open-btn" (click)="resultsOpen = true">open results <img class="arrow-down-purple" src="assets/img/arrow_drop_down-purple.png" alt="arrow icon purple"></button>
+                    <button class="d-none-desktop result-open-btn" [class.open]="resultsOpen" (click)="resultsOpen = true">See results <img class="arrow-down-purple" src="assets/img/arrow_drop_down-purple.png" alt="arrow icon purple"></button>
                 </div>
             }
             
