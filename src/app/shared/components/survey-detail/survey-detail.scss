@@ -58,11 +58,10 @@ p {
     line-height: 50px;
     letter-spacing: 0%;
     margin: 8px 0;
+    color: #EE9236;
 }
 
-.hl-color {
-    color: #FFB770;
-}
+
 
 .date-category-c {
     display: flex;
@@ -94,6 +93,11 @@ input {
     align-items: center;
 }
 
+.multiple-q-txt {
+    padding-top: 8px;
+    font-size: 14px;
+}
+
 .question-li {
     list-style: decimal;
     list-style-position: inside;
@@ -113,6 +117,7 @@ input {
     display: list-item;
     list-style: upper-latin;
     list-style-position: inside;
+    margin-left: 8px;
 }
 
 .result-li {
@@ -126,8 +131,13 @@ input {
     margin: 0 5px;
 }
 
+.result-li:first-child {
+    margin-top: 24px;
+}
+
 .li-pos-o {
     list-style-position: outside !important;
+    margin-left: 8px;
 }
 
 .add-survey-btn {
@@ -208,9 +218,47 @@ footer {
     align-items: center;
 }
 
+.checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 2px;
+    background-color: white;
+    cursor: pointer;
+    outline: 2px solid black;
+}
+
+.checkbox:checked {
+    accent-color: #FFB770;
+    outline: none;
+}
+
+.checkbox:checked:disabled::after {
+    background-color: #ffb77086;
+    accent-color:  #ffb77086;
+    outline: none;
+}
+
+.checkbox:checked::after {
+    background-color: #FFB770;
+    cursor: pointer;
+    content: "✓";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #433249;
+    font-size: 14px;
+    font-weight: bold;
+    outline: none;
+}
+
 .complete-btn {
     background: #FFB7704D;
-    width: 159px;
+    width: auto;
     height: 37px;
     margin-bottom: 24px;
     padding-top: 8px;
@@ -222,6 +270,32 @@ footer {
     border: none;
 }
 
+.complete-btn-mobile {
+    background: #FFB770;
+    width: auto;
+    height: 37px;
+    margin-bottom: 24px;
+    padding-top: 8px;
+    padding-right: 12px;
+    padding-bottom: 8px;
+    padding-left: 12px;
+    gap: 10px;
+    border-radius: 10px;
+    border: none;
+
+    &:disabled {
+        background: #FFB770;
+        color: inherit;
+        opacity: 1;
+        cursor: default;
+    }
+}
+
+.check-icon {
+    width: 12px;
+    height: 12px;
+}
+
 .complete-btn:not(:disabled):hover {
     background: #FFB770;
 }
@@ -230,6 +304,10 @@ footer {
     box-sizing: border-box;
     padding: 0 40px;
     width: 400px;
+}
+
+.hl-color {
+    color: #FFB770;
 }
 
 .result-headline-c {
@@ -340,6 +418,9 @@ footer {
         width: 60%;
     }
 
+    .result-li:first-child {
+        margin-top: 12px;
+    }
 }
 
 @media (max-width: 600px) {

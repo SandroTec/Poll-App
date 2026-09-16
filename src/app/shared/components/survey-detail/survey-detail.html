@@ -29,11 +29,14 @@
                         @for(question of questionList(); track question.id; let index = $index) {
                             <li class="question-li"> 
                             {{question.title}}
-                        
+                            <br>
+                            @if (question.allow_multiple_answers == true) {
+                                <span class="multiple-q-txt">More than one answers are possible.</span>
+                            }
                                 <ol>
                                     @for (answer of getAnswersForQuestion(question.id); track answer.id) {
                                         <div class="flex-c">
-                                            <input type="checkbox" [disabled]="isSurveyCompleted() || (this.surveyService.getEndingTime(getSurvey()?.ends_at) < 0)" [checked]="isAnswerSelected(question.id, answer.id)" (click)="updateVoteState(surveyId, question.id, answer.id)">
+                                            <input class="checkbox" type="checkbox" [disabled]="isSurveyCompleted() || (this.surveyService.getEndingTime(getSurvey()?.ends_at) < 0)" [checked]="isAnswerSelected(question.id, answer.id)" (click)="updateVoteState(surveyId, question.id, answer.id)">
                                             <li class="answer-li">
                                                 <span>{{ answer.title }}</span>
                                             </li>
@@ -48,7 +51,8 @@
                     <p>Survey is not loaded yet.</p>
                 }
                 <footer>
-                    <button class="complete-btn" [disabled]="!hasSelectedAnswers() || (surveyService.getEndingTime(getSurvey()?.ends_at) < 0) || isSurveyCompleted()" (click)="voting()" [routerLink]="(hasSelectedAnswers() && !isSurveyCompleted())? [''] : null">complete survey</button>
+                    <button class="complete-btn d-none-mobile" [disabled]="!hasSelectedAnswers() || (surveyService.getEndingTime(getSurvey()?.ends_at) < 0) || isSurveyCompleted()" (click)="voting()" [routerLink]="(hasSelectedAnswers() && !isSurveyCompleted())? [''] : null">complete survey</button>
+                    <button class="complete-btn-mobile d-none-desktop" [disabled]="!hasSelectedAnswers() || (surveyService.getEndingTime(getSurvey()?.ends_at) < 0) || isSurveyCompleted()" (click)="voting()" [routerLink]="(hasSelectedAnswers() && !isSurveyCompleted())? [''] : null">complete <img class="check-icon" src="assets/img/check.png" alt="check icon"></button>
                 </footer>
             </div>
 

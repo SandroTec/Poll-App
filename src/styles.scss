@@ -22,8 +22,8 @@ h1 {
     font-family: Nerko One;
     font-weight: 400;
     font-style: Regular;
-    font-size: 56px;
-    line-height: 50px;
+    font-size: 100px;
+    line-height: 89px;
     letter-spacing: 0%;
     margin: 20px 0;
 }
@@ -32,10 +32,11 @@ h2 {
     font-family: Nerko One;
     font-weight: 400;
     font-style: Regular;
-    font-size: 73px;
-    line-height: 40px;
+    font-size: 72px;
+    line-height: 100%;
     letter-spacing: 0%;
     color: #FFB770;
+    margin: 10px;
 }
 
 h3 {
@@ -131,5 +132,14 @@ label {
 
     .d-none-mobile {
         display: none !important;
+    }
+
+    h1 {
+        font-size: 62px;
+        line-height: 50px;
+    }
+
+    h2 {
+        font-size: 54px;
     }
 }
