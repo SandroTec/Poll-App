@@ -37,7 +37,10 @@
                         <div class="date-category-c">
                             <div class="input-c">
                                 <label for="endDate">Set end date (optional)</label>
-                                <input class="date-input" [min]="today" id="endDate" type="date" formControlName="ends_at">
+                                <div class="input-clear-c">
+                                    <input class="date-input" [min]="today" id="endDate" type="date" formControlName="ends_at">
+                                    <img (click)="clearField('ends_at')" class="clear-btn" src="" alt="delete-icon">
+                                </div>
                                 <span class="error-msg" [class.error-visible]="surveyForm.controls.ends_at.touched && surveyForm.controls.ends_at.errors?.['pastDate']">End date must be in the future.</span>
                             </div>
                             <div class="input-c-c category-c">
@@ -103,8 +106,8 @@
                                             </div>
                                         
                                         <div class="flex-c">
-                                            <label [for]="'multiple-answers-' + questionIndex">allow multiple answers</label>
-                                            <input class="ckeckbox-input" [id]="'multiple-answers-' + questionIndex" type="checkbox" formControlName="allow_multiple_answers">   
+                                            <input class="checkbox-input" [id]="'multiple-answers-' + questionIndex" type="checkbox" formControlName="allow_multiple_answers">   
+                                            <label class="checkbox-label" [for]="'multiple-answers-' + questionIndex">Allow multiple answers</label>
                                         </div>
                                         <label>Answers</label>
                                     </div>

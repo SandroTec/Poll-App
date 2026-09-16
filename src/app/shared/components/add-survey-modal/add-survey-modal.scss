@@ -2,9 +2,10 @@ dialog {
     box-sizing: border-box;
     background: #433249;
     color: white;
-    max-width: 1140px;
-    width: 80%;
-    height: min-content;
+    width: auto;
+    max-width: 1440px;
+    margin: auto;
+    height: max-content;
     opacity: 1;
     gap: 48px;
     border-top-left-radius: 5px;
@@ -75,8 +76,21 @@ textarea:focus {
     background: #FEE9D4;
 }
 
-.ckeckbox-input {
-    width: 20px !important;
+.checkbox-input {
+    width: 20px;
+    height: 20px;
+    background: transparent;
+}
+
+.checkbox-label {
+    font-family: Mulish;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+    color: #FFFFFF;
 }
 
 h1 {
@@ -111,7 +125,7 @@ h1 {
 }
 
 .form-content {
-    max-width: 1052px;
+    width: auto;
     height: auto;
     opacity: 1;
     gap: 64px;
@@ -160,11 +174,12 @@ h1 {
 }
 
 .survey-info-row {
+    box-sizing: border-box;
     width: 100%;
     display: grid;
     grid-template-columns: 50% 50%;
     padding-top: 10px;
-    gap: 20px;
+    gap: 50px;
 }
 
 .survey-info-row-c {
@@ -174,7 +189,8 @@ h1 {
 }
 
 .date-category-c {
-    display: flex;
+    display: grid;
+    grid-template-columns: 50% 50%;
     gap: 20px;
 }
 
@@ -291,7 +307,7 @@ h1 {
 .question-rows {
     display: grid;
     grid-template-columns: 50% 50%;
-    gap: 40px;
+    gap: 50px;
 }
 
 .flex-c {
@@ -445,7 +461,7 @@ h1 {
     }
 
     .date-category-c {
-        flex-direction: column;
+        grid-template-columns: auto;
         gap: 20px;
     }
 
