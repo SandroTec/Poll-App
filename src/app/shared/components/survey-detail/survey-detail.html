@@ -33,17 +33,16 @@
                             @if (question.allow_multiple_answers == true) {
                                 <span class="multiple-q-txt">More than one answers are possible.</span>
                             }
-                                <ol>
+                                <ol class="answer-list">
                                     @for (answer of getAnswersForQuestion(question.id); track answer.id) {
-                                        <div class="flex-c">
-                                            <input class="checkbox" type="checkbox" [disabled]="isSurveyCompleted() || (this.surveyService.getEndingTime(getSurvey()?.ends_at) < 0)" [checked]="isAnswerSelected(question.id, answer.id)" (click)="updateVoteState(surveyId, question.id, answer.id)">
-                                            <li class="answer-li">
+                                        <li class="answer-li">
+                                            <label class="li-label">
+                                                <input class="checkbox" type="checkbox" [disabled]="isSurveyCompleted() || surveyService.getEndingTime(getSurvey()?.ends_at) < 0" [checked]="isAnswerSelected(question.id, answer.id)" (change)="updateVoteState(surveyId, question.id, answer.id)">
                                                 <span>{{ answer.title }}</span>
-                                            </li>
-                                        </div>
+                                            </label>
+                                        </li>
                                     }
                                 </ol>
-                            
                             </li>
                     }
                     </div>

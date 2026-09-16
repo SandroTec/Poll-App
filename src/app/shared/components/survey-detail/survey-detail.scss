@@ -113,11 +113,34 @@ input {
     margin-left: 0;
 }
 
+.answer-list {
+    list-style: none;
+    counter-reset: answer;
+    padding-left: 0;
+}
+
 .answer-li {
-    display: list-item;
-    list-style: upper-latin;
-    list-style-position: inside;
-    margin-left: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    counter-increment: answer;
+}
+
+.answer-li::before {
+    content: counter(answer, upper-alpha) ".";
+}
+
+.li-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 12px;
+}
+
+.li-label:hover {
+    background-color: #FFCFA1;
 }
 
 .result-li {
