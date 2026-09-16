@@ -135,12 +135,14 @@ input {
     align-items: center;
     gap: 8px;
     cursor: pointer;
-    padding: 4px;
     border-radius: 12px;
+    margin: 4px 0;
+    padding: 0 4px;
 }
 
-.li-label:hover {
+.li-label:active {
     background-color: #FFCFA1;
+    
 }
 
 .result-li {
@@ -300,8 +302,6 @@ footer {
 }
 
 .checkbox:not(:disabled):hover {
-    background-color: #ffb7708e;
-    accent-color: #ffb7708e;
     cursor: pointer;
 }
 
