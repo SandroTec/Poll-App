@@ -37,7 +37,7 @@
                         <div class="date-category-c">
                             <div class="input-c">
                                 <label for="endDate">Set end date (optional)</label>
-                                <div class="input-clear-c">
+                                <div class="input-clear-c mobile-column">
                                     <input class="date-input" [min]="today" id="endDate" type="date" formControlName="ends_at">
                                     <img (click)="clearField('ends_at')" class="clear-btn" src="" alt="delete-icon">
                                 </div>
@@ -105,11 +105,13 @@
                                                 }
                                             </div>
                                         
-                                        <div class="flex-c">
-                                            <input class="checkbox-input" [id]="'multiple-answers-' + questionIndex" type="checkbox" formControlName="allow_multiple_answers">   
-                                            <label class="checkbox-label" [for]="'multiple-answers-' + questionIndex">Allow multiple answers</label>
+                                        <div class="flex-c space-between">
+                                            <label>Answers</label>
+                                           <div class="flex-c gap-10">
+                                                <input class="checkbox" [id]="'multiple-answers-' + questionIndex" type="checkbox" formControlName="allow_multiple_answers">   
+                                                <label class="checkbox-label" [for]="'multiple-answers-' + questionIndex">Allow multiple answers</label>
+                                           </div>
                                         </div>
-                                        <label>Answers</label>
                                     </div>
                                     <div formArrayName="answers" {counter-reset: answer}>
                                         @for (answer of question.controls.answers.controls; track $index; let answerIndex = $index) {
@@ -143,8 +145,9 @@
                         <div class="add-btn-c d-none-mobile">
                             <button class="add-question-btn" type="button" (click)="addQuestion()">Add next question <img class="add-icon" src="" alt=""></button>
                         </div>
-                        <button class="add-question-btn d-none-desktop" type="button" (click)="addQuestion()">Add next question <img class="add-icon" src="" alt=""></button>
-
+                        <div class="add-btn-c">
+                            <button class="add-question-btn d-none-desktop" type="button" (click)="addQuestion()">Add next question <img class="add-icon" src="" alt=""></button>
+                        </div>
                     </div>
                 </div>
             </div>

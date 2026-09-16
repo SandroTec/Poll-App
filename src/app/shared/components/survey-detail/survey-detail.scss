@@ -227,8 +227,13 @@ footer {
     border: none;
     border-radius: 2px;
     background-color: white;
-    cursor: pointer;
     outline: 2px solid black;
+}
+
+.checkbox:not(:disabled):hover {
+    background-color: #ffb7708e;
+    accent-color: #ffb7708e;
+    cursor: pointer;
 }
 
 .checkbox:checked {

@@ -76,11 +76,6 @@ textarea:focus {
     background: #FEE9D4;
 }
 
-.checkbox-input {
-    width: 20px;
-    height: 20px;
-    background: transparent;
-}
 
 .checkbox-label {
     font-family: Mulish;
@@ -91,6 +86,48 @@ textarea:focus {
     letter-spacing: 0%;
 
     color: #FFFFFF;
+}
+
+.checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: none;
+    border-radius: 2px;
+    background-color: transparent;
+    cursor: pointer;
+    outline: 2px solid white;
+}
+
+.checkbox:hover {
+    background-color: #ffb7708e;
+}
+
+.checkbox:checked {
+    accent-color: #FFB770;
+    background-color: #FFB770;
+    outline: none;
+}
+
+
+.checkbox:checked::after {
+    background-color: #FFB770;
+    cursor: pointer;
+    content: "✓";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #433249;
+    font-size: 14px;
+    font-weight: bold;
+    outline: none;
+    margin-top: 4px;
+}
+
+.gap-10 {
+    gap: 10px;
 }
 
 h1 {
@@ -314,7 +351,12 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    max-width: 400px;
+    max-width: auto;
+}
+
+.space-between {
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .add-question-btn {
@@ -474,7 +516,6 @@ h1 {
         justify-content: space-between;
     }
 
-
     .survey-info-row {
         height: auto;
         grid-template-columns: auto;
@@ -504,6 +545,14 @@ h1 {
     .publish-c {
         justify-content: center;
     }
+
+    .add-btn-c {
+        justify-content: center;
+    }
+
+    .add-question-btn {
+        width: max-content;
+    }
 }
 
 @media (max-width: 800px) {
@@ -531,10 +580,22 @@ h1 {
     #categories {
         width: 280px;
     }
+
+    .form-content {
+        padding: 10px 20px;
+    }
 }
 
 @media (max-width: 400px) {
     #categories {
         width: 200px;
+    }
+
+    .gap-10 {
+        gap: 0;
+    }
+
+    .form-content {
+        padding: 10px 8px;
     }
 }
