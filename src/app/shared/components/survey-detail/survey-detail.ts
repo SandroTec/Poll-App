@@ -22,6 +22,7 @@ export class SurveyDetail {
   surveyList = this.surveyService.surveyList;
   questionList = this.surveyService.questionList;
   answerList = this.surveyService.answerList;
+  voteList = this.surveyService.voteList;
 
   surveyId!: number;
 

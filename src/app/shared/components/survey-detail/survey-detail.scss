@@ -238,6 +238,21 @@ footer {
     gap: 20px;
 }
 
+.no-results-c {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.result-txt {
+    font-size: 18px;
+}
+
+.mr-left {
+    margin-left: 25px;
+}
+
 .result-btn {
     background: transparent;
     font-size: 24px;

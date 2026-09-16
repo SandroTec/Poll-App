@@ -53,14 +53,13 @@
             </div>
 
             @if (resultsOpen) {
-
                 <div class="result-c">
                     <button [class.open]="resultsOpen" class="d-none-desktop result-btn" (click)="resultsOpen = false">Close results <img class="arrow-up-purple" src="assets/img/arrow_drop_up-purple.png" alt="arrow icon purple"></button>
                     <div class="result-headline-c">
                         <h3>Survey results</h3>
                         <h3 class="hl-color">live</h3>
                     </div>
-                    @if (questionList().length > 0) {
+                    @if (questionList().length > 0 && voteList().length > 0) {
                         @for(question of questionList(); track question.id; let index = $index) {
                             <li class="question-li li-pos-o">
                                 <ol>
@@ -80,7 +79,10 @@
                             </li>
                         }
                     } @else {
-                        <p>There are no answers yet.</p>
+                        <div class="no-results-c">
+                            <p class="result-txt">Results will be shown here after participats complete the survey.</p>
+                            <p class="result-txt mr-left">There are no answers yet.</p>
+                        </div>
                     }
                 </div>
             } @else {
