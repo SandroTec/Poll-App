@@ -253,6 +253,7 @@ li {
 }
 
 .alert {
+    box-sizing: border-box;
     width: 357px;
     height: 86px;
     border-top-left-radius: 5px;
@@ -263,16 +264,18 @@ li {
     position: absolute;
     right: 70px;
     bottom: 20px;
-    
+    padding: 16px;
 }
 
-.alert p {
+.alert img {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.flex-c {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    font-family: Nerko One;
-    color: black;
-    padding-left: 10px;
 }
 
 @media (max-width: 950px) {
@@ -299,6 +302,12 @@ li {
 
     .soon-ending-survey-rows::-webkit-scrollbar-thumb {
         background: transparent;
+    }
+
+    .alert {
+        width: 357px;
+        height: 169px;
+        right: 8px;
     }
 
 }
@@ -330,6 +339,16 @@ li {
         width: auto;
         height: auto;
     }
+
+    .alert {
+        width: 280px;
+        right: 8px;
+    }
+
+    .alert img {
+    margin-right: 20px;
+    margin-top: 4px;
+}
     
 }
 

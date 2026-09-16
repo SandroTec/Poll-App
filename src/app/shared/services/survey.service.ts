@@ -340,4 +340,8 @@ export class SurveyService {
     return daysRemaining;
   }
 
+  closeAlert() {
+    this.showAlert.set(false);
+}
+
 }

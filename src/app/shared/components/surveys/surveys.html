@@ -120,8 +120,10 @@
     </div>
     <footer>
         @if (showAlert()) {
-            <div class="alert">
-                Survey succesfully published!
+            <div (click)="closeAlert()" class="alert flex-c">
+                Survey succesfully now published!
+
+                <img src="/assets/img/close.png" alt=" close icon">
             </div>
         }
     </footer>

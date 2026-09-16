@@ -94,5 +94,9 @@ export class Surveys {
   isSurveyCompleted(surveyId: number) {
     return this.surveyService.completedSurveys().includes(surveyId)
   }
+
+  closeAlert() {
+    this.surveyService.closeAlert()
+  }
 }
 
