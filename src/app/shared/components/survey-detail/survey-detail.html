@@ -50,14 +50,21 @@
                     <p>Survey is not loaded yet.</p>
                 }
                 <footer>
-                    <button class="complete-btn d-none-mobile" [disabled]="!hasSelectedAnswers() || (surveyService.getEndingTime(getSurvey()?.ends_at) < 0) || isSurveyCompleted()" (click)="voting()" [routerLink]="(hasSelectedAnswers() && !isSurveyCompleted())? [''] : null">complete survey</button>
-                    <button class="complete-btn-mobile d-none-desktop" [disabled]="!hasSelectedAnswers() || (surveyService.getEndingTime(getSurvey()?.ends_at) < 0) || isSurveyCompleted()" (click)="voting()" [routerLink]="(hasSelectedAnswers() && !isSurveyCompleted())? [''] : null">complete <img class="check-icon" src="assets/img/check.png" alt="check icon"></button>
+                    <button class="complete-btn d-none-mobile" [disabled]="!hasSelectedAnswers() || (surveyService.getEndingTime(getSurvey()?.ends_at) < 0) || isSurveyCompleted()" (click)="voting()" [routerLink]="(hasSelectedAnswers() && !isSurveyCompleted())? [''] : null">
+                        complete survey
+                    </button>
+                    <button class="complete-btn-mobile d-none-desktop" [disabled]="!hasSelectedAnswers() || (surveyService.getEndingTime(getSurvey()?.ends_at) < 0) || isSurveyCompleted()" (click)="voting()" [routerLink]="(hasSelectedAnswers() && !isSurveyCompleted())? [''] : null">
+                        complete <img class="check-icon" src="assets/img/check.png" alt="check icon">
+                    </button>
                 </footer>
             </div>
 
             @if (resultsOpen) {
-                <div class="result-c">
-                    <button [class.open]="resultsOpen" class="d-none-desktop result-btn" (click)="resultsOpen = false">Close results <img class="arrow-up-purple" src="assets/img/arrow_drop_up-purple.png" alt="arrow icon purple"></button>
+                <div class="result-c result-open">
+                    <button [class.open]="resultsOpen" class="d-none-desktop result-btn" (click)="resultsOpen = false">
+                        Close results 
+                        <img class="result-arrow arrow-up-purple" [class.rotate]="resultsOpen" src="assets/img/arrow_drop_up-purple.png" alt="arrow icon purple">
+                    </button>
                     <div class="result-headline-c">
                         <h3>Survey results</h3>
                         <h3 class="hl-color">live</h3>
@@ -89,8 +96,11 @@
                     }
                 </div>
             } @else {
-                <div class="result-c">
-                    <button class="d-none-desktop result-open-btn" [class.open]="resultsOpen" (click)="resultsOpen = true">See results <img class="arrow-down-purple" src="assets/img/arrow_drop_down-purple.png" alt="arrow icon purple"></button>
+                <div class="result-c result-closed">
+                    <button class="d-none-desktop result-open-btn" (click)="resultsOpen = true">
+                        See results 
+                        <img class="result-arrow arrow-down-purple" src="assets/img/arrow_drop_down-purple.png" alt="arrow icon purple">
+                    </button>
                 </div>
             }
             
