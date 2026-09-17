@@ -57,6 +57,10 @@ input:focus {
     background: #FEE9D4;
 }
 
+.modal-hl {
+    font-size: 56px;
+}
+
 #description {
     height: 80px;
     width: 100%;
@@ -152,6 +156,7 @@ h1 {
 .modal-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .over-header {
