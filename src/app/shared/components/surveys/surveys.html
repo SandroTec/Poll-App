@@ -100,16 +100,18 @@
 
                         <p>{{survey.title}}</p>
                         
-                        <div class="days-left-bg">
-                            <span>Ended:</span>
-                            @if (survey.ends_at) {
-                                @if (surveyService.getEndingTime(survey.ends_at) == -1) {
-                                    <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} day</span>
-                                }@else if (surveyService.getEndingTime(survey.ends_at) < -1) {
-                                    <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} days</span>
+                        <div class="days-left-c">
+                            <div class="days-left-bg">
+                                <span>Ended </span>
+                                @if (survey.ends_at) {
+                                    @if (surveyService.getEndingTime(survey.ends_at) == -1) {
+                                        <span>{{ this.surveyService.getDaysAgo( survey.ends_at ) }} day ago</span>
+                                    }@else if (surveyService.getEndingTime(survey.ends_at) < -1) {
+                                        <span>{{ this.surveyService.getDaysAgo( survey.ends_at ) }} days ago</span>
 
+                                    }
                                 }
-                            }
+                            </div>
                         </div>
                     </div>
                 }

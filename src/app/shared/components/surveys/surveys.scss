@@ -4,6 +4,11 @@ h2 {
     color: #FFB770;
 }
 
+.days-left-c {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .days-left-bg {
     background: #ffcfa1;
     width: fit-content;
@@ -64,6 +69,9 @@ h2 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .soon-ending-card:hover {
@@ -101,6 +109,8 @@ h2 {
 }
 
 .survey-list-c {
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
     cursor: pointer;
     width: 100%;
@@ -113,9 +123,8 @@ h2 {
     padding-right: 20px;
     padding-bottom: 12px;
     padding-left: 20px;
-    gap: 24px;
     background: #D9D9D914;
-
+    gap: 8px;
 }
 
 .survey-list-c:hover {
@@ -125,6 +134,14 @@ h2 {
 .survey-list-c.completed {
     opacity: 0.5;
     filter: grayscale(1);
+}
+
+.survey-list-c p {
+    padding: 4px 0;
+    margin: 8px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .category-span {
@@ -206,21 +223,34 @@ li {
     z-index: 10;
     width: 180px;
     gap: 8px;
-    border-radius: 5px;
-    border-width: 1px;
-    border-style: dashed;
     color: #35273A;
     display: block; 
     position: absolute;
     right: 0px;
+    border-radius: 12px;
+    margin: 12px 0;
 }
 
 .drop-down-menu button {
     border: none;
 }
 
+.drop-down-menu ul {
+    padding: 12px;
+    width: 240px;
+}
+
 .drop-down-menu ul li {
     background: #FFFFFF;
+    padding: 8px;
+}
+
+.drop-down-menu ul li:first-child {
+    border-radius: 12px 12px 0 0;
+}
+
+.drop-down-menu ul li:last-child {
+    border-radius: 0 0 12px 12px;
 }
 
 .drop-down-menu ul li:hover {
@@ -304,27 +334,6 @@ li {
         background: transparent;
     }
 
-    .alert {
-        width: 357px;
-        height: 169px;
-        right: 8px;
-    }
-
-}
-
-@media (max-width: 810px) {
-    .survey-list {
-        height: auto;
-        grid-template-columns: auto ;
-    }
-
-    .survey-list-c {
-        width: auto;
-        margin-top: 25px;
-    }
-}
-
-@media (max-width: 600px) {
     .btn-c {
         flex-direction: column;
         margin-top: 10px;
@@ -335,6 +344,25 @@ li {
         position: relative;
     }
 
+    .alert {
+        width: 357px;
+        height: 169px;
+        right: 8px;
+    }
+
+    .survey-list {
+        height: auto;
+        grid-template-columns: auto ;
+    }
+
+    .survey-list-c {
+        width: auto;
+        margin-top: 25px;
+    }
+
+}
+
+@media (max-width: 600px) {
     .survey-list-c {
         width: auto;
         height: auto;

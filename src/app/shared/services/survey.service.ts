@@ -340,8 +340,21 @@ export class SurveyService {
     return daysRemaining;
   }
 
+  /**
+   * Closes alert message.
+   */
   closeAlert() {
     this.showAlert.set(false);
-}
+  }
+
+  /**
+   * Changes negative values in positives.
+   *
+   * @endsAt - Surevey end date.
+   * @returns an absolut number of days.
+   */
+  getDaysAgo(endsAt:Date): number {
+    return Math.abs(this.getEndingTime(endsAt))
+  }
 
 }
