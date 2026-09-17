@@ -115,7 +115,7 @@ input {
 
 .answer-list {
     list-style: none;
-    counter-reset: answer;
+    counter-reset: answer-counter;
     padding-left: 0;
 }
 
@@ -123,11 +123,6 @@ input {
     display: flex;
     align-items: center;
     gap: 10px;
-    counter-increment: answer;
-}
-
-.answer-li::before {
-    content: counter(answer, upper-alpha) ".";
 }
 
 .li-label {
@@ -140,9 +135,20 @@ input {
     padding: 0 4px;
 }
 
+.li-label::before {
+    counter-increment: answer-counter;
+    content: counter(answer-counter, upper-alpha) ".";
+    font-size: 18px;
+    order: 1; 
+}
+
 .li-label:active {
     background-color: #FFCFA1;
     
+}
+
+.li-label span {
+    order: 2;
 }
 
 .result-li {
@@ -292,7 +298,7 @@ footer {
 .checkbox {
     appearance: none;
     -webkit-appearance: none;
-
+    order: 0;
     width: 20px;
     height: 20px;
     border: none;
