@@ -142,9 +142,12 @@ input {
     order: 1; 
 }
 
-.li-label:active {
+.li-label:not(:has(.checkbox:checked)):hover {
     background-color: #FFCFA1;
-    
+}
+
+.li-label:has(.checkbox:checked):active {
+    background-color: #f4f1f5;
 }
 
 .li-label span {
@@ -191,12 +194,10 @@ input {
 @keyframes results-open {
     from {
         opacity: 0;
-        transform: translateY(-10px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
     }
 }
 
@@ -485,6 +486,14 @@ footer {
 
     header {
         padding: 20px 20px;
+    }
+
+    .li-label:not(:has(.checkbox:checked)):hover {
+        background-color:#f4f1f5;
+    }
+
+    .li-label:not(:has(.checkbox:checked)):active {
+        background-color: #FFCFA1;
     }
 
     .bar-c {

@@ -37,7 +37,7 @@
                                     @for (answer of getAnswersForQuestion(question.id); track answer.id) {
                                         <li class="answer-li">
                                             <label class="li-label">
-                                                <input class="checkbox" type="checkbox" [disabled]="isSurveyCompleted() || surveyService.getEndingTime(getSurvey()?.ends_at) < 0" [checked]="isAnswerSelected(question.id, answer.id)" (change)="updateVoteState(surveyId, question.id, answer.id)">
+                                                <input class="checkbox" type="checkbox" [disabled]="isSurveyCompleted() || surveyService.getEndingTime(getSurvey()?.ends_at) < 0" [checked]="isAnswerSelected(question.id, answer.id)" (change)="updateVoteState($event, surveyId, question.id, answer.id)">
                                                 <span>{{ answer.title }}</span>
                                             </label>
                                         </li>

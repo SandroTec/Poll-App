@@ -83,7 +83,8 @@ export class SurveyDetail {
   * @returns A list of answers related to the specific question.
   */
   getAnswersForQuestion(questionId: number) {
-    return this.answerList().filter((answer: Answer) => answer.question_id === questionId);
+    const answers = this.answerList() || [];
+    return answers.filter((answer: Answer) => answer.question_id === questionId);
   }
 
   /**
@@ -124,21 +125,29 @@ export class SurveyDetail {
   /**
   * Updates the vote state for a survey.
   *
+  * @param event - The Event of updating the vote state.
   * @param surveyId - The ID of the survey.
   * @param questionId - The ID of the question.
   * @param answerId - The ID of the answer.
   */
-  updateVoteState(surveyId: number, questionId: number, answerId: number) {
+  updateVoteState(event: Event, surveyId: number, questionId: number, answerId: number) {
+      event.stopPropagation();
+      const currentSurvey = this.getSurvey();
+      if (!surveyId || !currentSurvey || currentSurvey.id !== surveyId) return;
+      const question = this.questionList()?.find(q => q.id === questionId);
+      if (!question) return;
       const storedState = localStorage.getItem(`survey-${surveyId}`);
       if (storedState) {
         let voteState: SurveyVoteState = JSON.parse(storedState);
         if (voteState.completed) return;
-        const question = this.questionList().find(question => question.id === questionId);
         voteState = this.updateSelectedAnswers(voteState, question, questionId, answerId);
         this.saveVoteState(surveyId, voteState.selectedAnswers, false);
       } else {
-        this.saveVoteState(surveyId, [{questionId, answerId}], false);
-      }; 
+        const initialVoteState: SurveyVoteState = { selectedAnswers: [], completed: false };
+        const newVoteState = this.updateSelectedAnswers(initialVoteState, question, questionId, answerId); 
+        this.saveVoteState(surveyId, newVoteState.selectedAnswers, false);
+      }
+    
   }
 
   /**
