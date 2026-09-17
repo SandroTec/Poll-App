@@ -163,6 +163,7 @@ input {
 
 .result-li strong {
     margin: 0 5px;
+    color: #d79451;
 }
 
 .result-li:first-child {
@@ -278,10 +279,7 @@ input {
     cursor: pointer;
     margin-right: 35px;
     border-radius: 10px;
-    padding-top: 8px;
-    padding-right: 12px;
-    padding-bottom: 8px;
-    padding-left: 12px;
+    padding: 4px;
     gap: 10px;
     background: #FFCFA1;
 }
@@ -306,6 +304,7 @@ footer {
     border-radius: 2px;
     background-color: white;
     outline: 2px solid black;
+    padding: 0;
 }
 
 .checkbox:not(:disabled):hover {
@@ -449,14 +448,18 @@ footer {
 
 .bar {
     width: 250px;
-    height: 15px;
+    height: 14px;
     background: lightgray;
     margin: 5px 0;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .bar-fill {
     height: 100%;
     background: #FFB770;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 

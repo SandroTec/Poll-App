@@ -39,7 +39,7 @@ form {
     flex-direction: column;
 }
 
-input {
+input:not(.checkbox) {
     width: 100%;
     margin-top: 8px;
     border-top-left-radius: 5px;
@@ -127,7 +127,6 @@ textarea:focus {
     font-size: 14px;
     font-weight: bold;
     outline: none;
-    margin-top: 4px;
 }
 
 .gap-10 {
@@ -141,13 +140,10 @@ h1 {
 .survey-state {
     background: #FFB770;
     color: black;
-    width: 64px;
+    width: auto;
     height: 26px;
+    padding: 0 6px;
     border-top-right-radius: 14px;
-    padding-top: 3px;
-    padding-right: 12px;
-    padding-bottom: 3px;
-    padding-left: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
