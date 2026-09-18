@@ -32,6 +32,7 @@ p {
 
 .survey-state {
     background: #FFB770;
+    color: #221227;
     width: auto;
     height: 26px;
     border-top-right-radius: 14px;
@@ -233,6 +234,7 @@ input {
     border-radius: 10px;
     margin-top: 20px;
     background: #FFCFA1;
+    font-weight: 700;
 }
 
 .add-survey-btn:hover {
@@ -348,6 +350,7 @@ footer {
     gap: 10px;
     border-radius: 10px;
     border: none;
+    font-weight: 700;
 }
 
 .complete-btn-mobile {

@@ -9,7 +9,7 @@ body:has(dialog[open]) {
 
 button {
     cursor: pointer;
-    font-family: Mulish;
+    font-family: Mulish !important;
     font-weight: 400;
     font-size: 16px;
     line-height: 100%;
@@ -141,5 +141,13 @@ label {
 
     h2 {
         font-size: 54px;
+    }
+
+    h4 {
+        font-size: 24px;
+    }
+
+    p {
+        font-size: 18px;
     }
 }
