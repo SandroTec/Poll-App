@@ -59,10 +59,7 @@ h2 {
     min-height: 310px;
     max-height: 310px;
     border-top-right-radius: 80px;
-    padding-top: 40px;
-    padding-right: 18px;
-    padding-bottom: 40px;
-    padding-left: 18px;
+    padding: 40px;
     background: #faf5fe;
     color: black;
     cursor: pointer;
@@ -152,6 +149,8 @@ h2 {
     display: flex;
     justify-content: space-between;
     position: relative;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .gap-c {
@@ -169,7 +168,7 @@ h2 {
     padding-left: 10px;
     gap: 10px;
     background: #ffb770;
-    font-family: 'Nokora';
+    font-family: 'Nokora' !important;
 }
 
 .activeBtn {
@@ -193,7 +192,7 @@ h2 {
     padding-bottom: 2px;
     padding-left: 10px;
     gap: 10px;
-    font-family: 'Nokora';
+    font-family: 'Nokora' !important;
 }
 
 .pastBtn {
@@ -229,6 +228,11 @@ li {
     right: 0px;
     border-radius: 12px;
     margin: 12px 0;
+}
+
+.category-txt {
+    color: #ffb770;
+    margin-left: 8px;
 }
 
 .drop-down-menu button {
@@ -318,7 +322,7 @@ li {
         max-width: 250px;
         min-height: 233px;
         max-height: 233px;
-
+        padding: 30px 20px;
     }
 
     .max-content {
@@ -336,8 +340,9 @@ li {
 
     .btn-c {
         flex-direction: column;
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        gap: 20px;
     }
 
     .drop-down-menu {
@@ -352,7 +357,7 @@ li {
 
     .survey-list {
         height: auto;
-        grid-template-columns: auto ;
+        grid-template-columns: 100% ;
     }
 
     .survey-list-c {

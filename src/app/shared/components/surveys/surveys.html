@@ -49,7 +49,9 @@
             <button (click)="openMenu()">
                 <span>Sort by Category</span> <img class="arrow-icon" src="" alt="">
             </button>
-            
+             @if (category != 'All Surveys') {
+                <span class="category-txt">{{ selectedCategory() }}</span>
+             }
             @if (menuOpen()) {
                 <ul>
                     @for (category of categories; track category) {
@@ -72,19 +74,24 @@
                         <span class="category-span">{{survey.category}}</span>
 
                         <p>{{survey.title}}</p>
-                        
-                        <div class="days-left-bg">
-                            <span>Ends in: </span>
-                            @if (survey.ends_at && (surveyService.getEndingTime(survey.ends_at) > 1)) {
-                                <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} days</span>
-                            }
-                            @if (survey.ends_at && (surveyService.getEndingTime(survey.ends_at) == 1)) {
-                                <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} day</span>
-                            }
-                            @if ((surveyService.getEndingTime(survey.ends_at) == 0)) {
-                                <span> today</span>
 
-                            }
+                        <div class="days-left-c">
+                            <div class="days-left-bg">
+                                @if (survey.ends_at) {
+                                    <span>Ends in: </span>
+                                    @if (survey.ends_at && (surveyService.getEndingTime(survey.ends_at) > 1)) {
+                                        <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} days</span>
+                                    }
+                                    @if (survey.ends_at && (surveyService.getEndingTime(survey.ends_at) == 1)) {
+                                        <span>{{ this.surveyService.getEndingTime( survey.ends_at ) }} day</span>
+                                    }
+                                    @if ((surveyService.getEndingTime(survey.ends_at) == 0)) {
+                                        <span> today</span>
+
+                                    }
+                                }@else {<span>No ending for this survey</span> }
+                                    
+                            </div>
                         </div>
                     </div>
                 }
@@ -102,15 +109,15 @@
                         
                         <div class="days-left-c">
                             <div class="days-left-bg">
-                                <span>Ended </span>
                                 @if (survey.ends_at) {
+                                    <span>Ended </span>
                                     @if (surveyService.getEndingTime(survey.ends_at) == -1) {
                                         <span>{{ this.surveyService.getDaysAgo( survey.ends_at ) }} day ago</span>
                                     }@else if (surveyService.getEndingTime(survey.ends_at) < -1) {
                                         <span>{{ this.surveyService.getDaysAgo( survey.ends_at ) }} days ago</span>
 
                                     }
-                                }
+                                } @else {<span>No ending for this survey</span> }
                             </div>
                         </div>
                     </div>

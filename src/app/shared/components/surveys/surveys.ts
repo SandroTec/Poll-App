@@ -16,9 +16,9 @@ export class Surveys {
   state:string = "";
   
   categories = this.surveyService.categories
-  selectedCategory = 'All Surveys';
-
   menuOpen = signal(false);
+  selectedCategory = signal('All Surveys');
+  category:string = 'All Surveys'
 
   showAlert = this.surveyService.showAlert
 
@@ -35,7 +35,8 @@ export class Surveys {
   * @param chosenCategory - The category to select.
   */
   sortCategories(chosenCategory:string) {
-    this.selectedCategory = chosenCategory;
+    this.selectedCategory.set(chosenCategory);
+    this.category = chosenCategory;
     this.menuOpen.set(false);
   }
 
@@ -63,8 +64,8 @@ export class Surveys {
     return this.list().filter((survey: Survey) => 
       survey.ends_at !== undefined &&
       this.surveyService.getEndingTime(survey.ends_at) < 0  &&
-      (this.selectedCategory === 'All Surveys' ||
-      survey.category === this.selectedCategory)
+      (this.category === 'All Surveys' ||
+      survey.category === this.category)
     )
     .sort((a, b) => this.surveyService.getEndingTime(b.ends_at!) - this.surveyService.getEndingTime(a.ends_at!))
   }
@@ -78,8 +79,8 @@ export class Surveys {
     return this.list().filter((survey: Survey) => 
       survey.ends_at !== undefined &&
       this.surveyService.getEndingTime(survey.ends_at) >= 0 &&
-      (this.selectedCategory === 'All Surveys' ||
-      survey.category === this.selectedCategory)
+      (this.category === 'All Surveys' ||
+      survey.category === this.category)
     )
     .sort((a, b) => this.surveyService.getEndingTime(a.ends_at!) - this.surveyService.getEndingTime(b.ends_at!))
 
